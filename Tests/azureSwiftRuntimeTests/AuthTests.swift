@@ -35,24 +35,26 @@ class AuthTests: XCTestCase {
         }
     }
     
-    func testStorageClient() {
+    func testRuntimeClient() {
         do {
             let filepath = "/Users/vlashch/__sp/sp1.azureauth"
             let atc = try ApplicationTokenCredentials.fromFile(path: filepath)
-            if atc.defaultSubscriptionId == nil {
+            guard let defaultSubscription = atc.defaultSubscriptionId else {
                 XCTFail("defaultSubscriptionId is nil")
+                return
             }
-            let storageAccountsListCommand = StorageAccountsListCommand(apiVersion: "2015-06-15", subscriptionId: atc.defaultSubscriptionId!)
             
+            let storageAccountsListCommand = StorageAccountsListCommand(apiVersion: "2015-06-15", subscriptionId: defaultSubscription)
             let azureClient = AzureClient(atc: atc)
-            let res = try azureClient.execute(command: storageAccountsListCommand)
+            guard let res = try azureClient.execute(command: storageAccountsListCommand) else {
+                XCTFail("command result is nil")
+                return
+            }
             print(res)
             
-          
         } catch RuntimeClientError.executionError(let message) {
             print("RuntimeClientError:", message)
             XCTFail(message)
-            
         } catch {
             print("Error:", error)
             XCTFail()
