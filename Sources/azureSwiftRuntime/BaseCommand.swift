@@ -18,6 +18,7 @@ open class BaseCommand {
     public var pathParameters = [String: String]()
     public var queryParameters = [String: String]()
     public var headerParameters = [String: String]()
+    public var body: Codable?
     
     open func preCall() {
 
