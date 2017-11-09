@@ -120,15 +120,15 @@ public class AzureClient: RuntimeClient {
 
 //{"error":{"code":"MissingApiVersionParameter","message":"The api-version query parameter (?api-version=) is required for all requests."}}
 
-class ReturnError: Codable {
+public class ReturnError: Codable {
     let error: ReturnErrorData
 }
-class ReturnErrorData: Codable {
+public class ReturnErrorData: Codable {
     let code: String
     let message: String
 }
 
-enum RuntimeClientError: Error {
+public enum RuntimeClientError: Error {
     case executionError(message: String)
     
 }
