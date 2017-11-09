@@ -12,22 +12,22 @@ public protocol ResponseDecoder {
 }
 
 public class BaseCommand {
-    var method: String
-    var isLongRunningOperation: Bool
-    var path: String
-    var pathParameters = [String: String]()
-    var queryParameters = [String: String]()
-    var headerParameters = [String: String]()
+    public var method: String
+    public var isLongRunningOperation: Bool
+    public var path: String
+    public var pathParameters = [String: String]()
+    public var queryParameters = [String: String]()
+    public var headerParameters = [String: String]()
     
-    func preCall() {
+    public func preCall() {
 
     }
 
-    func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
+    public func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
     	return nil;
     }
 
-    init() {
+    public init() {
     	self.method = "Get"
     	self.path = ""
     	self.isLongRunningOperation = false
