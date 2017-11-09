@@ -41,7 +41,7 @@ public class AzureClient: RuntimeClient {
     }
     
     public func execute(command: BaseCommand) throws -> Decodable? {
-        
+        command.preCall()
         let url = self.buildUrl(command: command, baseUrl: self.atc.environment.url(forEndpoint: .resourceManager))
 
         guard let method = HTTPMethod(rawValue: command.method.uppercased()) else {
