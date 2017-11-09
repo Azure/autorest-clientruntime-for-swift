@@ -26,6 +26,6 @@ let package = Package(
             dependencies: ["Alamofire", "RxSwift", "SwiftyJSON"]),
         .testTarget(
             name: "azureSwiftRuntimeTests",
-            dependencies: ["azureSwiftRuntime"]),
+            dependencies: ["Alamofire", "RxSwift", "SwiftyJSON","azureSwiftRuntime"]),
     ]
 )

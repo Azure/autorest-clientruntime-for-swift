@@ -16,7 +16,7 @@ protocol TokenCredentials: ServiceClientCredential {
     func getToken(forResource: String) throws -> String
 }
 
-class AzureTokenCredentials: TokenCredentials {
+public class AzureTokenCredentials: TokenCredentials {
     let tenantId: String
     let environment: Environment
     var defaultSubscriptionId: String?
