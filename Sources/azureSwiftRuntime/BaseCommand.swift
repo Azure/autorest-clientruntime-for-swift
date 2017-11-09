@@ -11,7 +11,7 @@ public protocol ResponseDecoder {
     func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable
 }
 
-public class BaseCommand {
+open class BaseCommand {
     public var method: String
     public var isLongRunningOperation: Bool
     public var path: String
