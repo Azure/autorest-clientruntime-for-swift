@@ -19,11 +19,11 @@ open class BaseCommand {
     public var queryParameters = [String: String]()
     public var headerParameters = [String: String]()
     
-    public func preCall() {
+    open func preCall() {
 
     }
 
-    public func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
+    open func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
     	return nil;
     }
 
