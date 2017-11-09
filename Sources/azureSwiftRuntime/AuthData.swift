@@ -4,13 +4,14 @@
 //
 //  Created by Alva D Bandy on 10/4/17.
 //
-import SwiftyJSON
+//import SwiftyJSON
+import Foundation
 
 public class AuthData {
     let grantType: String = "client_credentials"
-    let resource: String = "https://management.core.windows.net/"
-    var authURL: String
-    var clientCredentials: String
+    let resource: String
+    let authURL: String
+    var clientId: String
     var clientSecret: String
     var subscription: String
     var tenant: String
@@ -18,14 +19,27 @@ public class AuthData {
     var refreshToken: String? = nil
     var baseURL: String
     
-    init(authURL: String,
-         clientCredentials: String,
-         clientSecret: String,
-         subscription: String,
-         tenant: String,
-         baseURL: String) {
+    class AuthFileData : Codable {
+        let baseURL: String
+        let client: String
+        let managementURI: String
+        let key: String
+        let tenant: String
+        let authURL: String
+        let subscription: String
+    }
+    
+    init? (authURL: String,
+           managementUri: String,
+           clientId: String,
+           clientSecret: String,
+           subscription: String,
+           tenant: String,
+           baseURL: String) {
+        
         self.authURL = authURL
-        self.clientCredentials = clientCredentials
+        self.resource = managementUri
+        self.clientId = clientId
         self.clientSecret = clientSecret
         self.subscription = subscription
         self.tenant = tenant
@@ -33,23 +47,26 @@ public class AuthData {
     }
     
     public static func load(location: String) -> AuthData? {
-        guard let content = try? String(contentsOfFile: location, encoding: String.Encoding.utf8) else {
+        
+        let decoder = JSONDecoder()
+        let authFileData: AuthFileData
+        do {
+            let content = try String(contentsOfFile: location, encoding: String.Encoding.utf8)
+            guard let jsonData = content.data(using: .utf8, allowLossyConversion: false) else {
+                return nil
+            }
+            authFileData = try decoder.decode(AuthFileData.self, from: jsonData)
+        } catch {
+            print("Can't parse JSON data: \(error)")
             return nil
         }
         
-        guard let dataFromString = content.data(using: .utf8, allowLossyConversion: false) else {
-            return nil
-        }
-        
-        guard let jsonContent = try? JSON(data: dataFromString) else {
-            return nil;
-        }
-        
-        return AuthData(authURL: jsonContent["authURL"].string!,
-                        clientCredentials: jsonContent["client"].string!,
-                        clientSecret: jsonContent["key"].string!,
-                        subscription: jsonContent["subscription"].string!,
-                        tenant: jsonContent["tenant"].string!,
-                        baseURL: jsonContent["baseURL"].string!)
+        return AuthData(authURL: authFileData.authURL,
+            managementUri: authFileData.managementURI,
+            clientId: authFileData.client,
+            clientSecret: authFileData.key,
+            subscription: authFileData.subscription,
+            tenant: authFileData.tenant,
+            baseURL: authFileData.baseURL)
     }
 }
