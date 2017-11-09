@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AuthFile {
+public struct AuthFile {
    
     static func parseJsonFile(path: String) throws -> AuthFileData {
         let decoder = JSONDecoder()
@@ -20,7 +20,7 @@ struct AuthFile {
     }
 }
 
-class AuthFileData : Codable {
+public class AuthFileData : Codable {
     let baseURL: String
     let client: String
     let managementURI: String

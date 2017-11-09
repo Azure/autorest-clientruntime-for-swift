@@ -7,16 +7,30 @@
 
 import Foundation
 
-protocol ResponseDecoder {
+public protocol ResponseDecoder {
     func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable
 }
 
-protocol BaseCommand {
-    var method: String { get }
-    var isLongRunningOperation: Bool { get }
-    var path: String { get }
-    var pathParameters: [String: String] { get }
-    var queryParameters: [String: String] { get }
-    var headerParameters: [String: String] { get }
-    func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable?
+open class BaseCommand {
+    public var method: String
+    public var isLongRunningOperation: Bool
+    public var path: String
+    public var pathParameters = [String: String]()
+    public var queryParameters = [String: String]()
+    public var headerParameters = [String: String]()
+    public var body: Codable?
+    
+    open func preCall() {
+
+    }
+
+    open func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
+    	return nil;
+    }
+
+    public init() {
+    	self.method = "Get"
+    	self.path = ""
+    	self.isLongRunningOperation = false
+    }
 }

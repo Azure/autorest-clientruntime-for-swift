@@ -1,7 +1,7 @@
 import Alamofire
 import RxSwift
 
-class AzureAuthticate {
+public class AzureAuthticate {
     var authData: AuthData;
     
     init(authData: AuthData) {

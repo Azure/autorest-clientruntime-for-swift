@@ -10,7 +10,7 @@ import RxSwift
 import Alamofire
 import RxBlocking
 
-struct AuthResults: Codable {
+public struct AuthResults: Codable {
     let ext_expires_in: String
     let token_type: String
     let not_before: String
@@ -20,7 +20,7 @@ struct AuthResults: Codable {
     let expires_in: String
 }
 
-enum ApplicationTokenCredentialsError: Error {
+public enum ApplicationTokenCredentialsError: Error {
     case cantGetToken
     case cantParseResponceData
     case noResponse
@@ -28,7 +28,7 @@ enum ApplicationTokenCredentialsError: Error {
     case authResultIsNil
 }
 
-class ApplicationTokenCredentials: AzureTokenCredentials {
+public class ApplicationTokenCredentials: AzureTokenCredentials {
     
     var tokens = Dictionary<String, AuthResults>()
     let clientId: String
@@ -43,7 +43,7 @@ class ApplicationTokenCredentials: AzureTokenCredentials {
 //        tokens["https://login.windows.net/"] = ar
     }
     
-    static func fromFile(path: String) throws -> ApplicationTokenCredentials {
+    public static func fromFile(path: String) throws -> ApplicationTokenCredentials {
         let fileData = try AuthFile.parseJsonFile(path: path)
         let env = AuzureEnvironment(endpoints:[
             .management         : fileData.managementURI,

@@ -10,7 +10,7 @@ import Alamofire
 import RxSwift
 import RxBlocking
 
-protocol RuntimeClient {
+public protocol RuntimeClient {
 //    func execute<Command,RetType>(command: Command) -> RetType where RetType: Decodable, Command: BareCommand
     //associatedtype RetType where RetType: Decodable
     func execute(command: BaseCommand) throws -> Decodable?
@@ -28,20 +28,20 @@ class MyDecoder: ResponseDecoder {
     }
 }
 
-class AzureClient: RuntimeClient {
+public class AzureClient: RuntimeClient {
     
     let atc : AzureTokenCredentials
     let oauth2Handler: OAuth2Handler
     let sessionManager = SessionManager()
     
-    init(atc: AzureTokenCredentials) {
+    public init(atc: AzureTokenCredentials) {
         self.atc = atc
         self.oauth2Handler = OAuth2Handler(azureTokenCredentials: self.atc)
         sessionManager.adapter = oauth2Handler
     }
     
-    func execute(command: BaseCommand) throws -> Decodable? {
-        
+    public func execute(command: BaseCommand) throws -> Decodable? {
+        command.preCall()
         let url = self.buildUrl(command: command, baseUrl: self.atc.environment.url(forEndpoint: .resourceManager))
 
         guard let method = HTTPMethod(rawValue: command.method.uppercased()) else {
@@ -120,15 +120,15 @@ class AzureClient: RuntimeClient {
 
 //{"error":{"code":"MissingApiVersionParameter","message":"The api-version query parameter (?api-version=) is required for all requests."}}
 
-class ReturnError: Codable {
+public class ReturnError: Codable {
     let error: ReturnErrorData
 }
-class ReturnErrorData: Codable {
+public class ReturnErrorData: Codable {
     let code: String
     let message: String
 }
 
-enum RuntimeClientError: Error {
+public enum RuntimeClientError: Error {
     case executionError(message: String)
     
 }
