@@ -1,5 +1,4 @@
 import XCTest
-import RxSwift
 import RxBlocking
 import SwiftyJSON
 @testable import azureSwiftRuntime
