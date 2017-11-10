@@ -23,7 +23,7 @@ public class AzureTokenCredentials: TokenCredentials {
     
     let db = DisposeBag()
     
-    init(environment: Environment, tenantId: String, subscriptionId: String?) {
+    public init(environment: Environment, tenantId: String, subscriptionId: String?) {
         self.environment = environment
         self.tenantId = tenantId
         self.defaultSubscriptionId = subscriptionId
