@@ -34,7 +34,7 @@ public protocol Environment {
 public class AuzureEnvironment : Environment {
     public let endpoints : Dictionary<Endpoint, String>
 
-    init(endpoints : Dictionary<Endpoint, String>) {
+    public init(endpoints : Dictionary<Endpoint, String>) {
         self.endpoints = endpoints
     }
     
