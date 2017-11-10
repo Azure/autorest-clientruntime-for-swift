@@ -6,9 +6,7 @@
 //
 
 import XCTest
-import RxBlocking
 @testable import azureSwiftRuntime
-@testable import RxSwift
 @testable import Alamofire
 
 class AuthTests: XCTestCase {

@@ -37,8 +37,6 @@ public class AzureTokenCredentials: TokenCredentials {
         let resource = (url == nil)
             ? self.environment.url(forEndpoint: .activeDirectory)
             : try! self.getResource(fromUri: url!)
-        
-
         let token = try self.getToken(forResource: resource)
         return "Bearer " + token
     }

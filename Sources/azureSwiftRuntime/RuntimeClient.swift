@@ -11,15 +11,11 @@ import RxSwift
 import RxBlocking
 
 public protocol RuntimeClient {
-//    func execute<Command,RetType>(command: Command) -> RetType where RetType: Decodable, Command: BareCommand
-    //associatedtype RetType where RetType: Decodable
     func execute(command: BaseCommand) throws -> Decodable?
-    //func execute<RetType>(command: BaseCommand) -> RetType
-    //func buildUrl(command: BaseCommand, baseUrl: String) -> String
 }
 
-class MyDecoder: ResponseDecoder {
-    func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable {
+public class MyDecoder: ResponseDecoder {
+    public func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable {
         guard let jsonData = jsonString.data(using: .utf8) else {
             throw RuntimeClientError.executionError(message: "Can't get data form string utf8")
         }
@@ -29,7 +25,6 @@ class MyDecoder: ResponseDecoder {
 }
 
 public class AzureClient: RuntimeClient {
-    
     let atc : AzureTokenCredentials
     let oauth2Handler: OAuth2Handler
     let sessionManager = SessionManager()
@@ -41,15 +36,35 @@ public class AzureClient: RuntimeClient {
     }
     
     public func execute(command: BaseCommand) throws -> Decodable? {
+        
         command.preCall()
+        
         let url = self.buildUrl(command: command, baseUrl: self.atc.environment.url(forEndpoint: .resourceManager))
-
+        
         guard let method = HTTPMethod(rawValue: command.method.uppercased()) else {
             throw RuntimeClientError.executionError(message: "Can't parse command method to HTTPMethod enum")
         }
-        guard let retString = try self.executeRequest(url: url, method: method, parameters: Parameters(), headers: command.headerParameters).toBlocking().single() else {
+        
+        var params = Parameters()
+        if command.body != nil {
+            guard let jsonData = try command.encodeBody() else {
+                throw RuntimeClientError.executionError(message: "body json is nil")
+            }
+            
+            guard let bodyAsDict = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] else {
+                throw RuntimeClientError.executionError(message: "Can't cast body json to dictionary")
+            }
+            params = bodyAsDict
+        }
+        
+        guard let retString = try self.executeRequest(url: url, method: method, parameters: params, headers: command.headerParameters).toBlocking().single() else {
             return nil
         }
+        
+        if retString.isEmpty {
+            return nil
+        }
+        
         let decoder = MyDecoder()
         return try command.returnFunc(decoder: decoder, jsonString: retString)
     }
@@ -76,46 +91,55 @@ public class AzureClient: RuntimeClient {
         
         return fullUrl;
     }
-    
     private func executeRequest(url: String, method: HTTPMethod, parameters: Parameters, headers: HTTPHeaders) -> Single<String>{
-            return Single<String>.create{ single in
+        return Single<String>.create{ single in
             
-            let request = self.sessionManager.request(url, method: method, parameters: parameters, headers: headers)
-                .responseString(completionHandler: {
-                    response in
-                    
-                    guard let response1 = response.response else {
-                        single(.error(RuntimeClientError.executionError(message: "Response is nil")))
-                        return
-                    }
-                    
-                    let statusCode = response1.statusCode
-                    guard let responseString = response.result.value,
-                        let jsonData = responseString.data(using: .utf8) else {
+            let request = (parameters.isEmpty)
+                ? self.sessionManager.request(url, method: method, headers: headers)
+                : self.sessionManager.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            
+            request.responseString(completionHandler: {
+                response in
+                
+                
+                if let error = response.error {
+                    single(.error(error))
+                    return
+                }
+                
+                guard let response1 = response.response else {
+                    single(.error(RuntimeClientError.executionError(message: "Response is nil")))
+                    return
+                }
+                
+                let statusCode = response1.statusCode
+                
+                guard let responseString = response.result.value,
+                    let jsonData = responseString.data(using: .utf8) else {
                         single(.error(RuntimeClientError.executionError(message: "Response string is nil")))
                         return
-                    }
-                    
-                    if statusCode >= 400 {
-                        let decoder = JSONDecoder()
-                        guard let returnedJson = try? decoder.decode(ReturnError.self, from: jsonData) else {
-                                single(.error(RuntimeClientError.executionError(message: responseString)))
-                                return
-                        }
-                        single(.error(RuntimeClientError.executionError(message: returnedJson.error.code + ": " + returnedJson.error.message)))
+                }
+                
+                if statusCode >= 400 {
+                    let decoder = JSONDecoder()
+                    guard let returnedJson = try? decoder.decode(ReturnError.self, from: jsonData) else {
+                        single(.error(RuntimeClientError.executionError(message: responseString)))
                         return
                     }
-                    
-                    single(.success(responseString))
-                })
+                    single(.error(RuntimeClientError.executionError(message: returnedJson.error.code + ": " + returnedJson.error.message)))
+                    return
+                }
+                
+                single(.success(responseString))
+            })
+            
+            print(request)
             
             return Disposables.create{
                 request.cancel()
             }
         }
     }
-    
-    
 }
 
 //{"error":{"code":"MissingApiVersionParameter","message":"The api-version query parameter (?api-version=) is required for all requests."}}
@@ -132,3 +156,4 @@ public enum RuntimeClientError: Error {
     case executionError(message: String)
     
 }
+

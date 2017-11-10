@@ -20,9 +20,8 @@ open class BaseCommand {
     public var headerParameters = [String: String]()
     public var body: Codable?
     
-    open func preCall() {
-
-    }
+    open func preCall() {}
+    open func encodeBody() throws -> Data? { return nil }
 
     open func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
     	return nil;
