@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Endpoint: String {
+public enum Endpoint: String {
     case portal             = "portalUrl"
     case management         = "managementEndpointUrl"
     case resourceManager    = "resourceManagerEndpointUrl"
@@ -26,19 +26,19 @@ enum Endpoint: String {
     case activeDirectoryGraphApiVersion = "activeDirectoryGraphApiVersion"
 }
 
-protocol Environment {
+public protocol Environment {
     var endpoints : Dictionary<Endpoint, String> { get }
     func url(forEndpoint: Endpoint) -> String
 }
 
-class AuzureEnvironment : Environment {
-    let endpoints : Dictionary<Endpoint, String>
+public class AuzureEnvironment : Environment {
+    public let endpoints : Dictionary<Endpoint, String>
 
-    init(endpoints : Dictionary<Endpoint, String>) {
+    public init(endpoints : Dictionary<Endpoint, String>) {
         self.endpoints = endpoints
     }
     
-    func url(forEndpoint: Endpoint) -> String {
+    public func url(forEndpoint: Endpoint) -> String {
         return self.endpoints[forEndpoint]!
     }
     

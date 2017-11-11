@@ -34,7 +34,7 @@ public class ApplicationTokenCredentials: AzureTokenCredentials {
     let clientId: String
     let clentSecret: String
     
-    init(clientId: String, clentSecret: String, environment: Environment, tenantId: String, subscriptionId: String?) {
+    public init(clientId: String, clentSecret: String, environment: Environment, tenantId: String, subscriptionId: String?) {
         self.clientId = clientId
         self.clentSecret = clentSecret
         super.init(environment: environment, tenantId: tenantId, subscriptionId: subscriptionId)
