@@ -34,9 +34,12 @@ public class AzureTokenCredentials: TokenCredentials {
     }
    
     func authHeaderValue(url: String?) throws -> String {
-        let resource = (url == nil)
-            ? self.environment.url(forEndpoint: .activeDirectory)
-            : try! self.getResource(fromUri: url!)
+        guard
+            let resource = (url == nil)
+                ? self.environment.url(forEndpoint: .activeDirectory)
+                : try! self.getResource(fromUri: url!) else {
+            throw RuntimeError.general(message: "Can't get resource Url")
+        }
         let token = try self.getToken(forResource: resource)
         return "Bearer " + token
     }
@@ -74,7 +77,8 @@ public class AzureTokenCredentials: TokenCredentials {
     
     // abstract
     func getToken(forResource: String) throws -> String {
-        throw ClientCredentialError.abstructFuncCall
+        //throw ClientCredentialError.abstructFuncCall
+        return "NULL"
     }
 }
 
