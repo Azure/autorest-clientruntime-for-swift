@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import Alamofire
 import RxBlocking
 
 public struct AuthResults: Codable {
@@ -21,7 +20,7 @@ public struct AuthResults: Codable {
 }
 
 public enum ApplicationTokenCredentialsError: Error {
-    case cantGetToken
+    case message(message: String)
     case cantParseResponceData
     case noResponse
     case cantConvertAuthResult
@@ -33,6 +32,8 @@ public class ApplicationTokenCredentials: AzureTokenCredentials {
     var tokens = Dictionary<String, AuthResults>()
     let clientId: String
     let clentSecret: String
+    
+    let disposeBag = DisposeBag()
     
     public init(clientId: String, clentSecret: String, environment: Environment, tenantId: String, subscriptionId: String?) {
         self.clientId = clientId
@@ -77,7 +78,7 @@ public class ApplicationTokenCredentials: AzureTokenCredentials {
         }
         
         guard let authResults = self.tokens[forResource] else {
-            throw ApplicationTokenCredentialsError.cantGetToken
+            throw ApplicationTokenCredentialsError.message(message: "Can't get token for resourse: \(forResource)")
         }
         
         return authResults.access_token
@@ -90,40 +91,84 @@ public class ApplicationTokenCredentials: AzureTokenCredentials {
     }
     
     private func acquireToken<T>(forResource: String) -> Single<T> where T:Decodable {
-        return Single<T>.create{ single in
-            let uri = self.environment.url(forEndpoint: .activeDirectory) + self.tenantId + "/oauth2/token"
-            let parameters: Parameters = [
-                "grant_type":  "client_credentials",
-                "client_id": self.clientId,
-                "client_secret": self.clentSecret,
-                "resource": self.environment.url(forEndpoint: .management)
-            ]
-            
-            let request = Alamofire.request(uri, method: .post, parameters: parameters)
-                .responseString(completionHandler: {
-                    response in
-                    if response.result.isSuccess {
-                        if let jsonString = response.result.value,
-                           let jsonData = jsonString.data(using: .utf8) {
-                            do {
-                                let authResult = try JSONDecoder().decode(T.self, from: jsonData)
-                                single(.success(authResult))
-                            } catch {
-                                print("=== Error: \(error)")
-                                single(.error(error))
-                            }
-                        } else {
-                            single(.error(ApplicationTokenCredentialsError.cantParseResponceData))
-                        }
-                    } else {
-                        single(.error(ApplicationTokenCredentialsError.noResponse))
+        let session = URLSession(configuration: .default)
+        
+        guard
+            let baseUrl = self.environment.url(forEndpoint: .activeDirectory),
+            let resourseUrl = self.environment.url(forEndpoint: .management) else {
+            return Single.error(ApplicationTokenCredentialsError.message(message: ".activeDirectory or .resourseUrl endpoint is not set"))
+        }
+    
+        let body = [
+            "grant_type":  "client_credentials",
+            "client_id": self.clientId,
+            "client_secret": self.clentSecret,
+            "resource": resourseUrl
+        ]
+        
+        let bodyData = body.enumerated().map {
+            (i, pair) -> String in
+            let (key, value) = pair
+            return i == 0
+                ? "\(key)=\(value)"
+                : "&\(key)=\(value)"
+        }.map {
+            $0.data(using: .utf8)!
+        }.reduce(Data()) {
+            $0 + $1
+        }
+
+        let url = baseUrl + self.tenantId + "/oauth2/token"
+        
+        let response = Observable.just(url).map { urlString -> URL in
+            return URL(string: urlString)!
+        }.map { url -> URLRequest in
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            request.httpBody = bodyData
+            return request
+        }.flatMap { request -> Observable<(HTTPURLResponse, Data)> in
+            return Single<(HTTPURLResponse, Data)>.create { single in
+                let task = session.dataTask(with: request, completionHandler: { data, response, error in
+                    if let executionError = error {
+                        single(.error(executionError))
+                        return
                     }
+                    guard let cmdResponse = response as? HTTPURLResponse else {
+                        single(.error(RuntimeError.general(message: "=== Failed to downcast URLResponse to HTTPURLResponse")))
+                        return
+                    }
+                    guard let cmdData = data else {
+                        single(.error(RuntimeError.general(message: "=== Response data is nil")))
+                        return
+                    }
+                   
+                    single(.success((cmdResponse, cmdData)))
                 })
-            
-            return Disposables.create{
-                request.cancel()
+                
+                task.resume()
+                
+                return Disposables.create {
+                    task.cancel()
+                }
+            }.asObservable()
+        }.flatMap { (httpResponse: HTTPURLResponse, data: Data) -> Observable<T> in
+            do {
+//                if let bodyAsString = String(data: data, encoding: .utf8) {
+//                    if (!bodyAsString.isEmpty) {
+//                        print("=== Data from string:",bodyAsString)
+//                    }
+//                }
+                let authResult = try JSONDecoder().decode(T.self, from: data)
+                return Observable.just(authResult)
+            } catch {
+                return Observable.error(error)
             }
         }
+        
+        return response.asSingle()
     }
 }
+
 

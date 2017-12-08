@@ -28,7 +28,7 @@ public enum Endpoint: String {
 
 public protocol Environment {
     var endpoints : Dictionary<Endpoint, String> { get }
-    func url(forEndpoint: Endpoint) -> String
+    func url(forEndpoint: Endpoint) -> String?
 }
 
 public class AuzureEnvironment : Environment {
@@ -38,8 +38,8 @@ public class AuzureEnvironment : Environment {
         self.endpoints = endpoints
     }
     
-    public func url(forEndpoint: Endpoint) -> String {
-        return self.endpoints[forEndpoint]!
+    public func url(forEndpoint: Endpoint) -> String? {
+        return self.endpoints[forEndpoint]
     }
     
     static let azure = AuzureEnvironment(endpoints: [
