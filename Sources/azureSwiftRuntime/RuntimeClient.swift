@@ -11,6 +11,7 @@ import RxBlocking
 
 public protocol RuntimeClient {
     func execute(command: BaseCommand) throws -> Decodable?
+    func executeAsync(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
     func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
 }
 
@@ -170,7 +171,7 @@ public class AzureClient: RuntimeClient {
             }
     }
     
-    // handles non-long-running operations
+    // handles non-long-running operations (blocking)
     public func execute (command: BaseCommand) throws -> Decodable? {
         let (url, method, headers, body) = try self.prepareRequest(command: command)
         guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body).toBlocking().single() else {
@@ -186,6 +187,7 @@ public class AzureClient: RuntimeClient {
         }
     }
     
+    // handles non-long-running operations
     public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws {
         let (url, method, headers, body) = try self.prepareRequest(command: command)
         self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)

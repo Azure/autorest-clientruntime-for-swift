@@ -130,13 +130,35 @@ class BodyStringQuirksTests: XCTestCase {
         let cmd = StringNamespace.GetWhitespaceCommand()
         
         do {
-            let res = try cmd.execute(client: self.azureClient)
-            XCTAssertNotNil(res)
-            XCTAssertEqual(res!, "    Now is the time for all good men to come to the aid of their country    ")
+            try cmd.executeAsync(client: self.azureClient){
+                res, error in
+                do {
+                    if let e = error {
+                        throw e
+                    }
+                    XCTAssertNotNil(res)
+                    XCTAssertEqual(res!, "    Now is the time for all good men to come to the aid of their country    ")
+                    
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail(error.localizedDescription)
+                }
+                
+            }
+            
         } catch {
             print("=== Error:", error)
             XCTFail(error.localizedDescription)
         }
+        
+//        do {
+//            let res = try cmd.execute(client: self.azureClient)
+//            XCTAssertNotNil(res)
+//            XCTAssertEqual(res!, "    Now is the time for all good men to come to the aid of their country    ")
+//        } catch {
+//            print("=== Error:", error)
+//            XCTFail(error.localizedDescription)
+//        }
     }
     
     func test_string_putWhitespace() {

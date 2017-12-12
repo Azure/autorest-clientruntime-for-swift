@@ -164,22 +164,29 @@ struct StringNamespace {
     // men to come to the aid of their country<tab><space><space>'
     public class GetWhitespaceCommand : BaseCommand {
 
-        public override init() {
+        public override init () {
             super.init()
             self.method = "Get"
             self.isLongRunningOperation = false
             self.path = "/string/whitespace"
         }
 
-        public override func preCall()  {
+        public override func preCall ()  {
         }
 
-        override func returnFunc(data: Data) throws -> Decodable? {
+        override func returnFunc (data: Data) throws -> Decodable? {
             return try JsonResponseDecoder.decode(String?.self, from: data)
         }
         
-        public func execute(client: RuntimeClient) throws -> String? {
+        public func execute (client: RuntimeClient) throws -> String? {
             return try client.execute(command: self) as! String?
+        }
+        
+        public func executeAsync (client: RuntimeClient, completionHandler: @escaping (String?, Error?) -> Void) throws {
+            try client.executeAsync(command: self, completionHandler:  {
+                (decodable, error)  in
+                completionHandler(decodable as! String?, error)
+            })
         }
     }
 

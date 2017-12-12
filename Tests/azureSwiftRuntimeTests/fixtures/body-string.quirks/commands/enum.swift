@@ -21,7 +21,7 @@ struct EnumNamespace {
 
         override func returnFunc(data: Data) throws -> Decodable? {
             let val = try JsonResponseDecoder.decode(String.self, from: data)
-            return  Colors(rawValue: val)
+            return Colors(rawValue: val)
         }
         
         public func execute(client: RuntimeClient) throws -> Colors? {
