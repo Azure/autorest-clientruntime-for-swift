@@ -18,24 +18,19 @@ class LROsPutSubResourceCommand : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(product as! SubProductType?)
-        return jsonData
+        return try JsonRequestEncoder.encode(encodable: product as! SubProductType?)
     }
 
-    override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
-        return try decoder.decode(SubProductType?.self, from: jsonString)
-    }
     public func execute(client: RuntimeClient) throws -> SubProductTypeProtocol? {
         return try client.execute(command: self) as! SubProductTypeProtocol?
     }
     
-    override func returnFunc(decoder: ResponseDecoder, jsonData: Data) throws -> Decodable? {
-        return try decoder.decode(SubProductType?.self, from: jsonData)
+    override func returnFunc(data: Data) throws -> Decodable? {
+        return try JsonResponseDecoder.decode(SubProductType?.self, from: data)
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SubProductTypeProtocol?, Error?) -> Void) throws {
-        try client.executeAsync(command: self, completionHandler:  {
+        try client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? SubProductType, error)

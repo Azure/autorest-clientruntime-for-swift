@@ -18,25 +18,19 @@ class LROSADsPutNonRetry400Command : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(product as! ProductType?)
-        return jsonData
+        return try JsonRequestEncoder.encode(encodable: product as! ProductType?)
     }
 
-    override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
-        return try decoder.decode(ProductType?.self, from: jsonString)
+    override func returnFunc(data: Data) throws -> Decodable? {
+        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
     }
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {
         return try client.execute(command: self) as! ProductTypeProtocol?
     }
     
-    override func returnFunc(decoder: ResponseDecoder, jsonData: Data) throws -> Decodable? {
-        return try decoder.decode(ProductType?.self, from: jsonData)
-    }
-    
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
         
-        try client.executeAsync(command: self, completionHandler:  {
+        try client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? ProductType, error)

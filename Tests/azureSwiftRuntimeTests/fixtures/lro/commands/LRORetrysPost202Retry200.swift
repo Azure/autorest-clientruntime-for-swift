@@ -19,12 +19,10 @@ class LRORetrysPost202Retry200Command : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(product as! ProductType?)
-        return jsonData
+        return try JsonRequestEncoder.encode(encodable: product as! ProductType?)
     }
 
     public func execute(client: RuntimeClient) throws -> Decodable? {
         return try client.execute(command: self)
     }
-    }
+}

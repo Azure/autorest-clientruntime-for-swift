@@ -14,10 +14,10 @@ class LROSADsDelete202RetryInvalidHeaderCommand : BaseCommand {
     }
 
     override func preCall()  {
-}
+    }
 
 
     public func execute(client: RuntimeClient) throws -> Decodable? {
         return try client.execute(command: self)
     }
-    }
+}

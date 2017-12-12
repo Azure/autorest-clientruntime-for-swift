@@ -13,10 +13,9 @@ class LROSADsDelete202NonRetry400Command : BaseCommand {
     }
 
     override func preCall()  {
-}
-
+    }
 
     public func execute(client: RuntimeClient) throws -> Decodable? {
         return try client.execute(command: self)
     }
-    }
+}

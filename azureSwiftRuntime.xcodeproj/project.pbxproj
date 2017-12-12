@@ -21,6 +21,19 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C82203731FD868DC0007026C /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203631FD868CF0007026C /* enum.swift */; };
+		C82203741FD868E60007026C /* RefColorConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203651FD868CF0007026C /* RefColorConstantData.swift */; };
+		C82203761FD868E60007026C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203671FD868CF0007026C /* Colors.swift */; };
+		C82203781FD868ED0007026C /* RefColorConstantProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C822036A1FD868CF0007026C /* RefColorConstantProtocol.swift */; };
+		C822037B1FD87C9B0007026C /* BodyStringQuirksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203791FD87C8A0007026C /* BodyStringQuirksTests.swift */; };
+		C822037F1FD89ACD0007026C /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C822037C1FD8951D0007026C /* Decoder.swift */; };
+		C82203821FD89C810007026C /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203801FD89C620007026C /* Encoder.swift */; };
+		C82203841FD8A8F50007026C /* string.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203621FD868CF0007026C /* string.swift */; };
+		C82203851FD8ABF90007026C /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift */; };
+		C83B2EB21FE04C8400AC3E7B /* bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EAD1FE04C8400AC3E7B /* bool.swift */; };
+		C83B2EB61FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */; };
+		C8595C7C1FDF2FC400A57AB9 /* number.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C771FDF2FC400A57AB9 /* number.swift */; };
+		C8595C801FDF339300A57AB9 /* BodyNumberQuirksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */; };
 		OBJ_1000 /* GroupedObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_314 /* GroupedObservable.swift */; };
 		OBJ_1001 /* HistoricalScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_315 /* HistoricalScheduler.swift */; };
 		OBJ_1002 /* HistoricalSchedulerTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_316 /* HistoricalSchedulerTimeConverter.swift */; };
@@ -116,36 +129,11 @@
 		OBJ_537 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_6 /* Package.swift */; };
 		OBJ_543 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_524 /* Package.swift */; };
 		OBJ_549 /* AuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_19 /* AuthTests.swift */; };
-		OBJ_550 /* AzureResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_20 /* AzureResourceTests.swift */; };
 		OBJ_551 /* LongRunningOpsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_21 /* LongRunningOpsTests.swift */; };
-		OBJ_552 /* AzureResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_25 /* AzureResource.swift */; };
-		OBJ_553 /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_27 /* ErrorData.swift */; };
-		OBJ_554 /* ErrorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_28 /* ErrorType.swift */; };
-		OBJ_555 /* FlattenedProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_29 /* FlattenedProductData.swift */; };
-		OBJ_556 /* FlattenedProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_30 /* FlattenedProductType.swift */; };
-		OBJ_557 /* FlattenedResourcePropertiesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* FlattenedResourcePropertiesData.swift */; };
-		OBJ_558 /* FlattenedResourcePropertiesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* FlattenedResourcePropertiesType.swift */; };
-		OBJ_559 /* ListFlattenedProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* ListFlattenedProductType.swift */; };
-		OBJ_560 /* ResourceCollectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* ResourceCollectionData.swift */; };
-		OBJ_561 /* ResourceCollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* ResourceCollectionType.swift */; };
-		OBJ_562 /* ResourceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* ResourceData.swift */; };
-		OBJ_563 /* SetFlattenedProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* SetFlattenedProductType.swift */; };
-		OBJ_564 /* ErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_39 /* ErrorProtocol.swift */; };
-		OBJ_565 /* ErrorTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_40 /* ErrorTypeProtocol.swift */; };
-		OBJ_566 /* FlattenedProductProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_41 /* FlattenedProductProtocol.swift */; };
-		OBJ_567 /* FlattenedProductTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_42 /* FlattenedProductTypeProtocol.swift */; };
-		OBJ_568 /* FlattenedResourcePropertiesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_43 /* FlattenedResourcePropertiesProtocol.swift */; };
-		OBJ_569 /* FlattenedResourcePropertiesTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_44 /* FlattenedResourcePropertiesTypeProtocol.swift */; };
-		OBJ_570 /* ListFlattenedProductTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_45 /* ListFlattenedProductTypeProtocol.swift */; };
-		OBJ_571 /* ResourceCollectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_46 /* ResourceCollectionProtocol.swift */; };
-		OBJ_572 /* ResourceCollectionTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_47 /* ResourceCollectionTypeProtocol.swift */; };
-		OBJ_573 /* ResourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_48 /* ResourceProtocol.swift */; };
-		OBJ_574 /* SetFlattenedProductTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_49 /* SetFlattenedProductTypeProtocol.swift */; };
 		OBJ_575 /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_51 /* ResourceType.swift */; };
 		OBJ_576 /* ResourceTypeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_53 /* ResourceTypeProtocol.swift */; };
 		OBJ_577 /* LRORetrysDelete202Retry200.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_56 /* LRORetrysDelete202Retry200.swift */; };
 		OBJ_578 /* LRORetrysDeleteAsyncRelativeRetrySucceeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_57 /* LRORetrysDeleteAsyncRelativeRetrySucceeded.swift */; };
-		OBJ_579 /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift */; };
 		OBJ_580 /* LRORetrysPost202Retry200.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_59 /* LRORetrysPost202Retry200.swift */; };
 		OBJ_581 /* LRORetrysPostAsyncRelativeRetrySucceeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_60 /* LRORetrysPostAsyncRelativeRetrySucceeded.swift */; };
 		OBJ_582 /* LRORetrysPut201CreatingSucceeded200.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_61 /* LRORetrysPut201CreatingSucceeded200.swift */; };
@@ -627,6 +615,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C82203621FD868CF0007026C /* string.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = string.swift; sourceTree = "<group>"; };
+		C82203631FD868CF0007026C /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
+		C82203651FD868CF0007026C /* RefColorConstantData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefColorConstantData.swift; sourceTree = "<group>"; };
+		C82203671FD868CF0007026C /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C822036A1FD868CF0007026C /* RefColorConstantProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefColorConstantProtocol.swift; sourceTree = "<group>"; };
+		C82203791FD87C8A0007026C /* BodyStringQuirksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyStringQuirksTests.swift; sourceTree = "<group>"; };
+		C822037C1FD8951D0007026C /* Decoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		C82203801FD89C620007026C /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		C83B2EAD1FE04C8400AC3E7B /* bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bool.swift; sourceTree = "<group>"; };
+		C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBooleanQuirksTests.swift.swift; sourceTree = "<group>"; };
+		C8595C771FDF2FC400A57AB9 /* number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = number.swift; sourceTree = "<group>"; };
+		C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyNumberQuirksTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* AuthFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFile.swift; sourceTree = "<group>"; };
 		OBJ_100 /* LROsDeleteAsyncRetrycanceled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROsDeleteAsyncRetrycanceled.swift; sourceTree = "<group>"; };
 		OBJ_101 /* LROsDeleteNoHeaderInRetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROsDeleteNoHeaderInRetry.swift; sourceTree = "<group>"; };
@@ -733,7 +733,6 @@
 		OBJ_197 /* LRORetrysDeleteAsyncRelativeRetrySucceededHeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRORetrysDeleteAsyncRelativeRetrySucceededHeadersProtocol.swift; sourceTree = "<group>"; };
 		OBJ_198 /* LRORetrysDeleteProvisioning202Accepted200SucceededHeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRORetrysDeleteProvisioning202Accepted200SucceededHeadersProtocol.swift; sourceTree = "<group>"; };
 		OBJ_199 /* LRORetrysPost202Retry200HeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRORetrysPost202Retry200HeadersProtocol.swift; sourceTree = "<group>"; };
-		OBJ_20 /* AzureResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureResourceTests.swift; sourceTree = "<group>"; };
 		OBJ_200 /* LRORetrysPostAsyncRelativeRetrySucceededHeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRORetrysPostAsyncRelativeRetrySucceededHeadersProtocol.swift; sourceTree = "<group>"; };
 		OBJ_201 /* LRORetrysPutAsyncRelativeRetrySucceededHeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LRORetrysPutAsyncRelativeRetrySucceededHeadersProtocol.swift; sourceTree = "<group>"; };
 		OBJ_202 /* LROSADsDelete202NonRetry400HeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDelete202NonRetry400HeadersProtocol.swift; sourceTree = "<group>"; };
@@ -785,7 +784,6 @@
 		OBJ_247 /* LROsPutNoHeaderInRetryHeadersProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROsPutNoHeaderInRetryHeadersProtocol.swift; sourceTree = "<group>"; };
 		OBJ_248 /* OperationResultErrorTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationResultErrorTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_249 /* OperationResultTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationResultTypeProtocol.swift; sourceTree = "<group>"; };
-		OBJ_25 /* AzureResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureResource.swift; sourceTree = "<group>"; };
 		OBJ_250 /* ProductPropertiesTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPropertiesTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_251 /* ProductTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_252 /* SkuTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkuTypeProtocol.swift; sourceTree = "<group>"; };
@@ -801,7 +799,6 @@
 		OBJ_267 /* AsMaybe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsMaybe.swift; sourceTree = "<group>"; };
 		OBJ_268 /* AsSingle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsSingle.swift; sourceTree = "<group>"; };
 		OBJ_269 /* AsyncLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncLock.swift; sourceTree = "<group>"; };
-		OBJ_27 /* ErrorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorData.swift; sourceTree = "<group>"; };
 		OBJ_270 /* AsyncSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncSubject.swift; sourceTree = "<group>"; };
 		OBJ_271 /* Bag+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bag+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_272 /* Bag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bag.swift; sourceTree = "<group>"; };
@@ -812,7 +809,6 @@
 		OBJ_277 /* Cancelable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancelable.swift; sourceTree = "<group>"; };
 		OBJ_278 /* Catch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catch.swift; sourceTree = "<group>"; };
 		OBJ_279 /* CombineLatest+Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CombineLatest+Collection.swift"; sourceTree = "<group>"; };
-		OBJ_28 /* ErrorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorType.swift; sourceTree = "<group>"; };
 		OBJ_280 /* CombineLatest+arity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CombineLatest+arity.swift"; sourceTree = "<group>"; };
 		OBJ_281 /* CombineLatest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineLatest.swift; sourceTree = "<group>"; };
 		OBJ_282 /* Completable+AndThen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Completable+AndThen.swift"; sourceTree = "<group>"; };
@@ -823,7 +819,6 @@
 		OBJ_287 /* ConnectableObservableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectableObservableType.swift; sourceTree = "<group>"; };
 		OBJ_288 /* Create.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
 		OBJ_289 /* CurrentThreadScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentThreadScheduler.swift; sourceTree = "<group>"; };
-		OBJ_29 /* FlattenedProductData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedProductData.swift; sourceTree = "<group>"; };
 		OBJ_290 /* Debounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debounce.swift; sourceTree = "<group>"; };
 		OBJ_291 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		OBJ_292 /* DefaultIfEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultIfEmpty.swift; sourceTree = "<group>"; };
@@ -834,7 +829,6 @@
 		OBJ_297 /* Deprecated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deprecated.swift; sourceTree = "<group>"; };
 		OBJ_298 /* DispatchQueue+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Extensions.swift"; sourceTree = "<group>"; };
 		OBJ_299 /* DispatchQueueConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueueConfiguration.swift; sourceTree = "<group>"; };
-		OBJ_30 /* FlattenedProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedProductType.swift; sourceTree = "<group>"; };
 		OBJ_300 /* Disposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		OBJ_301 /* Disposables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposables.swift; sourceTree = "<group>"; };
 		OBJ_302 /* DisposeBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisposeBag.swift; sourceTree = "<group>"; };
@@ -845,7 +839,6 @@
 		OBJ_307 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		OBJ_308 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		OBJ_309 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		OBJ_31 /* FlattenedResourcePropertiesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedResourcePropertiesData.swift; sourceTree = "<group>"; };
 		OBJ_310 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		OBJ_311 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		OBJ_312 /* Generate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generate.swift; sourceTree = "<group>"; };
@@ -856,7 +849,6 @@
 		OBJ_317 /* ImmediateScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmediateScheduler.swift; sourceTree = "<group>"; };
 		OBJ_318 /* ImmediateSchedulerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmediateSchedulerType.swift; sourceTree = "<group>"; };
 		OBJ_319 /* InfiniteSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfiniteSequence.swift; sourceTree = "<group>"; };
-		OBJ_32 /* FlattenedResourcePropertiesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedResourcePropertiesType.swift; sourceTree = "<group>"; };
 		OBJ_320 /* InvocableScheduledItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvocableScheduledItem.swift; sourceTree = "<group>"; };
 		OBJ_321 /* InvocableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvocableType.swift; sourceTree = "<group>"; };
 		OBJ_322 /* Just.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Just.swift; sourceTree = "<group>"; };
@@ -867,7 +859,6 @@
 		OBJ_327 /* Materialize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Materialize.swift; sourceTree = "<group>"; };
 		OBJ_328 /* Merge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Merge.swift; sourceTree = "<group>"; };
 		OBJ_329 /* Multicast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multicast.swift; sourceTree = "<group>"; };
-		OBJ_33 /* ListFlattenedProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlattenedProductType.swift; sourceTree = "<group>"; };
 		OBJ_330 /* Never.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Never.swift; sourceTree = "<group>"; };
 		OBJ_331 /* NopDisposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NopDisposable.swift; sourceTree = "<group>"; };
 		OBJ_332 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -878,7 +869,6 @@
 		OBJ_337 /* ObserverBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverBase.swift; sourceTree = "<group>"; };
 		OBJ_338 /* ObserverType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObserverType.swift; sourceTree = "<group>"; };
 		OBJ_339 /* OperationQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationQueueScheduler.swift; sourceTree = "<group>"; };
-		OBJ_34 /* ResourceCollectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceCollectionData.swift; sourceTree = "<group>"; };
 		OBJ_340 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		OBJ_341 /* Platform.Darwin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
 		OBJ_342 /* Platform.Linux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.Linux.swift; sourceTree = "<group>"; };
@@ -889,7 +879,6 @@
 		OBJ_347 /* PublishSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishSubject.swift; sourceTree = "<group>"; };
 		OBJ_348 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		OBJ_349 /* Range.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Range.swift; sourceTree = "<group>"; };
-		OBJ_35 /* ResourceCollectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceCollectionType.swift; sourceTree = "<group>"; };
 		OBJ_350 /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
 		OBJ_351 /* RecursiveLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveLock.swift; sourceTree = "<group>"; };
 		OBJ_352 /* RecursiveScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecursiveScheduler.swift; sourceTree = "<group>"; };
@@ -900,7 +889,6 @@
 		OBJ_357 /* RetryWhen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetryWhen.swift; sourceTree = "<group>"; };
 		OBJ_358 /* Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rx.swift; sourceTree = "<group>"; };
 		OBJ_359 /* RxMutableBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMutableBox.swift; sourceTree = "<group>"; };
-		OBJ_36 /* ResourceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceData.swift; sourceTree = "<group>"; };
 		OBJ_360 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		OBJ_361 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		OBJ_362 /* ScheduledDisposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledDisposable.swift; sourceTree = "<group>"; };
@@ -911,7 +899,6 @@
 		OBJ_367 /* Sequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequence.swift; sourceTree = "<group>"; };
 		OBJ_368 /* SerialDispatchQueueScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialDispatchQueueScheduler.swift; sourceTree = "<group>"; };
 		OBJ_369 /* SerialDisposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerialDisposable.swift; sourceTree = "<group>"; };
-		OBJ_37 /* SetFlattenedProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFlattenedProductType.swift; sourceTree = "<group>"; };
 		OBJ_370 /* ShareReplayScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareReplayScope.swift; sourceTree = "<group>"; };
 		OBJ_371 /* SingleAssignmentDisposable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAssignmentDisposable.swift; sourceTree = "<group>"; };
 		OBJ_372 /* SingleAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleAsync.swift; sourceTree = "<group>"; };
@@ -932,7 +919,6 @@
 		OBJ_387 /* SynchronizedUnsubscribeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynchronizedUnsubscribeType.swift; sourceTree = "<group>"; };
 		OBJ_388 /* TailRecursiveSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TailRecursiveSink.swift; sourceTree = "<group>"; };
 		OBJ_389 /* Take.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Take.swift; sourceTree = "<group>"; };
-		OBJ_39 /* ErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorProtocol.swift; sourceTree = "<group>"; };
 		OBJ_390 /* TakeLast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeLast.swift; sourceTree = "<group>"; };
 		OBJ_391 /* TakeUntil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeUntil.swift; sourceTree = "<group>"; };
 		OBJ_392 /* TakeWhile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeWhile.swift; sourceTree = "<group>"; };
@@ -943,7 +929,6 @@
 		OBJ_397 /* Using.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Using.swift; sourceTree = "<group>"; };
 		OBJ_398 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		OBJ_399 /* VirtualTimeConverterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTimeConverterType.swift; sourceTree = "<group>"; };
-		OBJ_40 /* ErrorTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_400 /* VirtualTimeScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualTimeScheduler.swift; sourceTree = "<group>"; };
 		OBJ_401 /* Window.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Window.swift; sourceTree = "<group>"; };
 		OBJ_402 /* WithLatestFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithLatestFrom.swift; sourceTree = "<group>"; };
@@ -953,7 +938,6 @@
 		OBJ_407 /* _RX.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _RX.m; sourceTree = "<group>"; };
 		OBJ_408 /* _RXDelegateProxy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _RXDelegateProxy.m; sourceTree = "<group>"; };
 		OBJ_409 /* _RXKVOObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _RXKVOObserver.m; sourceTree = "<group>"; };
-		OBJ_41 /* FlattenedProductProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedProductProtocol.swift; sourceTree = "<group>"; };
 		OBJ_410 /* _RXObjCRuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _RXObjCRuntime.m; sourceTree = "<group>"; };
 		OBJ_412 /* _RXKVOObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RXKVOObserver.h; sourceTree = "<group>"; };
 		OBJ_413 /* _RXObjCRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _RXObjCRuntime.h; sourceTree = "<group>"; };
@@ -962,7 +946,6 @@
 		OBJ_416 /* RxCocoaRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RxCocoaRuntime.h; sourceTree = "<group>"; };
 		OBJ_417 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = "/Users/vlashch/git/swift/autorest-clientruntime-for-swift/azureSwiftRuntime.xcodeproj/GeneratedModuleMap/RxCocoaRuntime/module.modulemap"; sourceTree = "<group>"; };
 		OBJ_419 /* BlockingObservable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BlockingObservable+Operators.swift"; sourceTree = "<group>"; };
-		OBJ_42 /* FlattenedProductTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedProductTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_420 /* BlockingObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingObservable.swift; sourceTree = "<group>"; };
 		OBJ_421 /* ObservableConvertibleType+Blocking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+Blocking.swift"; sourceTree = "<group>"; };
 		OBJ_422 /* Platform.Darwin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.Darwin.swift; sourceTree = "<group>"; };
@@ -972,7 +955,6 @@
 		OBJ_426 /* RunLoopLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunLoopLock.swift; sourceTree = "<group>"; };
 		OBJ_428 /* ControlEvent+Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlEvent+Driver.swift"; sourceTree = "<group>"; };
 		OBJ_429 /* ControlEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlEvent.swift; sourceTree = "<group>"; };
-		OBJ_43 /* FlattenedResourcePropertiesProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedResourcePropertiesProtocol.swift; sourceTree = "<group>"; };
 		OBJ_430 /* ControlProperty+Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ControlProperty+Driver.swift"; sourceTree = "<group>"; };
 		OBJ_431 /* ControlProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlProperty.swift; sourceTree = "<group>"; };
 		OBJ_432 /* ControlTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlTarget.swift; sourceTree = "<group>"; };
@@ -983,7 +965,6 @@
 		OBJ_437 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		OBJ_438 /* ItemEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEvents.swift; sourceTree = "<group>"; };
 		OBJ_439 /* KVORepresentable+CoreGraphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KVORepresentable+CoreGraphics.swift"; sourceTree = "<group>"; };
-		OBJ_44 /* FlattenedResourcePropertiesTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlattenedResourcePropertiesTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_440 /* KVORepresentable+Swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KVORepresentable+Swift.swift"; sourceTree = "<group>"; };
 		OBJ_441 /* KVORepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KVORepresentable.swift; sourceTree = "<group>"; };
 		OBJ_442 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
@@ -994,7 +975,6 @@
 		OBJ_447 /* NSObject+Rx+KVORepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Rx+KVORepresentable.swift"; sourceTree = "<group>"; };
 		OBJ_448 /* NSObject+Rx+RawRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Rx+RawRepresentable.swift"; sourceTree = "<group>"; };
 		OBJ_449 /* NSObject+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Rx.swift"; sourceTree = "<group>"; };
-		OBJ_45 /* ListFlattenedProductTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFlattenedProductTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_450 /* NSSlider+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSSlider+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_451 /* NSTextField+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextField+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_452 /* NSTextStorage+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSTextStorage+Rx.swift"; sourceTree = "<group>"; };
@@ -1005,7 +985,6 @@
 		OBJ_457 /* ObservableConvertibleType+SharedSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableConvertibleType+SharedSequence.swift"; sourceTree = "<group>"; };
 		OBJ_458 /* RxCocoa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCocoa.swift; sourceTree = "<group>"; };
 		OBJ_459 /* RxCocoaObjCRuntimeError+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxCocoaObjCRuntimeError+Extensions.swift"; sourceTree = "<group>"; };
-		OBJ_46 /* ResourceCollectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceCollectionProtocol.swift; sourceTree = "<group>"; };
 		OBJ_460 /* RxCollectionViewDataSourceProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionViewDataSourceProxy.swift; sourceTree = "<group>"; };
 		OBJ_461 /* RxCollectionViewDataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionViewDataSourceType.swift; sourceTree = "<group>"; };
 		OBJ_462 /* RxCollectionViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCollectionViewDelegateProxy.swift; sourceTree = "<group>"; };
@@ -1016,7 +995,6 @@
 		OBJ_467 /* RxPickerViewDataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPickerViewDataSourceType.swift; sourceTree = "<group>"; };
 		OBJ_468 /* RxPickerViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxPickerViewDelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_469 /* RxScrollViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxScrollViewDelegateProxy.swift; sourceTree = "<group>"; };
-		OBJ_47 /* ResourceCollectionTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceCollectionTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_470 /* RxSearchBarDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSearchBarDelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_471 /* RxSearchControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSearchControllerDelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_472 /* RxTabBarControllerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTabBarControllerDelegateProxy.swift; sourceTree = "<group>"; };
@@ -1027,7 +1005,6 @@
 		OBJ_477 /* RxTableViewReactiveArrayDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTableViewReactiveArrayDataSource.swift; sourceTree = "<group>"; };
 		OBJ_478 /* RxTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTarget.swift; sourceTree = "<group>"; };
 		OBJ_479 /* RxTextStorageDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTextStorageDelegateProxy.swift; sourceTree = "<group>"; };
-		OBJ_48 /* ResourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceProtocol.swift; sourceTree = "<group>"; };
 		OBJ_480 /* RxTextViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxTextViewDelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_481 /* RxWebViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxWebViewDelegateProxy.swift; sourceTree = "<group>"; };
 		OBJ_482 /* SectionedViewDataSourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionedViewDataSourceType.swift; sourceTree = "<group>"; };
@@ -1038,7 +1015,6 @@
 		OBJ_487 /* UIActivityIndicatorView+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_488 /* UIAlertAction+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_489 /* UIApplication+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Rx.swift"; sourceTree = "<group>"; };
-		OBJ_49 /* SetFlattenedProductTypeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFlattenedProductTypeProtocol.swift; sourceTree = "<group>"; };
 		OBJ_490 /* UIBarButtonItem+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Rx.swift"; sourceTree = "<group>"; };
 		OBJ_491 /* UIBindingObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBindingObserver.swift; sourceTree = "<group>"; };
 		OBJ_492 /* UIButton+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Rx.swift"; sourceTree = "<group>"; };
@@ -1189,6 +1165,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C82203601FD868CF0007026C /* body-string.quirks */ = {
+			isa = PBXGroup;
+			children = (
+				C82203611FD868CF0007026C /* commands */,
+				C82203641FD868CF0007026C /* data */,
+				C82203681FD868CF0007026C /* protocols */,
+			);
+			path = "body-string.quirks";
+			sourceTree = "<group>";
+		};
+		C82203611FD868CF0007026C /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				C82203621FD868CF0007026C /* string.swift */,
+				C82203631FD868CF0007026C /* enum.swift */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
+		C82203641FD868CF0007026C /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C82203651FD868CF0007026C /* RefColorConstantData.swift */,
+				C82203671FD868CF0007026C /* Colors.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C82203681FD868CF0007026C /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C822036A1FD868CF0007026C /* RefColorConstantProtocol.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		C83B2EAB1FE04C8400AC3E7B /* body-boolean.quirks */ = {
+			isa = PBXGroup;
+			children = (
+				C83B2EAC1FE04C8400AC3E7B /* commands */,
+			);
+			path = "body-boolean.quirks";
+			sourceTree = "<group>";
+		};
+		C83B2EAC1FE04C8400AC3E7B /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				C83B2EAD1FE04C8400AC3E7B /* bool.swift */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
+		C8595C751FDF2FC400A57AB9 /* body-number.quirks */ = {
+			isa = PBXGroup;
+			children = (
+				C8595C761FDF2FC400A57AB9 /* commands */,
+			);
+			path = "body-number.quirks";
+			sourceTree = "<group>";
+		};
+		C8595C761FDF2FC400A57AB9 /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				C8595C771FDF2FC400A57AB9 /* number.swift */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
 		OBJ_129 /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1273,9 +1317,11 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_19 /* AuthTests.swift */,
-				OBJ_20 /* AzureResourceTests.swift */,
 				OBJ_21 /* LongRunningOpsTests.swift */,
 				OBJ_22 /* fixtures */,
+				C82203791FD87C8A0007026C /* BodyStringQuirksTests.swift */,
+				C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */,
+				C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */,
 			);
 			name = azureSwiftRuntimeTests;
 			path = Tests/azureSwiftRuntimeTests;
@@ -1353,28 +1399,12 @@
 		OBJ_22 /* fixtures */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_23 /* azure-reosource */,
+				C83B2EAB1FE04C8400AC3E7B /* body-boolean.quirks */,
+				C8595C751FDF2FC400A57AB9 /* body-number.quirks */,
+				C82203601FD868CF0007026C /* body-string.quirks */,
 				OBJ_54 /* lro */,
 			);
 			path = fixtures;
-			sourceTree = "<group>";
-		};
-		OBJ_23 /* azure-reosource */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_24 /* commands */,
-				OBJ_26 /* data */,
-				OBJ_38 /* protocols */,
-			);
-			path = "azure-reosource";
-			sourceTree = "<group>";
-		};
-		OBJ_24 /* commands */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_25 /* AzureResource.swift */,
-			);
-			path = commands;
 			sourceTree = "<group>";
 		};
 		OBJ_258 /* Dependencies */ = {
@@ -1396,24 +1426,6 @@
 			);
 			name = "RxSwift 3.6.1";
 			sourceTree = SOURCE_ROOT;
-		};
-		OBJ_26 /* data */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_27 /* ErrorData.swift */,
-				OBJ_28 /* ErrorType.swift */,
-				OBJ_29 /* FlattenedProductData.swift */,
-				OBJ_30 /* FlattenedProductType.swift */,
-				OBJ_31 /* FlattenedResourcePropertiesData.swift */,
-				OBJ_32 /* FlattenedResourcePropertiesType.swift */,
-				OBJ_33 /* ListFlattenedProductType.swift */,
-				OBJ_34 /* ResourceCollectionData.swift */,
-				OBJ_35 /* ResourceCollectionType.swift */,
-				OBJ_36 /* ResourceData.swift */,
-				OBJ_37 /* SetFlattenedProductType.swift */,
-			);
-			path = data;
-			sourceTree = "<group>";
 		};
 		OBJ_260 /* RxSwift */ = {
 			isa = PBXGroup;
@@ -1568,24 +1580,6 @@
 			path = ".build/checkouts/RxSwift.git--5214619868639177420/Sources/RxSwift";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_38 /* protocols */ = {
-			isa = PBXGroup;
-			children = (
-				OBJ_39 /* ErrorProtocol.swift */,
-				OBJ_40 /* ErrorTypeProtocol.swift */,
-				OBJ_41 /* FlattenedProductProtocol.swift */,
-				OBJ_42 /* FlattenedProductTypeProtocol.swift */,
-				OBJ_43 /* FlattenedResourcePropertiesProtocol.swift */,
-				OBJ_44 /* FlattenedResourcePropertiesTypeProtocol.swift */,
-				OBJ_45 /* ListFlattenedProductTypeProtocol.swift */,
-				OBJ_46 /* ResourceCollectionProtocol.swift */,
-				OBJ_47 /* ResourceCollectionTypeProtocol.swift */,
-				OBJ_48 /* ResourceProtocol.swift */,
-				OBJ_49 /* SetFlattenedProductTypeProtocol.swift */,
-			);
-			path = protocols;
-			sourceTree = "<group>";
-		};
 		OBJ_406 /* RxCocoaRuntime */ = {
 			isa = PBXGroup;
 			children = (
@@ -1732,7 +1726,7 @@
 			path = ".build/checkouts/RxSwift.git--5214619868639177420/Sources/RxCocoa";
 			sourceTree = SOURCE_ROOT;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -1741,7 +1735,6 @@
 				OBJ_258 /* Dependencies */,
 				OBJ_525 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_525 /* Products */ = {
@@ -1866,6 +1859,8 @@
 				OBJ_14 /* Interceptor.swift */,
 				OBJ_15 /* RuntimeClient.swift */,
 				OBJ_16 /* RuntimeError.swift */,
+				C822037C1FD8951D0007026C /* Decoder.swift */,
+				C82203801FD89C620007026C /* Encoder.swift */,
 			);
 			name = azureSwiftRuntime;
 			path = Sources/azureSwiftRuntime;
@@ -2026,7 +2021,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_525 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2066,36 +2061,13 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_549 /* AuthTests.swift in Sources */,
-				OBJ_550 /* AzureResourceTests.swift in Sources */,
 				OBJ_551 /* LongRunningOpsTests.swift in Sources */,
-				OBJ_552 /* AzureResource.swift in Sources */,
-				OBJ_553 /* ErrorData.swift in Sources */,
-				OBJ_554 /* ErrorType.swift in Sources */,
-				OBJ_555 /* FlattenedProductData.swift in Sources */,
-				OBJ_556 /* FlattenedProductType.swift in Sources */,
-				OBJ_557 /* FlattenedResourcePropertiesData.swift in Sources */,
-				OBJ_558 /* FlattenedResourcePropertiesType.swift in Sources */,
-				OBJ_559 /* ListFlattenedProductType.swift in Sources */,
-				OBJ_560 /* ResourceCollectionData.swift in Sources */,
-				OBJ_561 /* ResourceCollectionType.swift in Sources */,
-				OBJ_562 /* ResourceData.swift in Sources */,
-				OBJ_563 /* SetFlattenedProductType.swift in Sources */,
-				OBJ_564 /* ErrorProtocol.swift in Sources */,
-				OBJ_565 /* ErrorTypeProtocol.swift in Sources */,
-				OBJ_566 /* FlattenedProductProtocol.swift in Sources */,
-				OBJ_567 /* FlattenedProductTypeProtocol.swift in Sources */,
-				OBJ_568 /* FlattenedResourcePropertiesProtocol.swift in Sources */,
-				OBJ_569 /* FlattenedResourcePropertiesTypeProtocol.swift in Sources */,
-				OBJ_570 /* ListFlattenedProductTypeProtocol.swift in Sources */,
-				OBJ_571 /* ResourceCollectionProtocol.swift in Sources */,
-				OBJ_572 /* ResourceCollectionTypeProtocol.swift in Sources */,
-				OBJ_573 /* ResourceProtocol.swift in Sources */,
-				OBJ_574 /* SetFlattenedProductTypeProtocol.swift in Sources */,
+				C822037B1FD87C9B0007026C /* BodyStringQuirksTests.swift in Sources */,
 				OBJ_575 /* ResourceType.swift in Sources */,
 				OBJ_576 /* ResourceTypeProtocol.swift in Sources */,
+				C82203781FD868ED0007026C /* RefColorConstantProtocol.swift in Sources */,
 				OBJ_577 /* LRORetrysDelete202Retry200.swift in Sources */,
 				OBJ_578 /* LRORetrysDeleteAsyncRelativeRetrySucceeded.swift in Sources */,
-				OBJ_579 /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift in Sources */,
 				OBJ_580 /* LRORetrysPost202Retry200.swift in Sources */,
 				OBJ_581 /* LRORetrysPostAsyncRelativeRetrySucceeded.swift in Sources */,
 				OBJ_582 /* LRORetrysPut201CreatingSucceeded200.swift in Sources */,
@@ -2124,6 +2096,7 @@
 				OBJ_605 /* LROSADsPutAsyncRelativeRetryNoStatusPayload.swift in Sources */,
 				OBJ_606 /* LROSADsPutError201NoProvisioningStatePayload.swift in Sources */,
 				OBJ_607 /* LROSADsPutNonRetry201Creating400.swift in Sources */,
+				C83B2EB61FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift in Sources */,
 				OBJ_608 /* LROSADsPutNonRetry201Creating400InvalidJson.swift in Sources */,
 				OBJ_609 /* LROSADsPutNonRetry400.swift in Sources */,
 				OBJ_610 /* LROsCustomHeaderPost202Retry200.swift in Sources */,
@@ -2136,6 +2109,7 @@
 				OBJ_617 /* LROsDeleteAsyncNoHeaderInRetry.swift in Sources */,
 				OBJ_618 /* LROsDeleteAsyncNoRetrySucceeded.swift in Sources */,
 				OBJ_619 /* LROsDeleteAsyncRetryFailed.swift in Sources */,
+				C8595C7C1FDF2FC400A57AB9 /* number.swift in Sources */,
 				OBJ_620 /* LROsDeleteAsyncRetrySucceeded.swift in Sources */,
 				OBJ_621 /* LROsDeleteAsyncRetrycanceled.swift in Sources */,
 				OBJ_622 /* LROsDeleteNoHeaderInRetry.swift in Sources */,
@@ -2175,6 +2149,7 @@
 				OBJ_656 /* LRORetrysPutAsyncRelativeRetrySucceededHeaders.swift in Sources */,
 				OBJ_657 /* LROSADsDelete202NonRetry400Headers.swift in Sources */,
 				OBJ_658 /* LROSADsDelete202RetryInvalidHeaderHeaders.swift in Sources */,
+				C82203851FD8ABF90007026C /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift in Sources */,
 				OBJ_659 /* LROSADsDeleteAsyncRelativeRetry400Headers.swift in Sources */,
 				OBJ_660 /* LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.swift in Sources */,
 				OBJ_661 /* LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.swift in Sources */,
@@ -2188,10 +2163,12 @@
 				OBJ_669 /* LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.swift in Sources */,
 				OBJ_670 /* LROSADsPostAsyncRelativeRetryNoPayloadHeaders.swift in Sources */,
 				OBJ_671 /* LROSADsPostNonRetry400Headers.swift in Sources */,
+				C82203741FD868E60007026C /* RefColorConstantData.swift in Sources */,
 				OBJ_672 /* LROSADsPutAsyncRelativeRetry400Headers.swift in Sources */,
 				OBJ_673 /* LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.swift in Sources */,
 				OBJ_674 /* LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.swift in Sources */,
 				OBJ_675 /* LROSADsPutAsyncRelativeRetryNoStatusHeaders.swift in Sources */,
+				C8595C801FDF339300A57AB9 /* BodyNumberQuirksTests.swift in Sources */,
 				OBJ_676 /* LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.swift in Sources */,
 				OBJ_677 /* LROsCustomHeaderPost202Retry200Headers.swift in Sources */,
 				OBJ_678 /* LROsCustomHeaderPostAsyncRetrySucceededHeaders.swift in Sources */,
@@ -2212,6 +2189,7 @@
 				OBJ_693 /* LROsPostAsyncNoRetrySucceededHeaders.swift in Sources */,
 				OBJ_694 /* LROsPostAsyncRetryFailedHeaders.swift in Sources */,
 				OBJ_695 /* LROsPostAsyncRetrySucceededHeaders.swift in Sources */,
+				C82203841FD8A8F50007026C /* string.swift in Sources */,
 				OBJ_696 /* LROsPostAsyncRetrycanceledHeaders.swift in Sources */,
 				OBJ_697 /* LROsPutAsyncNoHeaderInRetryHeaders.swift in Sources */,
 				OBJ_698 /* LROsPutAsyncNoRetrySucceededHeaders.swift in Sources */,
@@ -2234,6 +2212,7 @@
 				OBJ_715 /* LRORetrysDelete202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_716 /* LRORetrysDeleteAsyncRelativeRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_717 /* LRORetrysDeleteProvisioning202Accepted200SucceededHeadersProtocol.swift in Sources */,
+				C82203731FD868DC0007026C /* enum.swift in Sources */,
 				OBJ_718 /* LRORetrysPost202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_719 /* LRORetrysPostAsyncRelativeRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_720 /* LRORetrysPutAsyncRelativeRetrySucceededHeadersProtocol.swift in Sources */,
@@ -2260,6 +2239,7 @@
 				OBJ_741 /* LROsCustomHeaderPost202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_742 /* LROsCustomHeaderPostAsyncRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_743 /* LROsCustomHeaderPutAsyncRetrySucceededHeadersProtocol.swift in Sources */,
+				C82203761FD868E60007026C /* Colors.swift in Sources */,
 				OBJ_744 /* LROsDelete202NoRetry204HeadersProtocol.swift in Sources */,
 				OBJ_745 /* LROsDelete202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_746 /* LROsDeleteAsyncNoHeaderInRetryHeadersProtocol.swift in Sources */,
@@ -2291,6 +2271,7 @@
 				OBJ_772 /* SubProductPropertiesTypeProtocol.swift in Sources */,
 				OBJ_773 /* SubProductTypeProtocol.swift in Sources */,
 				OBJ_774 /* SubResourceTypeProtocol.swift in Sources */,
+				C83B2EB21FE04C8400AC3E7B /* bool.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2300,8 +2281,10 @@
 			files = (
 				OBJ_795 /* ApplicationTokenCredentials.swift in Sources */,
 				OBJ_796 /* AuthFile.swift in Sources */,
+				C82203821FD89C810007026C /* Encoder.swift in Sources */,
 				OBJ_797 /* AzureTokentCredentials.swift in Sources */,
 				OBJ_798 /* BaseCommand.swift in Sources */,
+				C822037F1FD89ACD0007026C /* Decoder.swift in Sources */,
 				OBJ_799 /* Environment.swift in Sources */,
 				OBJ_800 /* Interceptor.swift in Sources */,
 				OBJ_801 /* RuntimeClient.swift in Sources */,

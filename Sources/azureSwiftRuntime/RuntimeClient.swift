@@ -11,25 +11,7 @@ import RxBlocking
 
 public protocol RuntimeClient {
     func execute(command: BaseCommand) throws -> Decodable?
-    func executeAsync(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
-}
-
-public class MyDecoder: ResponseDecoder {
-    public func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable {
-        guard let jsonData = jsonString.data(using: .utf8) else {
-            throw RuntimeError.general(message: "Can't get data form string utf8")
-        }
-        return try self.decode(type, from: jsonData)
-    }
-    
-    public func decode<T>(_ type: T.Type, from jsonData: Data) throws -> T where T : Decodable {
-        let decoder = JSONDecoder()
-        return try decoder.decode(type, from: jsonData)
-    }
-}
-
-public protocol RequetInterceptor {
-    func intercept()
+    func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
 }
 
 public class AzureClient: RuntimeClient {
@@ -58,7 +40,7 @@ public class AzureClient: RuntimeClient {
     
     var disposeBag = DisposeBag()
     
-    let decoder = MyDecoder()
+    let decoder = JsonResponseDecoder()
     
     public init(atc: AzureTokenCredentials) {
         self.atc = atc
@@ -67,7 +49,7 @@ public class AzureClient: RuntimeClient {
         }
     }
     
-    func buildUrl(command: BaseCommand, baseUrl: String) -> String {
+    func buildUrl (command: BaseCommand, baseUrl: String) -> String {
         var fullUrl = baseUrl + command.path
         for (key, value) in command.pathParameters {
             //replace parameter in full url with path parameter value
@@ -84,6 +66,7 @@ public class AzureClient: RuntimeClient {
                     : "&\(key)=\(value)"
                 veryFirstParam = false
             }
+            
             fullUrl += queryString
         }
         
@@ -92,7 +75,7 @@ public class AzureClient: RuntimeClient {
     
     typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
     
-    func prepareRequest(command: BaseCommand) throws -> RequestParams  {
+    func prepareRequest (command: BaseCommand) throws -> RequestParams  {
         command.preCall()
         
         guard let baseUrl = self.atc.environment.url(forEndpoint: .resourceManager) else {
@@ -100,7 +83,6 @@ public class AzureClient: RuntimeClient {
         }
         
         let url = self.buildUrl(command: command, baseUrl: baseUrl)
-        
        
         var bodyData: Data? = nil
         if command.body != nil {
@@ -124,14 +106,9 @@ public class AzureClient: RuntimeClient {
         session.finishTasksAndInvalidate()
     }
     
-    func executeRequest(url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Single<ResponseData> {
-        
+    func executeRequest (url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Single<ResponseData> {
         return Single<ResponseData>.create { single in
-            
-            var _urlStr = url
-            var _method = method
-            var _headers = headers
-            var _body = body
+            var _urlStr = url, _method = method, _headers = headers, _body = body
             
             for interceptor in self.requestInterceptors {
                 interceptor.intercept(url: &_urlStr, method: &_method, headers: &_headers, body: &_body)
@@ -147,8 +124,8 @@ public class AzureClient: RuntimeClient {
             cmdRequest.allHTTPHeaderFields = _headers
             cmdRequest.httpBody = _body
             
-            
-            let task = self.session.dataTask(with: cmdRequest, completionHandler: { data, response, error in
+            let task = self.session.dataTask(with: cmdRequest, completionHandler: {
+                data, response, error in
                 
                 if let executionError = error {
                     single(.error(executionError))
@@ -178,28 +155,7 @@ public class AzureClient: RuntimeClient {
         }
     }
     
-    
-    
-//    func executeRequestBocking(url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Single<ResponseData> {
-//        return Single<ResponseData>.create { single in
-//            do {
-//                guard let (httpResponse, data) = try self.executeRequest(url: url, method: method, headers: headers, body: body).toBlocking().single() else {
-//                    single(.error(RuntimeError.general(message: "executeRequestAsync returned nil")))
-//                    return Disposables.create()
-//                }
-//
-//                single(.success((httpResponse, data)))
-//
-//            } catch {
-//                single(.error(error))
-//            }
-//
-//            return Disposables.create()
-//        }
-//    }
-
-    func executeRequestWithInterception(url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Observable<ResponseData> {
-
+    func executeRequestWithInterception (url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Observable<ResponseData> {
         return self.executeRequest(url: url, method: method, headers: headers, body: body)
             .asObservable().flatMap {
                 httpResponse, data -> Observable<ResponseData> in
@@ -215,37 +171,51 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func execute(command: BaseCommand) throws -> Decodable? {
+    public func execute (command: BaseCommand) throws -> Decodable? {
         let (url, method, headers, body) = try self.prepareRequest(command: command)
-        guard let (httpResponse, data) = try self.executeRequest(url: url, method: method, headers: headers, body: body).toBlocking().single() else {
+        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body).toBlocking().single() else {
             throw RuntimeError.general(message: "executeRequestAsync returned nil")
         }
         
         try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-      
-        
-        let decodable = try command.returnFunc(decoder: self.decoder, jsonData: data!)
-        
-        return decodable
+        do {
+            let decodable = try command.returnFunc(data: data!)
+            return decodable
+        } catch DecodeError.nilString {
+            return nil
+        }
+    }
+    
+    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws {
+        let (url, method, headers, body) = try self.prepareRequest(command: command)
+        self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
+            .subscribe(
+                onNext:{ (httpResponse, data) in
+                    if let body = data {
+                        let decodable = try? command.returnFunc(data: body)
+                        completionHandler(decodable, nil)
+                    } else {
+                        completionHandler(nil, nil)
+                    }
+                },
+                onError: { error in
+                    completionHandler(nil,error)
+                }
+            ).disposed(by: disposeBag)
     }
     
     enum RetryConditionError: Error {
         case needRetry
     }
 
-    // handles long-running operations
-    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws {
+    // handles long-running operations with retry loginc
+    public func executeAsyncLRO (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws {
         do {
-            
             let (url, method, headers, body) = try self.prepareRequest(command: command)
-            
             let firstRequestObservable = self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body).asObservable()
-                
             let responseParserObservable = firstRequestObservable
                 .flatMap { httpResponse, data -> Observable<ResponseData> in
-                
                     let statusCode = httpResponse.statusCode
-                    
                     do {
                         try self.handleErrorCode(statusCode: statusCode, data: data)
                     } catch {
@@ -253,7 +223,6 @@ public class AzureClient: RuntimeClient {
                     }
                     
                     let headers = httpResponse.allHeaderFields
-                    
                     var statusUrl = String()
                     var isAsyncOperation = false
                     if let asyncOperation = headers["Azure-AsyncOperation"] as? String {
@@ -295,7 +264,6 @@ public class AzureClient: RuntimeClient {
                             }
                             
                             return Observable<ResponseData>.just((httpResponse, data))
-                            
                         }.map { (httpResponse, data) -> ResponseData in
                             let done = try self.checkCompletionStatus(command: command, responseData: (httpResponse, data))
                             if !done {
@@ -303,7 +271,6 @@ public class AzureClient: RuntimeClient {
                             }
                             
                             return (httpResponse, data)
-                        
                         }.retryWhen { (e: Observable<Error>) -> Observable<Int> in
                             return e.flatMapWithIndex { (e, i) -> Observable<Int> in
                                 switch(e) {
@@ -315,6 +282,7 @@ public class AzureClient: RuntimeClient {
                                     return Observable.error(e)
                                 }
                             }
+                            
                         }.flatMap { httpResponse, data -> Observable<ResponseData> in
                             if (isAsyncOperation && method.uppercased() != "DELETE" && method.uppercased() != "POST") {
                                 return self.executeRequestWithInterception(url: url, method: "GET").asObservable()
@@ -328,25 +296,23 @@ public class AzureClient: RuntimeClient {
                 .subscribeOn(ConcurrentDispatchQueueScheduler(queue: queueWorker))
                 .subscribe(
                     onNext: { (httpResponse, data) in
-                        
-                   if let body = data {
-                            let decodable = try? command.returnFunc(decoder: self.decoder, jsonData: body)
+                        if let body = data {
+                            let decodable = try? command.returnFunc(data: body)
                             completionHandler(decodable, nil)
                         } else {
                             completionHandler(nil,nil)
                         }
-                    }, onError: { e in
+                    },
+                    onError: { e in
                         completionHandler(nil,e)
                     }
-            ).disposed(by: disposeBag)
-            
+                ).disposed(by: disposeBag)
         } catch {
             completionHandler(nil,error)
         }
     }
  
     // === Private helpers
-    
     
     struct Status : Codable {
         let status: String
@@ -392,7 +358,7 @@ public class AzureClient: RuntimeClient {
                     return false
                 }                
                 
-                if let result = try? decoder.decode(Status.self, from: body) {
+                if let result = try? JsonResponseDecoder.decode(Status.self, from: body) {
                     if let status = Status.Value(rawValue: result.status) {
                         switch status {
                         case .Accepted, .InProgress:
@@ -408,11 +374,8 @@ public class AzureClient: RuntimeClient {
                         throw RuntimeError.general(message: "Unexpected status")
                     }
                     
-                } else if try command.returnFunc(decoder: self.decoder, jsonData: body) != nil {
-                    //print("Result:", result)
-                    //decoded.value = result
-                    
-                    if let result = try? decoder.decode(ProvisionStateProp.self, from: body) {
+                } else if try command.returnFunc(data: body) != nil {
+                    if let result = try? JsonResponseDecoder.decode(ProvisionStateProp.self, from: body) {
                         //print("Result:", result)
                         if let provisioningState: ProvisionState.Value = ProvisionState.Value(rawValue: result.properties.provisioningState) {
                             switch provisioningState {
@@ -436,9 +399,9 @@ public class AzureClient: RuntimeClient {
             } else {
                 throw RuntimeError.general(message: "No data in the body")
             }
+            
         default:
             return true
-
         }
         
         return false
@@ -451,7 +414,7 @@ public class AzureClient: RuntimeClient {
                     throw RuntimeError.errorStatusCode(code: statusCode, details: "no details")
                 } 
 
-                if let cloudError = try? self.decoder.decode(CloudError.self, from: jsonData) {
+                if let cloudError = try? JsonResponseDecoder.decode(CloudError.self, from: jsonData) {
                     throw RuntimeError.cloud(error: cloudError)
                 } else {
                     let str = String(data: jsonData, encoding: .utf8)

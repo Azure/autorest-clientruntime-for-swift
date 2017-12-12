@@ -15,13 +15,13 @@ class LRORetrysDeleteProvisioning202Accepted200SucceededCommand : BaseCommand {
     }
 
     override func preCall()  {
-}
-
-
-    override func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
-        return try decoder.decode(ProductType?.self, from: jsonString)
     }
+
+    override func returnFunc(data: Data) throws -> Decodable? {
+        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+    }
+    
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {
         return try client.execute(command: self) as! ProductTypeProtocol?
     }
-    }
+}

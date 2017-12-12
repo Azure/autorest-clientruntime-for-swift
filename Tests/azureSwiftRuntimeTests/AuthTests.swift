@@ -60,12 +60,12 @@ class AuthTests: XCTestCase {
             self.path = "/subscriptions?api-version=2016-06-01"
         }
         
-        override func returnFunc(decoder: ResponseDecoder, jsonData: Data) throws -> Decodable? {
-            return try decoder.decode(Subscription?.self, from: jsonData)
+        override func returnFunc(data: Data) throws -> Decodable? {
+            return try JsonResponseDecoder.decode(Subscription?.self, from: data)
         }
         
         public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Subscription?, Error?) -> Void) throws {
-            try client.executeAsync(command: self, completionHandler:  {
+            try client.executeAsyncLRO(command: self, completionHandler:  {
                 (decodable, error)  in
                 
                 completionHandler(decodable as? Subscription, error)
