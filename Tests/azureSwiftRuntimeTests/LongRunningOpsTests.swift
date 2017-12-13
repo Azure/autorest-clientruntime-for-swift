@@ -7,8 +7,7 @@
 
 import XCTest
 import RxSwift
-//import Alamofire
-@testable import azureSwiftRuntime
+import azureSwiftRuntime
 
 class LongRunningOpsTest: XCTestCase {
     

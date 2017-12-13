@@ -45,20 +45,6 @@ public struct JsonRequestEncoder: RequestEncoder {
         }
         
         return data
-        
-//        let test = try JSONSerialization.data(withJSONObject: e)
-//
-//        if let str = encodable as? String {
-//            let qstr = "\"\(str)\""
-//            guard let d = qstr.data(using: .utf8) else {
-//                throw EncodeError.stringTpDataFailed
-//            }
-//            return d
-//        }
-//
-//        let jsonEncoder = JSONEncoder()
-//        let jsonData = try jsonEncoder.encode(e)
-//        return jsonData
     }
 }
 

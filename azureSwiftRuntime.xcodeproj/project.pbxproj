@@ -32,6 +32,15 @@
 		C82203851FD8ABF90007026C /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_58 /* LRORetrysDeleteProvisioning202Accepted200Succeeded.swift */; };
 		C83B2EB21FE04C8400AC3E7B /* bool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EAD1FE04C8400AC3E7B /* bool.swift */; };
 		C83B2EB61FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */; };
+		C83B2EBD1FE0A57100AC3E7B /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EB91FE0A42000AC3E7B /* Endpoint.swift */; };
+		C83B2EBE1FE0A57E00AC3E7B /* ServiceClientCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EB71FE0A3D700AC3E7B /* ServiceClientCredential.swift */; };
+		C83B2EBF1FE0A5A700AC3E7B /* TokenCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EBB1FE0A46800AC3E7B /* TokenCredentials.swift */; };
+		C83B2EC21FE0A69800AC3E7B /* ResponseInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EC01FE0A69200AC3E7B /* ResponseInterceptor.swift */; };
+		C83B2EC51FE0A71200AC3E7B /* LogInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EC31FE0A70E00AC3E7B /* LogInterceptor.swift */; };
+		C83B2EC71FE19D1200AC3E7B /* AzureClient-LRO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EC61FE19D1200AC3E7B /* AzureClient-LRO.swift */; };
+		C83B2ECA1FE19DC300AC3E7B /* AzureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EC81FE19D5500AC3E7B /* AzureClient.swift */; };
+		C83B2ECC1FE19EB200AC3E7B /* AzureClient-Interception.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ECB1FE19EB200AC3E7B /* AzureClient-Interception.swift */; };
+		C83B2ECE1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ECD1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift */; };
 		C8595C7C1FDF2FC400A57AB9 /* number.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C771FDF2FC400A57AB9 /* number.swift */; };
 		C8595C801FDF339300A57AB9 /* BodyNumberQuirksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */; };
 		OBJ_1000 /* GroupedObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_314 /* GroupedObservable.swift */; };
@@ -339,7 +348,7 @@
 		OBJ_797 /* AzureTokentCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* AzureTokentCredentials.swift */; };
 		OBJ_798 /* BaseCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* BaseCommand.swift */; };
 		OBJ_799 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_13 /* Environment.swift */; };
-		OBJ_800 /* Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* Interceptor.swift */; };
+		OBJ_800 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* RequestInterceptor.swift */; };
 		OBJ_801 /* RuntimeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_15 /* RuntimeClient.swift */; };
 		OBJ_802 /* RuntimeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_16 /* RuntimeError.swift */; };
 		OBJ_804 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = "RxSwift::RxCocoa::Product" /* RxCocoa.framework */; };
@@ -625,6 +634,15 @@
 		C82203801FD89C620007026C /* Encoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
 		C83B2EAD1FE04C8400AC3E7B /* bool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bool.swift; sourceTree = "<group>"; };
 		C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyBooleanQuirksTests.swift.swift; sourceTree = "<group>"; };
+		C83B2EB71FE0A3D700AC3E7B /* ServiceClientCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceClientCredential.swift; sourceTree = "<group>"; };
+		C83B2EB91FE0A42000AC3E7B /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		C83B2EBB1FE0A46800AC3E7B /* TokenCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCredentials.swift; sourceTree = "<group>"; };
+		C83B2EC01FE0A69200AC3E7B /* ResponseInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseInterceptor.swift; sourceTree = "<group>"; };
+		C83B2EC31FE0A70E00AC3E7B /* LogInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInterceptor.swift; sourceTree = "<group>"; };
+		C83B2EC61FE19D1200AC3E7B /* AzureClient-LRO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AzureClient-LRO.swift"; sourceTree = "<group>"; };
+		C83B2EC81FE19D5500AC3E7B /* AzureClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureClient.swift; sourceTree = "<group>"; };
+		C83B2ECB1FE19EB200AC3E7B /* AzureClient-Interception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AzureClient-Interception.swift"; sourceTree = "<group>"; };
+		C83B2ECD1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AzureClient-HandleErrors.swift"; sourceTree = "<group>"; };
 		C8595C771FDF2FC400A57AB9 /* number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = number.swift; sourceTree = "<group>"; };
 		C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyNumberQuirksTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* AuthFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFile.swift; sourceTree = "<group>"; };
@@ -670,7 +688,7 @@
 		OBJ_137 /* LROSADsDelete202NonRetry400Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDelete202NonRetry400Headers.swift; sourceTree = "<group>"; };
 		OBJ_138 /* LROSADsDelete202RetryInvalidHeaderHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDelete202RetryInvalidHeaderHeaders.swift; sourceTree = "<group>"; };
 		OBJ_139 /* LROSADsDeleteAsyncRelativeRetry400Headers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDeleteAsyncRelativeRetry400Headers.swift; sourceTree = "<group>"; };
-		OBJ_14 /* Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interceptor.swift; sourceTree = "<group>"; };
+		OBJ_14 /* RequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInterceptor.swift; sourceTree = "<group>"; };
 		OBJ_140 /* LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.swift; sourceTree = "<group>"; };
 		OBJ_141 /* LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.swift; sourceTree = "<group>"; };
 		OBJ_142 /* LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.swift; sourceTree = "<group>"; };
@@ -1856,11 +1874,20 @@
 				OBJ_11 /* AzureTokentCredentials.swift */,
 				OBJ_12 /* BaseCommand.swift */,
 				OBJ_13 /* Environment.swift */,
-				OBJ_14 /* Interceptor.swift */,
+				OBJ_14 /* RequestInterceptor.swift */,
 				OBJ_15 /* RuntimeClient.swift */,
 				OBJ_16 /* RuntimeError.swift */,
 				C822037C1FD8951D0007026C /* Decoder.swift */,
 				C82203801FD89C620007026C /* Encoder.swift */,
+				C83B2EB71FE0A3D700AC3E7B /* ServiceClientCredential.swift */,
+				C83B2EB91FE0A42000AC3E7B /* Endpoint.swift */,
+				C83B2EBB1FE0A46800AC3E7B /* TokenCredentials.swift */,
+				C83B2EC01FE0A69200AC3E7B /* ResponseInterceptor.swift */,
+				C83B2EC31FE0A70E00AC3E7B /* LogInterceptor.swift */,
+				C83B2EC61FE19D1200AC3E7B /* AzureClient-LRO.swift */,
+				C83B2EC81FE19D5500AC3E7B /* AzureClient.swift */,
+				C83B2ECB1FE19EB200AC3E7B /* AzureClient-Interception.swift */,
+				C83B2ECD1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift */,
 			);
 			name = azureSwiftRuntime;
 			path = Sources/azureSwiftRuntime;
@@ -2279,16 +2306,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				C83B2ECC1FE19EB200AC3E7B /* AzureClient-Interception.swift in Sources */,
+				C83B2EC51FE0A71200AC3E7B /* LogInterceptor.swift in Sources */,
+				C83B2EC21FE0A69800AC3E7B /* ResponseInterceptor.swift in Sources */,
+				C83B2ECA1FE19DC300AC3E7B /* AzureClient.swift in Sources */,
 				OBJ_795 /* ApplicationTokenCredentials.swift in Sources */,
 				OBJ_796 /* AuthFile.swift in Sources */,
 				C82203821FD89C810007026C /* Encoder.swift in Sources */,
+				C83B2EBF1FE0A5A700AC3E7B /* TokenCredentials.swift in Sources */,
+				C83B2EBE1FE0A57E00AC3E7B /* ServiceClientCredential.swift in Sources */,
 				OBJ_797 /* AzureTokentCredentials.swift in Sources */,
 				OBJ_798 /* BaseCommand.swift in Sources */,
 				C822037F1FD89ACD0007026C /* Decoder.swift in Sources */,
 				OBJ_799 /* Environment.swift in Sources */,
-				OBJ_800 /* Interceptor.swift in Sources */,
+				OBJ_800 /* RequestInterceptor.swift in Sources */,
+				C83B2ECE1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift in Sources */,
 				OBJ_801 /* RuntimeClient.swift in Sources */,
+				C83B2EBD1FE0A57100AC3E7B /* Endpoint.swift in Sources */,
 				OBJ_802 /* RuntimeError.swift in Sources */,
+				C83B2EC71FE19D1200AC3E7B /* AzureClient-LRO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,7 @@ class BodyNumberQuirksTests: XCTestCase {
         
         let env = AuzureEnvironment(endpoints:[
             .resourceManager : "http://localhost:3000"
-            ])
+        ])
         
         let atc = AzureTokenCredentials(environment: env, tenantId: "", subscriptionId: "")
         
