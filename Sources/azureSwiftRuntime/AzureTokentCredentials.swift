@@ -8,14 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol ServiceClientCredential {
-    func authHeaderValue(url: String?) throws -> String
-}
-
-protocol TokenCredentials: ServiceClientCredential {
-    func getToken(forResource: String) throws -> String
-}
-
 public class AzureTokenCredentials: TokenCredentials {
     let tenantId: String
     let environment: Environment
@@ -33,7 +25,7 @@ public class AzureTokenCredentials: TokenCredentials {
         self.init(environment: AuzureEnvironment.azure, tenantId: tenantId, subscriptionId: subscriptionId)
     }
    
-    func authHeaderValue(url: String?) throws -> String {
+    internal func authHeaderValue(url: String?) throws -> String {
         guard
             let resource = (url == nil)
                 ? self.environment.url(forEndpoint: .activeDirectory)
@@ -82,7 +74,7 @@ public class AzureTokenCredentials: TokenCredentials {
     }
 }
 
-enum ClientCredentialError: Error {
+public enum ClientCredentialError: Error {
     case badUrl
     case abstructFuncCall
     case cantGetToken

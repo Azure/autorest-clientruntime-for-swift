@@ -16,16 +16,16 @@ public enum RuntimeError: Error {
     case errorStatusCode(code: Int, details: String)
 }
 public struct AzureError: Codable {
-    let error: AzureErrorDetails
+    public let error: AzureErrorDetails
     
-    struct AzureErrorDetails: Codable {
+    public struct AzureErrorDetails: Codable {
         let code: String
         let message: String
     }
 }
 
 public struct CloudError: Codable {
-    let status: Int?
-    let message: String?
+    public let status: Int?
+    public let message: String?
 }
 

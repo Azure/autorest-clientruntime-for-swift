@@ -7,11 +7,6 @@
 
 import Foundation
 
-public protocol ResponseDecoder {
-    func decode<T>(_ type: T.Type, from jsonString: String) throws -> T where T : Decodable
-    func decode<T>(_ type: T.Type, from jsonData: Data) throws -> T where T : Decodable
-}
-
 open class BaseCommand {
     public var method: String
     public var isLongRunningOperation: Bool
@@ -22,14 +17,13 @@ open class BaseCommand {
     public var body: Codable?
     
     open func preCall() {}
-    open func encodeBody() throws -> Data? { return nil }
-
-    open func returnFunc(decoder: ResponseDecoder, jsonString: String) throws -> Decodable? {
-    	return nil;
+    
+    open func encodeBody() throws -> Data? {
+        return nil
     }
     
-    open func returnFunc(decoder: ResponseDecoder, jsonData: Data) throws -> Decodable? {
-        return nil;
+    open func returnFunc(data: Data) throws -> Decodable? {
+        return nil
     }
 
     public init() {
