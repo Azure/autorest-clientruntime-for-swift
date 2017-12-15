@@ -93,8 +93,8 @@ class BodyNumberQuirksTests: XCTestCase {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNil(res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -102,14 +102,15 @@ class BodyNumberQuirksTests: XCTestCase {
         print("\n=================== #4.2 number_getBigFloat\n")
         
         let cmd = NumberNamespace.GetBigFloatCommand()
+        let expectedResult = 3.402823e+20
         
         do {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNotNil(res)
-            XCTAssertEqual(3.402823e+20, res)
+            XCTAssertEqual(expectedResult, res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -123,8 +124,8 @@ class BodyNumberQuirksTests: XCTestCase {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNil(res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -138,8 +139,8 @@ class BodyNumberQuirksTests: XCTestCase {
             XCTAssertNotNil(res)
             XCTAssertEqual(number/1e+101, res!/1e+101)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -153,8 +154,8 @@ class BodyNumberQuirksTests: XCTestCase {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNil(res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -168,8 +169,8 @@ class BodyNumberQuirksTests: XCTestCase {
             XCTAssertNotNil(res)
             XCTAssertEqual(number, res!)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
 /*
@@ -213,8 +214,8 @@ class BodyNumberQuirksTests: XCTestCase {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNil(res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -228,8 +229,8 @@ class BodyNumberQuirksTests: XCTestCase {
             XCTAssertNotNil(res)
             XCTAssertEqual(number, res!)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -243,8 +244,8 @@ class BodyNumberQuirksTests: XCTestCase {
             let res = try cmd.execute(client: self.azureClient)
             XCTAssertNil(res)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
     
@@ -258,8 +259,8 @@ class BodyNumberQuirksTests: XCTestCase {
             XCTAssertNotNil(res)
             XCTAssertEqual(number/1e+101, res!/1e+101, accuracy: 4.53255549978056e-218)
         } catch {
-            XCTFail(error.localizedDescription)
             print("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
 }

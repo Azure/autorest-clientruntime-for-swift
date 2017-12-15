@@ -21,6 +21,18 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		C81081B41FE1F590004DDBCB /* paging.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081A61FE1F590004DDBCB /* paging.swift */; };
+		C81081B51FE1F590004DDBCB /* OperationResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081A81FE1F590004DDBCB /* OperationResultData.swift */; };
+		C81081B61FE1F590004DDBCB /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081A91FE1F590004DDBCB /* ProductData.swift */; };
+		C81081B71FE1F590004DDBCB /* ProductPropertiesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081AA1FE1F590004DDBCB /* ProductPropertiesData.swift */; };
+		C81081B81FE1F590004DDBCB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081AB1FE1F590004DDBCB /* Status.swift */; };
+		C81081B91FE1F590004DDBCB /* ProductResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081AC1FE1F590004DDBCB /* ProductResultData.swift */; };
+		C81081BA1FE1F590004DDBCB /* OdataProductResultData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081AD1FE1F590004DDBCB /* OdataProductResultData.swift */; };
+		C81081BB1FE1F590004DDBCB /* ProductResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081AF1FE1F590004DDBCB /* ProductResultProtocol.swift */; };
+		C81081BC1FE1F590004DDBCB /* OperationResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081B01FE1F590004DDBCB /* OperationResultProtocol.swift */; };
+		C81081BD1FE1F590004DDBCB /* ProductPropertiesProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081B11FE1F590004DDBCB /* ProductPropertiesProtocol.swift */; };
+		C81081BE1FE1F590004DDBCB /* OdataProductResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081B21FE1F590004DDBCB /* OdataProductResultProtocol.swift */; };
+		C81081BF1FE1F590004DDBCB /* ProductProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81081B31FE1F590004DDBCB /* ProductProtocol.swift */; };
 		C82203731FD868DC0007026C /* enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203631FD868CF0007026C /* enum.swift */; };
 		C82203741FD868E60007026C /* RefColorConstantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203651FD868CF0007026C /* RefColorConstantData.swift */; };
 		C82203761FD868E60007026C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C82203671FD868CF0007026C /* Colors.swift */; };
@@ -41,8 +53,12 @@
 		C83B2ECA1FE19DC300AC3E7B /* AzureClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2EC81FE19D5500AC3E7B /* AzureClient.swift */; };
 		C83B2ECC1FE19EB200AC3E7B /* AzureClient-Interception.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ECB1FE19EB200AC3E7B /* AzureClient-Interception.swift */; };
 		C83B2ECE1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ECD1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift */; };
+		C83B2ED61FE1AEE500AC3E7B /* files.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ED11FE1AEE500AC3E7B /* files.swift */; };
+		C83B2EDA1FE1B67800AC3E7B /* BodyFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C83B2ED91FE1B67800AC3E7B /* BodyFileTests.swift */; };
 		C8595C7C1FDF2FC400A57AB9 /* number.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C771FDF2FC400A57AB9 /* number.swift */; };
 		C8595C801FDF339300A57AB9 /* BodyNumberQuirksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */; };
+		C8677F751FE2E6DD001534F8 /* PagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8677F741FE2E6DD001534F8 /* PagingTests.swift */; };
+		C8677F761FE2E6DD001534F8 /* PagingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8677F741FE2E6DD001534F8 /* PagingTests.swift */; };
 		OBJ_1000 /* GroupedObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_314 /* GroupedObservable.swift */; };
 		OBJ_1001 /* HistoricalScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_315 /* HistoricalScheduler.swift */; };
 		OBJ_1002 /* HistoricalSchedulerTimeConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_316 /* HistoricalSchedulerTimeConverter.swift */; };
@@ -273,7 +289,6 @@
 		OBJ_707 /* ProvisioningStateValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_187 /* ProvisioningStateValues.swift */; };
 		OBJ_708 /* ProvisioningStateValues1.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_188 /* ProvisioningStateValues1.swift */; };
 		OBJ_709 /* SkuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_189 /* SkuType.swift */; };
-		OBJ_710 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_190 /* Status.swift */; };
 		OBJ_711 /* SubProductPropertiesType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_191 /* SubProductPropertiesType.swift */; };
 		OBJ_712 /* SubProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_192 /* SubProductType.swift */; };
 		OBJ_713 /* SubResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_193 /* SubResourceType.swift */; };
@@ -624,6 +639,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C81081A61FE1F590004DDBCB /* paging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = paging.swift; sourceTree = "<group>"; };
+		C81081A81FE1F590004DDBCB /* OperationResultData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationResultData.swift; sourceTree = "<group>"; };
+		C81081A91FE1F590004DDBCB /* ProductData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
+		C81081AA1FE1F590004DDBCB /* ProductPropertiesData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPropertiesData.swift; sourceTree = "<group>"; };
+		C81081AB1FE1F590004DDBCB /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		C81081AC1FE1F590004DDBCB /* ProductResultData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductResultData.swift; sourceTree = "<group>"; };
+		C81081AD1FE1F590004DDBCB /* OdataProductResultData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdataProductResultData.swift; sourceTree = "<group>"; };
+		C81081AF1FE1F590004DDBCB /* ProductResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductResultProtocol.swift; sourceTree = "<group>"; };
+		C81081B01FE1F590004DDBCB /* OperationResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationResultProtocol.swift; sourceTree = "<group>"; };
+		C81081B11FE1F590004DDBCB /* ProductPropertiesProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductPropertiesProtocol.swift; sourceTree = "<group>"; };
+		C81081B21FE1F590004DDBCB /* OdataProductResultProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OdataProductResultProtocol.swift; sourceTree = "<group>"; };
+		C81081B31FE1F590004DDBCB /* ProductProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductProtocol.swift; sourceTree = "<group>"; };
 		C82203621FD868CF0007026C /* string.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = string.swift; sourceTree = "<group>"; };
 		C82203631FD868CF0007026C /* enum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enum.swift; sourceTree = "<group>"; };
 		C82203651FD868CF0007026C /* RefColorConstantData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefColorConstantData.swift; sourceTree = "<group>"; };
@@ -643,8 +670,12 @@
 		C83B2EC81FE19D5500AC3E7B /* AzureClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureClient.swift; sourceTree = "<group>"; };
 		C83B2ECB1FE19EB200AC3E7B /* AzureClient-Interception.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AzureClient-Interception.swift"; sourceTree = "<group>"; };
 		C83B2ECD1FE19FA400AC3E7B /* AzureClient-HandleErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AzureClient-HandleErrors.swift"; sourceTree = "<group>"; };
+		C83B2ED11FE1AEE500AC3E7B /* files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = files.swift; sourceTree = "<group>"; };
+		C83B2ED91FE1B67800AC3E7B /* BodyFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyFileTests.swift; sourceTree = "<group>"; };
 		C8595C771FDF2FC400A57AB9 /* number.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = number.swift; sourceTree = "<group>"; };
 		C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyNumberQuirksTests.swift; sourceTree = "<group>"; };
+		C8677F741FE2E6DD001534F8 /* PagingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingTests.swift; sourceTree = "<group>"; };
+		C8F199D91FE1CCE000D4C2C2 /* en */ = {isa = PBXFileReference; explicitFileType = image.png; name = en; path = en.lproj/nonempty.png; sourceTree = "<group>"; };
 		OBJ_10 /* AuthFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFile.swift; sourceTree = "<group>"; };
 		OBJ_100 /* LROsDeleteAsyncRetrycanceled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROsDeleteAsyncRetrycanceled.swift; sourceTree = "<group>"; };
 		OBJ_101 /* LROsDeleteNoHeaderInRetry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LROsDeleteNoHeaderInRetry.swift; sourceTree = "<group>"; };
@@ -742,7 +773,6 @@
 		OBJ_188 /* ProvisioningStateValues1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvisioningStateValues1.swift; sourceTree = "<group>"; };
 		OBJ_189 /* SkuType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkuType.swift; sourceTree = "<group>"; };
 		OBJ_19 /* AuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTests.swift; sourceTree = "<group>"; };
-		OBJ_190 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		OBJ_191 /* SubProductPropertiesType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubProductPropertiesType.swift; sourceTree = "<group>"; };
 		OBJ_192 /* SubProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubProductType.swift; sourceTree = "<group>"; };
 		OBJ_193 /* SubResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubResourceType.swift; sourceTree = "<group>"; };
@@ -1183,6 +1213,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C81081A41FE1F590004DDBCB /* paging */ = {
+			isa = PBXGroup;
+			children = (
+				C81081A51FE1F590004DDBCB /* commands */,
+				C81081A71FE1F590004DDBCB /* data */,
+				C81081AE1FE1F590004DDBCB /* protocols */,
+			);
+			path = paging;
+			sourceTree = "<group>";
+		};
+		C81081A51FE1F590004DDBCB /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				C81081A61FE1F590004DDBCB /* paging.swift */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
+		C81081A71FE1F590004DDBCB /* data */ = {
+			isa = PBXGroup;
+			children = (
+				C81081A81FE1F590004DDBCB /* OperationResultData.swift */,
+				C81081A91FE1F590004DDBCB /* ProductData.swift */,
+				C81081AA1FE1F590004DDBCB /* ProductPropertiesData.swift */,
+				C81081AB1FE1F590004DDBCB /* Status.swift */,
+				C81081AC1FE1F590004DDBCB /* ProductResultData.swift */,
+				C81081AD1FE1F590004DDBCB /* OdataProductResultData.swift */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		C81081AE1FE1F590004DDBCB /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C81081AF1FE1F590004DDBCB /* ProductResultProtocol.swift */,
+				C81081B01FE1F590004DDBCB /* OperationResultProtocol.swift */,
+				C81081B11FE1F590004DDBCB /* ProductPropertiesProtocol.swift */,
+				C81081B21FE1F590004DDBCB /* OdataProductResultProtocol.swift */,
+				C81081B31FE1F590004DDBCB /* ProductProtocol.swift */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		C82203601FD868CF0007026C /* body-string.quirks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1231,6 +1304,22 @@
 			isa = PBXGroup;
 			children = (
 				C83B2EAD1FE04C8400AC3E7B /* bool.swift */,
+			);
+			path = commands;
+			sourceTree = "<group>";
+		};
+		C83B2ECF1FE1AEE500AC3E7B /* body-file */ = {
+			isa = PBXGroup;
+			children = (
+				C83B2ED01FE1AEE500AC3E7B /* commands */,
+			);
+			path = "body-file";
+			sourceTree = "<group>";
+		};
+		C83B2ED01FE1AEE500AC3E7B /* commands */ = {
+			isa = PBXGroup;
+			children = (
+				C83B2ED11FE1AEE500AC3E7B /* files.swift */,
 			);
 			path = commands;
 			sourceTree = "<group>";
@@ -1315,7 +1404,6 @@
 				OBJ_187 /* ProvisioningStateValues.swift */,
 				OBJ_188 /* ProvisioningStateValues1.swift */,
 				OBJ_189 /* SkuType.swift */,
-				OBJ_190 /* Status.swift */,
 				OBJ_191 /* SubProductPropertiesType.swift */,
 				OBJ_192 /* SubProductType.swift */,
 				OBJ_193 /* SubResourceType.swift */,
@@ -1334,12 +1422,15 @@
 		OBJ_18 /* azureSwiftRuntimeTests */ = {
 			isa = PBXGroup;
 			children = (
+				C8F199DA1FE1CCE000D4C2C2 /* nonempty.png */,
 				OBJ_19 /* AuthTests.swift */,
 				OBJ_21 /* LongRunningOpsTests.swift */,
 				OBJ_22 /* fixtures */,
 				C82203791FD87C8A0007026C /* BodyStringQuirksTests.swift */,
 				C8595C7F1FDF339300A57AB9 /* BodyNumberQuirksTests.swift */,
 				C83B2EB51FE0506600AC3E7B /* BodyBooleanQuirksTests.swift.swift */,
+				C83B2ED91FE1B67800AC3E7B /* BodyFileTests.swift */,
+				C8677F741FE2E6DD001534F8 /* PagingTests.swift */,
 			);
 			name = azureSwiftRuntimeTests;
 			path = Tests/azureSwiftRuntimeTests;
@@ -1417,6 +1508,8 @@
 		OBJ_22 /* fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				C81081A41FE1F590004DDBCB /* paging */,
+				C83B2ECF1FE1AEE500AC3E7B /* body-file */,
 				C83B2EAB1FE04C8400AC3E7B /* body-boolean.quirks */,
 				C8595C751FDF2FC400A57AB9 /* body-number.quirks */,
 				C82203601FD868CF0007026C /* body-string.quirks */,
@@ -2072,6 +2165,7 @@
 			buildActionMask = 0;
 			files = (
 				OBJ_537 /* Package.swift in Sources */,
+				C8677F751FE2E6DD001534F8 /* PagingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2112,6 +2206,7 @@
 				OBJ_594 /* LROSADsPost202RetryInvalidHeader.swift in Sources */,
 				OBJ_595 /* LROSADsPostAsyncRelativeRetry400.swift in Sources */,
 				OBJ_596 /* LROSADsPostAsyncRelativeRetryInvalidHeader.swift in Sources */,
+				C81081BC1FE1F590004DDBCB /* OperationResultProtocol.swift in Sources */,
 				OBJ_597 /* LROSADsPostAsyncRelativeRetryInvalidJsonPolling.swift in Sources */,
 				OBJ_598 /* LROSADsPostAsyncRelativeRetryNoPayload.swift in Sources */,
 				OBJ_599 /* LROSADsPostNonRetry400.swift in Sources */,
@@ -2144,11 +2239,13 @@
 				OBJ_624 /* LROsDeleteProvisioning202DeletingFailed200.swift in Sources */,
 				OBJ_625 /* LROsDeleteProvisioning202Deletingcanceled200.swift in Sources */,
 				OBJ_626 /* LROsPost200WithPayload.swift in Sources */,
+				C81081BD1FE1F590004DDBCB /* ProductPropertiesProtocol.swift in Sources */,
 				OBJ_627 /* LROsPost202NoRetry204.swift in Sources */,
 				OBJ_628 /* LROsPost202Retry200.swift in Sources */,
 				OBJ_629 /* LROsPostAsyncNoRetrySucceeded.swift in Sources */,
 				OBJ_630 /* LROsPostAsyncRetryFailed.swift in Sources */,
 				OBJ_631 /* LROsPostAsyncRetrySucceeded.swift in Sources */,
+				C81081BB1FE1F590004DDBCB /* ProductResultProtocol.swift in Sources */,
 				OBJ_632 /* LROsPostAsyncRetrycanceled.swift in Sources */,
 				OBJ_633 /* LROsPut200Acceptedcanceled200.swift in Sources */,
 				OBJ_634 /* LROsPut200Succeeded.swift in Sources */,
@@ -2185,7 +2282,9 @@
 				OBJ_664 /* LROSADsPost202NoLocationHeaders.swift in Sources */,
 				OBJ_665 /* LROSADsPost202NonRetry400Headers.swift in Sources */,
 				OBJ_666 /* LROSADsPost202RetryInvalidHeaderHeaders.swift in Sources */,
+				C81081B71FE1F590004DDBCB /* ProductPropertiesData.swift in Sources */,
 				OBJ_667 /* LROSADsPostAsyncRelativeRetry400Headers.swift in Sources */,
+				C81081B61FE1F590004DDBCB /* ProductData.swift in Sources */,
 				OBJ_668 /* LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.swift in Sources */,
 				OBJ_669 /* LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.swift in Sources */,
 				OBJ_670 /* LROSADsPostAsyncRelativeRetryNoPayloadHeaders.swift in Sources */,
@@ -2199,14 +2298,17 @@
 				OBJ_676 /* LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.swift in Sources */,
 				OBJ_677 /* LROsCustomHeaderPost202Retry200Headers.swift in Sources */,
 				OBJ_678 /* LROsCustomHeaderPostAsyncRetrySucceededHeaders.swift in Sources */,
+				C81081B41FE1F590004DDBCB /* paging.swift in Sources */,
 				OBJ_679 /* LROsCustomHeaderPutAsyncRetrySucceededHeaders.swift in Sources */,
 				OBJ_680 /* LROsDelete202NoRetry204Headers.swift in Sources */,
 				OBJ_681 /* LROsDelete202Retry200Headers.swift in Sources */,
 				OBJ_682 /* LROsDeleteAsyncNoHeaderInRetryHeaders.swift in Sources */,
 				OBJ_683 /* LROsDeleteAsyncNoRetrySucceededHeaders.swift in Sources */,
+				C81081B91FE1F590004DDBCB /* ProductResultData.swift in Sources */,
 				OBJ_684 /* LROsDeleteAsyncRetryFailedHeaders.swift in Sources */,
 				OBJ_685 /* LROsDeleteAsyncRetrySucceededHeaders.swift in Sources */,
 				OBJ_686 /* LROsDeleteAsyncRetrycanceledHeaders.swift in Sources */,
+				C81081BA1FE1F590004DDBCB /* OdataProductResultData.swift in Sources */,
 				OBJ_687 /* LROsDeleteNoHeaderInRetryHeaders.swift in Sources */,
 				OBJ_688 /* LROsDeleteProvisioning202Accepted200SucceededHeaders.swift in Sources */,
 				OBJ_689 /* LROsDeleteProvisioning202DeletingFailed200Headers.swift in Sources */,
@@ -2231,13 +2333,13 @@
 				OBJ_707 /* ProvisioningStateValues.swift in Sources */,
 				OBJ_708 /* ProvisioningStateValues1.swift in Sources */,
 				OBJ_709 /* SkuType.swift in Sources */,
-				OBJ_710 /* Status.swift in Sources */,
 				OBJ_711 /* SubProductPropertiesType.swift in Sources */,
 				OBJ_712 /* SubProductType.swift in Sources */,
 				OBJ_713 /* SubResourceType.swift in Sources */,
 				OBJ_714 /* CloudErrorTypeProtocol.swift in Sources */,
 				OBJ_715 /* LRORetrysDelete202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_716 /* LRORetrysDeleteAsyncRelativeRetrySucceededHeadersProtocol.swift in Sources */,
+				C81081BE1FE1F590004DDBCB /* OdataProductResultProtocol.swift in Sources */,
 				OBJ_717 /* LRORetrysDeleteProvisioning202Accepted200SucceededHeadersProtocol.swift in Sources */,
 				C82203731FD868DC0007026C /* enum.swift in Sources */,
 				OBJ_718 /* LRORetrysPost202Retry200HeadersProtocol.swift in Sources */,
@@ -2246,9 +2348,11 @@
 				OBJ_721 /* LROSADsDelete202NonRetry400HeadersProtocol.swift in Sources */,
 				OBJ_722 /* LROSADsDelete202RetryInvalidHeaderHeadersProtocol.swift in Sources */,
 				OBJ_723 /* LROSADsDeleteAsyncRelativeRetry400HeadersProtocol.swift in Sources */,
+				C83B2EDA1FE1B67800AC3E7B /* BodyFileTests.swift in Sources */,
 				OBJ_724 /* LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeadersProtocol.swift in Sources */,
 				OBJ_725 /* LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeadersProtocol.swift in Sources */,
 				OBJ_726 /* LROSADsDeleteAsyncRelativeRetryNoStatusHeadersProtocol.swift in Sources */,
+				C8677F761FE2E6DD001534F8 /* PagingTests.swift in Sources */,
 				OBJ_727 /* LROSADsDeleteNonRetry400HeadersProtocol.swift in Sources */,
 				OBJ_728 /* LROSADsPost202NoLocationHeadersProtocol.swift in Sources */,
 				OBJ_729 /* LROSADsPost202NonRetry400HeadersProtocol.swift in Sources */,
@@ -2260,6 +2364,7 @@
 				OBJ_735 /* LROSADsPostNonRetry400HeadersProtocol.swift in Sources */,
 				OBJ_736 /* LROSADsPutAsyncRelativeRetry400HeadersProtocol.swift in Sources */,
 				OBJ_737 /* LROSADsPutAsyncRelativeRetryInvalidHeaderHeadersProtocol.swift in Sources */,
+				C83B2ED61FE1AEE500AC3E7B /* files.swift in Sources */,
 				OBJ_738 /* LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeadersProtocol.swift in Sources */,
 				OBJ_739 /* LROSADsPutAsyncRelativeRetryNoStatusHeadersProtocol.swift in Sources */,
 				OBJ_740 /* LROSADsPutAsyncRelativeRetryNoStatusPayloadHeadersProtocol.swift in Sources */,
@@ -2277,11 +2382,13 @@
 				OBJ_751 /* LROsDeleteNoHeaderInRetryHeadersProtocol.swift in Sources */,
 				OBJ_752 /* LROsDeleteProvisioning202Accepted200SucceededHeadersProtocol.swift in Sources */,
 				OBJ_753 /* LROsDeleteProvisioning202DeletingFailed200HeadersProtocol.swift in Sources */,
+				C81081BF1FE1F590004DDBCB /* ProductProtocol.swift in Sources */,
 				OBJ_754 /* LROsDeleteProvisioning202Deletingcanceled200HeadersProtocol.swift in Sources */,
 				OBJ_755 /* LROsPost202NoRetry204HeadersProtocol.swift in Sources */,
 				OBJ_756 /* LROsPost202Retry200HeadersProtocol.swift in Sources */,
 				OBJ_757 /* LROsPostAsyncNoRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_758 /* LROsPostAsyncRetryFailedHeadersProtocol.swift in Sources */,
+				C81081B81FE1F590004DDBCB /* Status.swift in Sources */,
 				OBJ_759 /* LROsPostAsyncRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_760 /* LROsPostAsyncRetrycanceledHeadersProtocol.swift in Sources */,
 				OBJ_761 /* LROsPutAsyncNoHeaderInRetryHeadersProtocol.swift in Sources */,
@@ -2290,6 +2397,7 @@
 				OBJ_764 /* LROsPutAsyncRetryFailedHeadersProtocol.swift in Sources */,
 				OBJ_765 /* LROsPutAsyncRetrySucceededHeadersProtocol.swift in Sources */,
 				OBJ_766 /* LROsPutNoHeaderInRetryHeadersProtocol.swift in Sources */,
+				C81081B51FE1F590004DDBCB /* OperationResultData.swift in Sources */,
 				OBJ_767 /* OperationResultErrorTypeProtocol.swift in Sources */,
 				OBJ_768 /* OperationResultTypeProtocol.swift in Sources */,
 				OBJ_769 /* ProductPropertiesTypeProtocol.swift in Sources */,
@@ -2683,6 +2791,18 @@
 			targetProxy = C82203541FD74E650007026C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C8F199DA1FE1CCE000D4C2C2 /* nonempty.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C8F199D91FE1CCE000D4C2C2 /* en */,
+			);
+			name = nonempty.png;
+			path = Tests/azureSwiftRuntimeTests;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		OBJ_1095 /* Debug */ = {

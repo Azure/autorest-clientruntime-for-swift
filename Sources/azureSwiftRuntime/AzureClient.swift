@@ -13,8 +13,13 @@ public class AzureClient: RuntimeClient {
     
     // handles non-long-running operations (blocking)
     public func execute (command: BaseCommand) throws -> Decodable? {
+        
         let (url, method, headers, body) = try self.prepareRequest(command: command)
-        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body).toBlocking().single() else {
+        
+        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
+            .toBlocking()
+            .single() else {
+                
             throw RuntimeError.general(message: "Request returned nil")
         }
         
@@ -29,9 +34,12 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws {
+    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?) -> Void) throws {
+        
         let (url, method, headers, body) = try self.prepareRequest(command: command)
-        self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
+        
+        self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
+            .asObservable()
             .subscribe(
                 onNext:{ (httpResponse, data) in
                     if let body = data {
@@ -40,10 +48,10 @@ public class AzureClient: RuntimeClient {
                     } else {
                         completionHandler(nil, nil)
                     }
-            },
+                },
                 onError: { error in
                     completionHandler(nil,error)
-            }
+                }
             ).disposed(by: disposeBag)
     }
     
@@ -173,6 +181,11 @@ public class AzureClient: RuntimeClient {
                 task.cancel()
             }
         }
+//        }
+//            .asObservable().map { httpResponse, data -> ResponseData in
+//            try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+//            return (httpResponse, data)
+//        }.asSingle()
     }
 }
 

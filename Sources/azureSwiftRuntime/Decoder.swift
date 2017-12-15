@@ -38,35 +38,6 @@ public class JsonResponseDecoder: ResponseDecoder {
             let test = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as! T
             return test
         }
-        
-//        if !JSONSerialization.isValidJSONObject(jsonData) {
-//
-//            //&& (type == String.self || type == String?.self) { // FIXME: make docodable mandatory(non-optional)
-//
-//            guard let bodyAsString = String(data: jsonData, encoding: .utf8) else {
-//                throw DecodeError.dataToString
-//            }
-//
-//            if bodyAsString.isEmpty {
-//                throw DecodeError.nilString
-//            }
-//
-//            let ser = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments ) as! T
-//            return ser
-////            var start = bodyAsString.startIndex
-////            let end = bodyAsString.index(before:bodyAsString.endIndex)
-////            if bodyAsString[start] != "\""
-////                || bodyAsString[end] != "\"" {
-////                throw DecodeError.invalidString
-////            }
-////
-////            start = bodyAsString.index(after: start)
-////            //end = bodyAsString.index(before: end)
-////            let str = String(bodyAsString[start ..< end])
-////            return  str as! T
-//        }
-//
-//        return try JSONDecoder().decode(type, from: jsonData)
     }
 }
 

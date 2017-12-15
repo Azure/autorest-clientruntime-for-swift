@@ -39,12 +39,14 @@ public class LogInterceptor {
         if self.showOptions.contains(LogInterceptor.Show.all)
             || self.showOptions.contains(LogInterceptor.Show.body) {
             if let b = body {
-                if let bodyAsString = String(data: b, encoding: .utf8) {
-                    if (!bodyAsString.isEmpty) {
-                        print(prefix(), bodyAsString)
+                if b.count > 0 && b.count < 1024 {
+                    if let bodyAsString = String(data: b, encoding: .utf8) {
+                        if (!bodyAsString.isEmpty) {
+                            print(prefix(), bodyAsString)
+                        }
                     }
                 } else {
-                    print(prefix(), "Can't get body")
+                    print(prefix(), b)
                 }
             }
         }

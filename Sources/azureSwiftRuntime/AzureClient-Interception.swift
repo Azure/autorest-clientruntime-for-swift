@@ -22,8 +22,9 @@ public extension AzureClient {
     
     internal func executeRequestWithInterception (url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Observable<ResponseData> {
         return self.executeRequest(url: url, method: method, headers: headers, body: body)
-            .asObservable().flatMap {
-                httpResponse, data -> Observable<ResponseData> in
+            .asObservable()
+            .map {
+                httpResponse, data -> ResponseData in
                 var _httpResponse = httpResponse
                 var _data = data
                 
@@ -31,7 +32,8 @@ public extension AzureClient {
                     interceptor.intercept(httpResponse: &_httpResponse, data: &_data)
                 }
                 
-                return Observable<ResponseData>.just((_httpResponse, _data))
-        }
+                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+                return (_httpResponse, _data)
+            }.retry(2)
     }
 }
