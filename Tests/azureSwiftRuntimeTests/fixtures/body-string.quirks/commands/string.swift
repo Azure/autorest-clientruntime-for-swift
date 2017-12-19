@@ -183,9 +183,9 @@ struct StringNamespace {
         }
         
         public func executeAsync (client: RuntimeClient, completionHandler: @escaping (String?, Error?) -> Void) throws {
-            try client.executeAsync(command: self, completionHandler:  {
+            client.executeAsync(command: self, completionHandler:  {
                 (decodable, error)  in
-                completionHandler(decodable as! String?, error)
+                completionHandler(decodable, error)
             })
         }
     }

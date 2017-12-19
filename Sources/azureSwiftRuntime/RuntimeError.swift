@@ -15,6 +15,7 @@ public enum RuntimeError: Error {
     case cloud(error: CloudError)
     case errorStatusCode(code: Int, details: String)
 }
+
 public struct AzureError: Codable {
     public let error: AzureErrorDetails
     

@@ -31,8 +31,8 @@ class LROsPut202Retry200Command : BaseCommand {
     }
     
     // non-blocking
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
-        try client.executeAsyncLRO(command: self) {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self) {
             decodable, error  in
             
             completionHandler(decodable as? ProductType , error)

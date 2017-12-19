@@ -20,9 +20,9 @@ class LROSADsDeleteNonRetry400Command : BaseCommand {
         return try client.execute(command: self)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) throws {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) {
         
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+        client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable, error)

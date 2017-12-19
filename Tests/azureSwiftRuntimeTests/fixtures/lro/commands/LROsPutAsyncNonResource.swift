@@ -27,13 +27,11 @@ class LROsPutAsyncNonResourceCommand : BaseCommand {
         return try JsonResponseDecoder.decode(SkuType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) throws {
-        
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self) {
             (decodable, error)  in
-            
             completionHandler(decodable as? SkuType, error)
-        })
+        }
     }
     
 }

@@ -24,9 +24,9 @@ class LROsPost200WithPayloadCommand : BaseCommand {
         return try JsonResponseDecoder.decode(SkuType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) throws {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) {
         
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+        client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? SkuType, error)

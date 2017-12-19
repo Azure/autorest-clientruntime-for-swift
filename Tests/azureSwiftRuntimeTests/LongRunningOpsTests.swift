@@ -59,22 +59,16 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LROsPut200SucceededCommand()
         cmd.product = self.product
         
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -87,23 +81,17 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LROsPut200SucceededNoStateCommand()
         cmd.product = self.product
         
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -114,24 +102,17 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPut202Retry200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -143,22 +124,16 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPut201CreatingSucceeded200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -169,22 +144,16 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPut200UpdatingSucceeded204Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -195,18 +164,12 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPut201CreatingFailed200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                XCTAssertNil(result)
-            }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            XCTAssertNil(result)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -217,18 +180,12 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPut200Acceptedcanceled200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                XCTAssertNil(result)
-            }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            XCTAssertNil(result)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -240,23 +197,16 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutNoHeaderInRetryCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -267,25 +217,17 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROsPutAsyncRetrySucceededCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -295,25 +237,17 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROsPutAsyncNoRetrySucceededCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -323,28 +257,22 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutAsyncRetryFailedCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                XCTAssertNil(result)
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationFailed {
-                        // expected error
-                    } catch {
-                        XCTFail(error.localizedDescription)
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            XCTAssertNil(result)
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationFailed {
+                    // expected error
+                } catch {
+                    XCTFail(error.localizedDescription)
                 }
             }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -355,29 +283,23 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutAsyncNoRetrycanceledCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                XCTAssertNil(result)
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationCanceled {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            XCTAssertNil(result)
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationCanceled {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -388,23 +310,16 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutAsyncNoHeaderInRetryCommand()
         cmd.product = self.product
-        
-        do {            
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                
-                let product = result
-                XCTAssertEqual("100", product?.id)
-                XCTAssertEqual("foo", product?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            
+            let product = result
+            XCTAssertEqual("100", product?.id)
+            XCTAssertEqual("foo", product?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -415,22 +330,15 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutNonResourceCommand()
         cmd.sku = self.sku
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                XCTAssertEqual("sku", result?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            XCTAssertEqual("sku", result?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -442,22 +350,15 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPutAsyncNonResourceCommand()
         cmd.sku = self.sku
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                XCTAssertEqual("sku", result?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            XCTAssertEqual("sku", result?.name)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -471,22 +372,15 @@ class LongRunningOpsTest: XCTestCase {
         cmd.product = SubProductType()
         cmd.product?.id = "Sub product id"
         cmd.product?.properties = SubProductPropertiesType()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                //XCTAssertEqual("sub1", result?.subresource)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            //XCTAssertEqual("sub1", result?.subresource)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -500,22 +394,15 @@ class LongRunningOpsTest: XCTestCase {
         cmd.product = SubProductType()
         cmd.product?.id = "Sub product id"
         cmd.product?.properties = SubProductPropertiesType()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                //XCTAssertEqual("sub1", result?.subresource)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            //XCTAssertEqual("sub1", result?.subresource)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -525,18 +412,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteProvisioning202Accepted200SucceededCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -546,27 +426,20 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteProvisioning202DeletingFailed200Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationFailed {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationFailed {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -576,29 +449,21 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteProvisioning202Deletingcanceled200Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationCanceled {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationCanceled {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
-        }
-        
+        }        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -607,18 +472,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDelete204SucceededCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -628,18 +486,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDelete202Retry200Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -649,18 +500,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDelete202NoRetry204Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -670,18 +514,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteNoHeaderInRetryCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -691,18 +528,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteAsyncNoHeaderInRetryCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -712,18 +542,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteAsyncRetrySucceededCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -733,18 +556,11 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteAsyncNoRetrySucceededCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -754,27 +570,20 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteAsyncRetryFailedCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationFailed {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationFailed {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
         waitForExpectations(timeout: timeout, handler: nil)
     }
@@ -784,29 +593,21 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsDeleteAsyncRetrycanceledCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationCanceled {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationCanceled {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -815,26 +616,18 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsPost200WithPayloadCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-// wrong returned data
-// {"id":1, "name":"product"}
-// typeMismatch(Swift.String, Swift.DecodingError.Context(codingPath: [azureSwiftRuntimeTests.SkuType.CodingKeys.id], debugDescription: "Expected to decode String but found a number instead.", underlyingError: nil))
-//                XCTAssertNil(error)
-//                XCTAssertNotNil(result)
-//                XCTAssertEqual("1", result?.id)
-//                XCTAssertEqual("product", result?.name)
-            }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            // wrong returned data
+            // {"id":1, "name":"product"}
+            // typeMismatch(Swift.String, Swift.DecodingError.Context(codingPath: [azureSwiftRuntimeTests.SkuType.CodingKeys.id], debugDescription: "Expected to decode String but found a number instead.", underlyingError: nil))
+            //                XCTAssertNil(error)
+            //                XCTAssertNotNil(result)
+            //                XCTAssertEqual("1", result?.id)
+            //                XCTAssertEqual("product", result?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -844,23 +637,15 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPost202Retry200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                XCTAssertEqual("foo", result?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            XCTAssertEqual("foo", result?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -870,24 +655,16 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPost202NoRetry204Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                // FIXME: test-server doesn't return product - ask why
-                // XCTAssertNotNil(result)
-                // XCTAssertEqual("100", result?.id)
-                // XCTAssertEqual("foo", result?.name)
-            }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            // FIXME: test-server doesn't return product - ask why
+            // XCTAssertNotNil(result)
+            // XCTAssertEqual("100", result?.id)
+            // XCTAssertEqual("foo", result?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -897,23 +674,15 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPostAsyncRetrySucceededCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                XCTAssertEqual("foo", result?.name)
-            }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            XCTAssertEqual("foo", result?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -923,23 +692,15 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsPostAsyncNoRetrySucceededCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNil(error)
-                XCTAssertNotNil(result)
-                XCTAssertEqual("100", result?.id)
-                XCTAssertEqual("foo", result?.name)
-            }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
             
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
+            XCTAssertNil(error)
+            XCTAssertNotNil(result)
+            XCTAssertEqual("100", result?.id)
+            XCTAssertEqual("foo", result?.name)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -948,32 +709,24 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsPostAsyncRetryFailedCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationFailed {
-                        // FIXME: parse error details
-                        // { "status": "Failed", "error": { "code": 500, "message": "Internal Server Error"}}
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationFailed {
+                    // FIXME: parse error details
+                    // { "status": "Failed", "error": { "code": 500, "message": "Internal Server Error"}}
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -982,30 +735,22 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROsPostAsyncRetrycanceledCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.operationCanceled {
-                        // expected error
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.operationCanceled {
+                    // expected error
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1014,28 +759,21 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LRORetrysPut201CreatingSucceeded200Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.errorStatusCode(let code, _) {
-                        XCTAssertEqual(500, code)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.errorStatusCode(let code, _) {
+                    XCTAssertEqual(500, code)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -1046,28 +784,21 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsPutNonRetry400Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -1090,30 +821,22 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsPutNonRetry201Creating400Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1122,31 +845,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsPutNonRetry201Creating400InvalidJsonCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.errorStatusCode(let code, let details) {
-                        XCTAssertEqual(400, code)
-                        XCTAssertEqual("<{ \"message\" : \"Error from the server\" }", details)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.errorStatusCode(let code, let details) {
+                    XCTAssertEqual(400, code)
+                    XCTAssertEqual("<{ \"message\" : \"Error from the server\" }", details)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1155,31 +870,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsPutAsyncRelativeRetry400Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.errorStatusCode(let code, let details) {
-                        XCTAssertEqual(400, code)
-                        XCTAssertEqual("no details", details)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.errorStatusCode(let code, let details) {
+                    XCTAssertEqual(400, code)
+                    XCTAssertEqual("no details", details)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1188,30 +895,22 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsDeleteNonRetry400Command()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1220,31 +919,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = LROSADsPutError201NoProvisioningStatePayloadCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
    
@@ -1267,31 +958,23 @@ class LongRunningOpsTest: XCTestCase {
 
         
         let cmd = LROSADsPutAsyncRelativeRetryNoStatusCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1301,31 +984,23 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROSADsPutAsyncRelativeRetryNoStatusPayloadCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1337,31 +1012,23 @@ class LongRunningOpsTest: XCTestCase {
         
 //      <--  DELETE http://localhost:3000/lro/error/delete/204/nolocation
 //      --> 204 http://localhost:3000/lro/error/delete/204/nolocation
-
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
-        }
-        
+        }        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1378,31 +1045,23 @@ class LongRunningOpsTest: XCTestCase {
 //      -->     Azure-AsyncOperation: http://localhost:3000/lro/error/postasync/retry/failed/operationResults/nopayload
 //      <-- GET http://localhost:3000/lro/error/postasync/retry/failed/operationResults/nopayload
 //      -->     200 http://localhost:3000/lro/error/postasync/retry/failed/operationResults/nopayload
-
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
  
@@ -1411,34 +1070,26 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROSADsPut200InvalidJsonCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch DecodingError.dataCorrupted(let context) {
-                        print("=== Error context:", context)
-                    } catch  {
-                        if (error as NSError).code  != 3840 {
-                            XCTFail("Unexpected error")
-                        }
-                        print("=== Error:", error, type(of: error))
-                        
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch DecodingError.dataCorrupted(let context) {
+                    print("=== Error context:", context)
+                } catch  {
+                    if (error as NSError).code  != 3840 {
+                        XCTFail("Unexpected error")
                     }
+                    print("=== Error:", error, type(of: error))
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1447,29 +1098,21 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROSADsPutAsyncRelativeRetryInvalidHeaderCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                //XCTAssertNotNil(error)
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch {
-                        print("=== Error:", error)
-                        
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            //XCTAssertNotNil(error)
+            if let curError = error {
+                do {
+                    throw curError
+                } catch {
+                    print("=== Error:", error)
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1478,33 +1121,25 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROSADsPutAsyncRelativeRetryInvalidJsonPollingCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch DecodingError.dataCorrupted(let context) {
-                        print("=== Error context:", context)
-                    } catch {
-                        if (error as NSError).code  != 3840 {
-                            XCTFail("Unexpected error")
-                        }
-                        print("=== Error:", error, type(of: error))
-                        
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            if let curError = error {
+                do {
+                    throw curError
+                } catch DecodingError.dataCorrupted(let context) {
+                    print("=== Error context:", context)
+                } catch {
+                    if (error as NSError).code  != 3840 {
+                        XCTFail("Unexpected error")
                     }
+                    print("=== Error:", error, type(of: error))
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1513,31 +1148,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROsCustomHeaderPutAsyncRetrySucceededCommand()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                        
-                    }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
  
@@ -1546,31 +1173,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROsCustomHeaderPut201CreatingSucceeded200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                        
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
@@ -1579,31 +1198,23 @@ class LongRunningOpsTest: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let cmd = LROsCustomHeaderPost202Retry200Command()
         cmd.product = self.product
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
-                
-                // FIXME: don't know what to check here
-                if let curError = error {
-                    do {
-                        throw curError
-                    } catch RuntimeError.cloud(let cloudError) {
-                        self.printCloudError(cloudError)
-                    } catch {
-                        print("=== Error:", error)
-                        XCTFail("Unexpected error")
-                        
-                    }
+        try cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            // FIXME: don't know what to check here
+            if let curError = error {
+                do {
+                    throw curError
+                } catch RuntimeError.cloud(let cloudError) {
+                    self.printCloudError(cloudError)
+                } catch {
+                    print("=== Error:", error)
+                    XCTFail("Unexpected error")
+                    
                 }
             }
-            
-        } catch {
-            print("=== Error1:", error)
-            XCTFail(error.localizedDescription)
         }
-        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     

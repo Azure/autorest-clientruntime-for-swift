@@ -29,11 +29,10 @@ class LROsPutSubResourceCommand : BaseCommand {
         return try JsonResponseDecoder.decode(SubProductType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SubProductTypeProtocol?, Error?) -> Void) throws {
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SubProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self) {
             (decodable, error)  in
-            
             completionHandler(decodable as? SubProductType, error)
-        })
+        }
     }
 }

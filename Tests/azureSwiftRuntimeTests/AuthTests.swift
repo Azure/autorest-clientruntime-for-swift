@@ -65,16 +65,15 @@ class AuthTests: XCTestCase {
             return try JsonResponseDecoder.decode(Subscription?.self, from: data)
         }
         
-        public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Subscription?, Error?) -> Void) throws {
-            try client.executeAsyncLRO(command: self, completionHandler:  {
-                (decodable, error)  in
-                
-                completionHandler(decodable as? Subscription, error)
-            })
+        public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Subscription?, Error?) -> Void) {
+            client.executeAsync(command: self) {
+                (result, error)  in
+                completionHandler(result, error)
+            }
         }
         
-        public func executeAsync(client: RuntimeClient) throws -> Observable<Subscription?> {
-            return try client.executeAsync(command: self)
+        public func executeAsync(client: RuntimeClient) -> Observable<Subscription?> {
+            return client.executeAsync(command: self)
         }
         
         struct Subscription : Codable {
@@ -102,38 +101,30 @@ class AuthTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         
         let cmd = AzureAuthCommand()
-        
-        do {
-            try cmd.executeAsync(client: self.azureClient) {
-                result, error in
-                defer { e.fulfill() }
+        cmd.executeAsync(client: self.azureClient) {
+            result, error in
+            defer { e.fulfill() }
+            
+            do {
+                if let curError = error {
+                    throw curError
+                }
                 
-                do {
-                    if let curError = error {
-                        throw curError
-                    }
-                    
-                    XCTAssertNotNil(result)
-                    if let subscriptions = result?.value {
-                        if subscriptions.count > 0 {
-                            print("Subscriptions ===")
-                            for sub in subscriptions {
-                                print("\tname: \(sub.displayName), id: \(sub.subscriptionId)")
-                            }
-                            
+                XCTAssertNotNil(result)
+                if let subscriptions = result?.value {
+                    if subscriptions.count > 0 {
+                        print("Subscriptions ===")
+                        for sub in subscriptions {
+                            print("\tname: \(sub.displayName), id: \(sub.subscriptionId)")
                         }
                     }
-                    
-                } catch {
-                    print("=== Error:", error)
-                    XCTFail(error.localizedDescription)
                 }
-                //XCTAssertNil(error)
+            } catch RuntimeError.azure(let azureError) {
+                print("=== AzureError:", "code: \(azureError.error.code)", "message: \(azureError.error.message)")
+            } catch {
+                print("=== Error:", error)
+                XCTFail(error.localizedDescription)
             }
-            
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -144,30 +135,34 @@ class AuthTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to compleate")
         let disposeBag = DisposeBag()
         let cmd = AzureAuthCommand()
-        do {
-            try cmd.executeAsync(client: self.azureClient).subscribe(
-                onNext: { result in
-                    defer { e.fulfill() }
-                    XCTAssertNotNil(result)
-                    if let subscriptions = result?.value {
-                        if subscriptions.count > 0 {
-                            print("Subscriptions ===")
-                            for sub in subscriptions {
-                                print("\tname: \(sub.displayName), id: \(sub.subscriptionId)")
-                            }
-                            
+        cmd.executeAsync(client: self.azureClient).subscribe(
+            onNext: { result in
+                defer { e.fulfill() }
+                XCTAssertNotNil(result)
+                if let subscriptions = result?.value {
+                    XCTAssertTrue(subscriptions.count > 0)
+                    if subscriptions.count > 0 {
+                        print("Subscriptions ===")
+                        for sub in subscriptions {
+                            print("\tname: \(sub.displayName), id: \(sub.subscriptionId)")
                         }
                     }
-                },
-                    onError: { error in
-                        print("=== Error:", error)
-                        XCTFail(error.localizedDescription)
+                } else {
+                    XCTFail("subscriptions in nil")
                 }
-            ).disposed(by: disposeBag)
-        } catch {
-            print("=== Error:", error)
-            XCTFail(error.localizedDescription)
-        }
+            },
+            onError: { error in
+                defer { e.fulfill() }
+                switch error {
+                case RuntimeError.azure(let azureError) :
+                    print("=== AzureError:", "code: \(azureError.error.code)", "message: \(azureError.error.message)")
+                default:
+                    print("=== Error:", error)
+                    XCTFail(error.localizedDescription)
+                }
+            }
+        ).disposed(by: disposeBag)
+        
         waitForExpectations(timeout: timeout, handler: nil)
     }
     

@@ -11,19 +11,43 @@ import RxBlocking
 
 public class AzureClient: RuntimeClient {
     
-    public func executeAsync<T>(command: BaseCommand) throws -> Observable<T?>  where T : Decodable {
-        let (url, method, headers, body) = try self.prepareRequest(command: command)
-        return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
-            .asObservable()
-            .flatMap{ httpResponse, data -> Observable<T?> in
-                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-                if let body = data {
-                    let decodable = try? command.returnFunc(data: body)
-                    return Observable<T?>.just(decodable as! T?)
-                } else {
-                    return Observable<T?>.just(nil)
+    internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
+    
+    public func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
+        
+        return Observable.just(command)
+            .map { c -> RequestParams in
+                return try self.prepareRequest(command: c)
+            }.flatMap { (requestParams: RequestParams) -> Observable<T?> in
+                let (url, method, headers, body) = requestParams
+                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
+                    .flatMap{ httpResponse, data -> Observable<T?> in
+                        try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+                        if let body = data {
+                            let decodable = try? command.returnFunc(data: body)
+                            return Observable<T?>.just(decodable as! T?)
+                        } else {
+                            return Observable<T?>.just(nil)
+                        }
                 }
             }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+        
+//        let (url, method, headers, body) = try self.prepareRequest(command: command)
+//
+//
+//
+//
+//        return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
+//            .asObservable()
+//            .flatMap{ httpResponse, data -> Observable<T?> in
+//                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+//                if let body = data {
+//                    let decodable = try? command.returnFunc(data: body)
+//                    return Observable<T?>.just(decodable as! T?)
+//                } else {
+//                    return Observable<T?>.just(nil)
+//                }
+//            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
     }
         
     // handles non-long-running operations (blocking)
@@ -49,17 +73,21 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?) -> Void) throws {
+    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {
         
-        let (url, method, headers, body) = try self.prepareRequest(command: command)
+        //let (url, method, headers, body) = try self.prepareRequest(command: command)
         
-        self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
-            .asObservable()
-            .subscribe(
-                onNext:{ (httpResponse, data) in
-                    if let body = data {
-                        let decodable = try? command.returnFunc(data: body)
-                        completionHandler(decodable, nil)
+        return Observable.just(command)
+            .map { c -> RequestParams in
+                return try self.prepareRequest(command: c)
+            }.flatMap { (requestParams: RequestParams) -> Observable<ResponseData> in
+                let (url, method, headers, body) = requestParams
+                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
+            }.subscribe (
+                onNext: { (httpResponse, data) in
+                    if let body = data,
+                        let decodable = try? command.returnFunc(data: body) {
+                        completionHandler(decodable as! T?, nil)
                     } else {
                         completionHandler(nil, nil)
                     }
@@ -115,8 +143,6 @@ public class AzureClient: RuntimeClient {
         
         return fullUrl;
     }
-    
-    internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
     
     internal func prepareRequest (command: BaseCommand) throws -> RequestParams  {
         command.preCall()
