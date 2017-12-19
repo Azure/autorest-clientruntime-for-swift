@@ -11,7 +11,7 @@ public enum EncodeError: Error {
     case nilInput
     case DataToBase64Failed
     case notString
-    case stringTpDataFailed
+    case stringToDataFailed
 }
 
 public protocol RequestEncoder {
@@ -41,7 +41,7 @@ public struct JsonRequestEncoder: RequestEncoder {
         }
         
         guard let data = d else {
-            throw EncodeError.stringTpDataFailed
+            throw EncodeError.stringToDataFailed
         }
         
         return data

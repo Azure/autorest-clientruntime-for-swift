@@ -11,6 +11,21 @@ import RxBlocking
 
 public class AzureClient: RuntimeClient {
     
+    public func executeAsync<T>(command: BaseCommand) throws -> Observable<T?>  where T : Decodable {
+        let (url, method, headers, body) = try self.prepareRequest(command: command)
+        return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
+            .asObservable()
+            .flatMap{ httpResponse, data -> Observable<T?> in
+                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+                if let body = data {
+                    let decodable = try? command.returnFunc(data: body)
+                    return Observable<T?>.just(decodable as! T?)
+                } else {
+                    return Observable<T?>.just(nil)
+                }
+            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+    }
+        
     // handles non-long-running operations (blocking)
     public func execute (command: BaseCommand) throws -> Decodable? {
         
@@ -28,7 +43,7 @@ public class AzureClient: RuntimeClient {
         do {
             let decodable = try command.returnFunc(data: data!)
             return decodable
-        } catch DecodeError.nilString {
+        } catch DecodeError.nilData { // to return nil not empty string or data
             return nil
         }
     }
@@ -125,7 +140,6 @@ public class AzureClient: RuntimeClient {
     }
     
     let queueWorker = DispatchQueue(label: "com.microsoft.executeAsync", qos: .userInitiated)
-    //let queueDelay = DispatchQueue(label: "com.microsoft.delay", qos: .userInitiated)
     
     internal typealias ResponseData = (HTTPURLResponse, Data?)
     internal let session = URLSession(configuration: .default)
@@ -181,11 +195,6 @@ public class AzureClient: RuntimeClient {
                 task.cancel()
             }
         }
-//        }
-//            .asObservable().map { httpResponse, data -> ResponseData in
-//            try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-//            return (httpResponse, data)
-//        }.asSingle()
     }
 }
 
