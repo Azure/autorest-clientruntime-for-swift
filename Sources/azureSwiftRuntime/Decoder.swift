@@ -13,7 +13,6 @@ public enum DecodeError: Error {
     case base64Url
     case wrongInputType
     case invalidString
-    case nilString
     case nilData
 }
 
@@ -26,8 +25,9 @@ public class JsonResponseDecoder: ResponseDecoder {
         
         // trying to handle a special json case: a keyless quoted string like - "example of invalid json" (even if it's not a valid according to the spec!)
         
+        // to return nil instead of emply data down stream
         if jsonData.isEmpty {
-            throw DecodeError.nilString
+            throw DecodeError.nilData
         }
         
         if let _ = try? JSONSerialization.jsonObject(with: jsonData) {

@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import RxSwift
 
 public protocol RuntimeClient {
     func execute(command: BaseCommand) throws -> Decodable?
+    func executeAsync<T>(command: BaseCommand) throws -> Observable<T?> where T : Decodable
     func executeAsync(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
     func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) throws
 }

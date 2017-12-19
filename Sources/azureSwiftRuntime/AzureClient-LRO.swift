@@ -91,7 +91,7 @@ public extension AzureClient {
                             }
                             
                             return Observable<ResponseData>.just((httpResponse, data))
-                    }
+                        }
             }
             
             responseParserObservable
@@ -104,10 +104,10 @@ public extension AzureClient {
                         } else {
                             completionHandler(nil,nil)
                         }
-                },
+                    },
                     onError: { e in
                         completionHandler(nil,e)
-                }
+                    }
                 ).disposed(by: disposeBag)
         } catch {
             completionHandler(nil,error)

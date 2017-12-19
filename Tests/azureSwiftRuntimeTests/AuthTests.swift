@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import RxSwift
 @testable import azureSwiftRuntime
 
 class AuthTests: XCTestCase {
@@ -72,6 +73,10 @@ class AuthTests: XCTestCase {
             })
         }
         
+        public func executeAsync(client: RuntimeClient) throws -> Observable<Subscription?> {
+            return try client.executeAsync(command: self)
+        }
+        
         struct Subscription : Codable {
             let value: [SubscriptionData]
         }
@@ -131,6 +136,38 @@ class AuthTests: XCTestCase {
             XCTFail(error.localizedDescription)
         }
         
+        waitForExpectations(timeout: timeout, handler: nil)
+    }
+    
+    func testAzureAuthObservable() {
+        print("\n=================== #2 AzureAuthObservable\n")
+        let e = expectation(description: "Wait for HTTP request to compleate")
+        let disposeBag = DisposeBag()
+        let cmd = AzureAuthCommand()
+        do {
+            try cmd.executeAsync(client: self.azureClient).subscribe(
+                onNext: { result in
+                    defer { e.fulfill() }
+                    XCTAssertNotNil(result)
+                    if let subscriptions = result?.value {
+                        if subscriptions.count > 0 {
+                            print("Subscriptions ===")
+                            for sub in subscriptions {
+                                print("\tname: \(sub.displayName), id: \(sub.subscriptionId)")
+                            }
+                            
+                        }
+                    }
+                },
+                    onError: { error in
+                        print("=== Error:", error)
+                        XCTFail(error.localizedDescription)
+                }
+            ).disposed(by: disposeBag)
+        } catch {
+            print("=== Error:", error)
+            XCTFail(error.localizedDescription)
+        }
         waitForExpectations(timeout: timeout, handler: nil)
     }
     
