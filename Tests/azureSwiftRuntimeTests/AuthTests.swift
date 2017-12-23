@@ -62,7 +62,7 @@ class AuthTests: XCTestCase {
         }
         
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Subscription?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Subscription?.self, from: data)
         }
         
         public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Subscription?, Error?) -> Void) throws {

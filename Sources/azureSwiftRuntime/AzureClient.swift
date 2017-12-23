@@ -83,8 +83,6 @@ public class AzureClient: RuntimeClient {
     
     var disposeBag = DisposeBag()
     
-    let decoder = JsonResponseDecoder()
-    
     public init(atc: AzureTokenCredentials) {
         self.atc = atc
         if let _ = atc.environment.url(forEndpoint: .activeDirectory) {

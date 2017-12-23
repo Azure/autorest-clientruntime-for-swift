@@ -19,7 +19,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode([FlattenedProductData?]?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode([FlattenedProductData?]?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> [FlattenedProductProtocol?]? {
@@ -41,7 +41,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode([String:FlattenedProductData?]?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode([String:FlattenedProductData?]?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> [String:FlattenedProductProtocol?]? {
@@ -63,7 +63,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ResourceCollectionData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ResourceCollectionData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> ResourceCollectionProtocol? {
@@ -86,7 +86,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode([ProductWrapperData?]?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode([ProductWrapperData?]?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> [ProductWrapperProtocol?]? {
@@ -110,11 +110,11 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: simpleBodyProduct as! SimpleProductData?)
+            return try CoderFactory.encoder(for: .json).encode(simpleBodyProduct as! SimpleProductData?)
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(SimpleProductData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(SimpleProductData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> SimpleProductProtocol? {
@@ -139,7 +139,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: resourceArray as! [ResourceData?]?)
+            return try CoderFactory.encoder(for: .json).encode(resourceArray as! [ResourceData?]?)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -164,7 +164,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: resourceDictionary as! [String:FlattenedProductData?]?)
+            return try CoderFactory.encoder(for: .json).encode(resourceDictionary as! [String:FlattenedProductData?]?)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -189,7 +189,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: resourceComplexObject as! ResourceCollectionData?)
+            return try CoderFactory.encoder(for: .json).encode(resourceComplexObject as! ResourceCollectionData?)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -214,11 +214,11 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: simpleBodyProduct as! SimpleProductData?)
+            return try CoderFactory.encoder(for: .json).encode(simpleBodyProduct as! SimpleProductData?)
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(SimpleProductData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(SimpleProductData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> SimpleProductProtocol? {
@@ -245,11 +245,11 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: simpleBodyProduct as! SimpleProductData?)
+            return try CoderFactory.encoder(for: .json).encode(simpleBodyProduct as! SimpleProductData?)
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(SimpleProductData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(SimpleProductData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> SimpleProductProtocol? {
@@ -275,7 +275,7 @@ struct ModelFlatteningNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: resourceArray as! [WrappedProductData?]?)
+            return try CoderFactory.encoder(for: .json).encode(resourceArray as! [WrappedProductData?]?)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {

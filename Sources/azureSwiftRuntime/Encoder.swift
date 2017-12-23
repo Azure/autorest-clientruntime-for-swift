@@ -26,20 +26,7 @@ public struct JsonRequestEncoder: RequestEncoder {
         
         var d: Data? = nil
         
-        if e is String {
-            let str = e as! String
-            let qstr = "\"\(str)\""
-            d = qstr.data(using: .utf8)
-        } else if e is Int
-            || e is Float
-            || e is Double
-            || e is Bool {
-            let str = String(describing: e)
-            d = str.data(using: .utf8)
-        } else {
-            d = try JSONEncoder().encode(e)
-        }
-        
+        d = try AzureJSONEncoder().encode(e)
         guard let data = d else {
             throw EncodeError.stringToDataFailed
         }

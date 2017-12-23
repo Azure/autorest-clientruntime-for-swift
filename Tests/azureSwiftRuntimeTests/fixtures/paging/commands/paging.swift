@@ -70,7 +70,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple"
@@ -108,7 +108,7 @@ struct PagingNamespace {
 
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/failure"
@@ -145,7 +145,7 @@ struct PagingNamespace {
 
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/failureuri"
@@ -186,7 +186,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(OdataProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(OdataProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/fragment/{tenant}"
@@ -229,7 +229,7 @@ struct PagingNamespace {
 
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(OdataProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(OdataProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/fragmentwithgrouping/{tenant}"
@@ -267,7 +267,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
 //        public func execute(client: RuntimeClient) throws -> ProductResultProtocol? {
@@ -309,7 +309,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> ProductResultProtocol? {
@@ -403,7 +403,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/withpath/{offset}"
@@ -493,7 +493,7 @@ struct PagingNamespace {
 
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(OdataProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(OdataProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/multiple/odata"
@@ -529,7 +529,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/single"
@@ -566,7 +566,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(ProductResultProtocol?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultProtocol?.self, from: data)
         }
         
         let firstPage = "/paging/single/failure"
@@ -610,7 +610,7 @@ struct PagingNamespace {
 
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(OdataProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(OdataProductResultData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> OdataProductResultProtocol? {
@@ -638,7 +638,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(OdataProductResultData?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(OdataProductResultData?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> OdataProductResultProtocol? {

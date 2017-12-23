@@ -24,7 +24,7 @@ class LROsCustomHeaderPutAsyncRetrySucceededCommand : BaseCommand {
     }
 
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {

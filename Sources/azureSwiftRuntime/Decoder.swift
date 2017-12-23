@@ -14,6 +14,7 @@ public enum DecodeError: Error {
     case wrongInputType
     case invalidString
     case nilData
+    case unknownMimeType
 }
 
 public protocol ResponseDecoder {
@@ -30,14 +31,7 @@ public class JsonResponseDecoder: ResponseDecoder {
             throw DecodeError.nilData
         }
         
-        if let _ = try? JSONSerialization.jsonObject(with: jsonData) {
-            //print("test:", test)
-            let test = try JSONDecoder().decode(type, from: jsonData)
-            return test
-        } else {
-            let test = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments) as! T
-            return test
-        }
+        return try CoderFactory.decoder(for: .json).decode(type, from: jsonData)
     }
 }
 

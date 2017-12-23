@@ -35,7 +35,7 @@ class BodyBooleanQuirksTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_bool_getTrue() {
+    func test_bool_putTrue() {
         print("\n=================== #1.1 bool_getTrue\n")
         
         let cmd = BoolNamespace.PutTrueCommand()
@@ -50,7 +50,7 @@ class BodyBooleanQuirksTests: XCTestCase {
         }
     }
     
-    func test_bool_putTrue() {
+    func test_bool_getTrue() {
         print("\n=================== #1.2 bool_putTrue\n")
         
         let cmd = BoolNamespace.GetTrueCommand()

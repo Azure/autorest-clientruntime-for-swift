@@ -19,9 +19,7 @@ class LROSADsPostAsyncRelativeRetry400Command : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        let jsonEncoder = JSONEncoder()
-        let jsonData = try jsonEncoder.encode(product as! ProductType?)
-        return jsonData
+        return try CoderFactory.encoder(for: .json).encode(product as! ProductType?)
     }
 
     public func execute(client: RuntimeClient) throws -> Decodable? {

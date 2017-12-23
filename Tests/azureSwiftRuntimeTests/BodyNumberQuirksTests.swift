@@ -56,7 +56,7 @@ class BodyNumberQuirksTests: XCTestCase {
         
         do {
             let res = try cmd.execute(client: self.azureClient)
-            XCTAssertNotNil(res)
+            XCTAssertNil(res)
         } catch {
             if (error as NSError).code != 3840 {
                 XCTFail(error.localizedDescription)
@@ -73,7 +73,7 @@ class BodyNumberQuirksTests: XCTestCase {
         
         do {
             let res = try cmd.execute(client: self.azureClient)
-            XCTAssertNotNil(res)
+            XCTAssertNil(res)
         } catch {
             if (error as NSError).code != 3840 {
                 XCTFail(error.localizedDescription)

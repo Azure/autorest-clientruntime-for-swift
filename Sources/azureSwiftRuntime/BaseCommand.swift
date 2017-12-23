@@ -21,8 +21,12 @@ open class BaseCommand {
     open func encodeBody() throws -> Data? {
         return nil
     }
-    
+
     open func returnFunc(data: Data) throws -> Decodable? {
+        return nil
+    }
+
+    open func returnFunc(data: Data, contentType: MimeType) throws -> Decodable? {
         return nil
     }
 

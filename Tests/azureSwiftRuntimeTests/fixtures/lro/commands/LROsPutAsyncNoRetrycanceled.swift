@@ -19,7 +19,7 @@ class LROsPutAsyncNoRetrycanceledCommand : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable: product as! ProductType?)
+        return try CoderFactory.encoder(for: .json).encode(product as! ProductType?)
     }
 
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {
@@ -27,7 +27,7 @@ class LROsPutAsyncNoRetrycanceledCommand : BaseCommand {
     }
     
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {

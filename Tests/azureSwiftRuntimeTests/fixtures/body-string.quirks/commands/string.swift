@@ -20,7 +20,7 @@ struct StringNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -43,7 +43,7 @@ struct StringNamespace {
 
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -64,7 +64,7 @@ struct StringNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -86,7 +86,7 @@ struct StringNamespace {
         }
         
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -108,7 +108,7 @@ struct StringNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -130,7 +130,7 @@ struct StringNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -152,7 +152,7 @@ struct StringNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> String? {
@@ -175,7 +175,7 @@ struct StringNamespace {
         }
 
         override func returnFunc (data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(String?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(String?.self, from: data)
         }
         
         public func execute (client: RuntimeClient) throws -> String? {
@@ -207,7 +207,7 @@ struct StringNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody)
+            return try CoderFactory.encoder(for: .json).encode(stringBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -232,7 +232,7 @@ struct StringNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody)
+            return try CoderFactory.encoder(for: .json).encode(stringBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -257,7 +257,7 @@ struct StringNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody)
+            return try CoderFactory.encoder(for: .json).encode(stringBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -281,7 +281,7 @@ struct StringNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody)
+            return try CoderFactory.encoder(for: .json).encode(stringBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -307,7 +307,7 @@ struct StringNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody)
+            return try CoderFactory.encoder(for: .json).encode(stringBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {

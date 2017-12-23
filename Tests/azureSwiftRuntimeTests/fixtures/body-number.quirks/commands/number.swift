@@ -19,7 +19,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Decimal?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Decimal?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Decimal? {
@@ -41,7 +41,7 @@ struct NumberNamespace {
         }
         
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Decimal?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Decimal?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Decimal? {
@@ -86,7 +86,7 @@ struct NumberNamespace {
 
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -108,7 +108,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         public func execute(client: RuntimeClient) throws -> Double? {
             return try client.execute(command: self) as! Double?
@@ -130,7 +130,7 @@ struct NumberNamespace {
 
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -152,7 +152,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -174,7 +174,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -196,7 +196,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -218,7 +218,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         public func execute(client: RuntimeClient) throws -> Double? {
             return try client.execute(command: self) as! Double?
@@ -239,7 +239,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Decimal?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(Decimal?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Decimal? {
@@ -261,7 +261,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Double?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Double?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Double? {
@@ -283,7 +283,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Float?.self, from: data)
+            return try  CoderFactory.decoder(for: .json).decode(Float?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Float? {
@@ -307,7 +307,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -331,7 +331,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -355,7 +355,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -380,7 +380,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -405,7 +405,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -430,7 +430,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -456,7 +456,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -481,7 +481,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -506,7 +506,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -531,7 +531,7 @@ struct NumberNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: numberBody)
+            return try CoderFactory.encoder(for: .json).encode(numberBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
