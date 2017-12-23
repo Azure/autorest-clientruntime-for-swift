@@ -16,7 +16,7 @@ public enum MimeType : String {
     case gif = "image/gif"
     case unknown = "unknown"
     
-    static func getType(forStr: String) -> MimeType? {
+    public static func getType(forStr: String) -> MimeType? {
         let mimeType = MimeType.init(rawValue: forStr);
         return mimeType
     }
