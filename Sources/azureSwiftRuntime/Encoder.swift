@@ -12,6 +12,7 @@ public enum EncodeError: Error {
     case DataToBase64Failed
     case notString
     case stringToDataFailed
+    case unknownMimeType
 }
 
 public protocol RequestEncoder {
