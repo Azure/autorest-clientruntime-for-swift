@@ -11,7 +11,7 @@ import RxBlocking
 
 public class AzureClient: RuntimeClient {
     
-    public func executeAsync<T>(command: BaseCommand) throws -> Observable<T?>  where T : Decodable {
+    public func executeAsync<T>(command: BaseCommand) throws -> Observable<T?> {
         let (url, method, headers, body) = try self.prepareRequest(command: command)
         return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
             .asObservable()
