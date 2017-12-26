@@ -16,8 +16,14 @@ class LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingCommand : BaseCommand {
     override func preCall()  {
     }
 
-
     public func execute(client: RuntimeClient) throws -> Decodable? {
         return try client.execute(command: self)
+    }
+    
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self, completionHandler:  {
+            (decodable, error)  in
+            completionHandler(decodable, error)
+        })
     }
 }

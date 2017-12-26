@@ -103,7 +103,7 @@ public extension AzureClient {
         }
         
         responseParserObservable
-            .subscribeOn(ConcurrentDispatchQueueScheduler(queue: queueWorker))
+            //.subscribeOn(ConcurrentDispatchQueueScheduler(queue: queueWorker))
             .subscribe(
                 onNext: { (httpResponse, data) in
                     if let body = data {
@@ -202,7 +202,11 @@ public extension AzureClient {
                         return true
                     }
                 } else {
-                    throw RuntimeError.general(message: "Can't parse the body")
+                    if JSONSerialization.isValidJSONObject(body) {
+                        throw RuntimeError.general(message: "Can't parse the body")
+                    } else {
+                        throw RuntimeError.invalidData
+                    }
                 }
                 
             } else {

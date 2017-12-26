@@ -14,6 +14,7 @@ public enum RuntimeError: Error {
     case azure(error: AzureError)
     case cloud(error: CloudError)
     case errorStatusCode(code: Int, details: String)
+    case invalidData
 }
 
 public struct AzureError: Codable {

@@ -30,24 +30,7 @@ public class AzureClient: RuntimeClient {
                             return Observable<T?>.just(nil)
                         }
                 }
-            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
-        
-//        let (url, method, headers, body) = try self.prepareRequest(command: command)
-//
-//
-//
-//
-//        return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
-//            .asObservable()
-//            .flatMap{ httpResponse, data -> Observable<T?> in
-//                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-//                if let body = data {
-//                    let decodable = try? command.returnFunc(data: body)
-//                    return Observable<T?>.just(decodable as! T?)
-//                } else {
-//                    return Observable<T?>.just(nil)
-//                }
-//            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+            }
     }
         
     // handles non-long-running operations (blocking)
@@ -73,10 +56,7 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {
-        
-        //let (url, method, headers, body) = try self.prepareRequest(command: command)
-        
+    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {        
         return Observable.just(command)
             .map { c -> RequestParams in
                 return try self.prepareRequest(command: c)
