@@ -183,13 +183,10 @@ struct StringNamespace {
         }
         
         public func executeAsync (client: RuntimeClient, completionHandler: @escaping (String?, Error?) -> Void) throws {
-<<<<<<< Updated upstream
             client.executeAsync(command: self, completionHandler:  {
                 (decodable, error)  in
                 completionHandler(decodable, error)
             })
-=======
->>>>>>> Stashed changes
         }
     }
 
