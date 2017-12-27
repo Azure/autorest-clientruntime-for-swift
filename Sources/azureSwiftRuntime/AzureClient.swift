@@ -10,20 +10,24 @@ import RxSwift
 import RxBlocking
 
 public class AzureClient: RuntimeClient {
-    
-    public func executeAsync<T>(command: BaseCommand) throws -> Observable<T?> {
-        let (url, method, headers, body) = try self.prepareRequest(command: command)
-        return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
-            .asObservable()
-            .flatMap{ httpResponse, data -> Observable<T?> in
-                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-                if let body = data {
-                    let decodable = try? command.returnFunc(data: body)
-                    return Observable<T?>.just(decodable as! T?)
-                } else {
-                    return Observable<T?>.just(nil)
-                }
-            }
+    internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
+    public func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
+        return Observable.just(command)
+            .map { c -> RequestParams in
+                    return try self.prepareRequest(command: c)
+            }.flatMap { (requestParams: RequestParams) -> Observable<T?> in
+                let (url, method, headers, body) = requestParams
+                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
+                    .flatMap{ httpResponse, data -> Observable<T?> in
+                        try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+                        if let body = data {
+                            let decodable = try? command.returnFunc(data: body)
+                            return Observable<T?>.just(decodable as! T?)
+                        } else {
+                            return Observable<T?>.just(nil)
+                        }
+            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+        }
     }
         
     // handles non-long-running operations (blocking)

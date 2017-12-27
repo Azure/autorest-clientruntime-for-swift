@@ -83,7 +83,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       language = ""
-      shouldUseLaunchSchemeArgsEnv = "NO">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -96,13 +96,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "AUTH_FILE_PATH"
-            value = "/Users/vlashch/__sp/sp1.azureauth"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -126,6 +119,13 @@
             ReferencedContainer = "container:azureSwiftRuntime.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "AUTH_FILE_PATH"
+            value = "/Users/alvab/myauth.azureAuth.json"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
