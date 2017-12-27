@@ -29,9 +29,9 @@ class LROsPutAsyncSubResourceCommand : BaseCommand {
         return try client.execute(command: self) as! SubProductTypeProtocol?
     }
     
-   public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SubProductTypeProtocol?, Error?) -> Void) throws {
+   public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SubProductTypeProtocol?, Error?) -> Void) {
         
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+        client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? SubProductType, error)

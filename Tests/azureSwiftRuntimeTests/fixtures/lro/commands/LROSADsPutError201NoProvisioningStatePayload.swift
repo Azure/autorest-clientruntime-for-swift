@@ -28,9 +28,9 @@ class LROSADsPutError201NoProvisioningStatePayloadCommand : BaseCommand {
         return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
         
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+        client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? ProductType, error)

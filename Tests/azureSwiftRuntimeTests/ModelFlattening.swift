@@ -310,5 +310,134 @@ class ModelFlatteningTests: XCTestCase {
         }
     }
     
+    
+    func testAsync_putResourceCollection() {
+        print("\n=================== #3.1 putResourceCollection\n")
+        
+        var flattenedProduct1: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct1?.location = "West US"
+        flattenedProduct1?.tags = ["tag1":"value1","tag2":"value3"]
+        flattenedProduct1?.properties = FlattenedProductPropertiesData()
+        flattenedProduct1?.properties?.pname = "Product1"
+        flattenedProduct1?.properties?.type = "Flat"
+        
+        var flattenedProduct2: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct2?.location = "East US"
+        flattenedProduct2?.properties = FlattenedProductPropertiesData()
+        flattenedProduct2?.properties?.pname = "Product2"
+        flattenedProduct2?.properties?.type = "Flat"
+        
+        var flattenedProduct3: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct3?.location = "Building 44"
+        flattenedProduct3?.properties = FlattenedProductPropertiesData()
+        flattenedProduct3?.properties?.pname = "Product2"
+        flattenedProduct3?.properties?.type = "Flat"
+        
+        var flattenedProduct4: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct4?.location = "India"
+        flattenedProduct4?.properties = FlattenedProductPropertiesData()
+        flattenedProduct4?.properties?.pname = "Azure"
+        flattenedProduct4?.properties?.type = "Flat"
+        
+        let cmd = ModelFlatteningNamespace.PutResourceCollectionCommand()
+        cmd.resourceComplexObject = ResourceCollectionData()
+        
+        cmd.resourceComplexObject?.arrayofresources = [flattenedProduct1, flattenedProduct2]
+        
+        cmd.resourceComplexObject?.dictionaryofresources = [
+            "Resource1" : flattenedProduct1,
+            "Resource2" : flattenedProduct3,
+        ]
+        
+        cmd.resourceComplexObject?.productresource = flattenedProduct4
+        
+        cmd.executeAsync(client: self.azureClient) {
+            res, error in
+            XCTAssertNil(error)
+            XCTAssertNil(res)
+        }
+    }
+    
+    func testAsync_getResourceCollection() {
+        print("\n=================== #3.2 getResourceCollection\n")
+        
+        var flattenedProduct4: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct4?.id = "4"
+        flattenedProduct4?.location = "Building 44"
+        flattenedProduct4?.name = "Resource4"
+        flattenedProduct4?.properties = FlattenedProductPropertiesData()
+        flattenedProduct4?.properties?.provisioningState = "Succeeded"
+        flattenedProduct4?.properties?.provisioningStateValues = ProvisioningStateValues.OK
+        flattenedProduct4?.properties?.pname = "Product4"
+        flattenedProduct4?.properties?.type = "Flat"
+        flattenedProduct4?.tags = ["tag1":"value1","tag2":"value3"]
+        flattenedProduct4?.type = "Microsoft.Web/sites"
+        
+        var flattenedProduct5: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct5?.id = "5"
+        flattenedProduct5?.location = "Building 44"
+        flattenedProduct5?.name = "Resource5"
+        
+        var flattenedProduct6: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct6?.id = "6"
+        flattenedProduct6?.name = "Resource6"
+        
+        var flattenedProduct7: FlattenedProductProtocol? = FlattenedProductData()
+        flattenedProduct7?.id = "7"
+        flattenedProduct7?.location = "Building 44"
+        flattenedProduct7?.name = "Resource7"
+        
+        let cmd = ModelFlatteningNamespace.GetResourceCollectionCommand()
+        
+        var expectedResult = ResourceCollectionData()
+        expectedResult.dictionaryofresources = [
+            "Product1" : flattenedProduct1,
+            "Product2" : flattenedProduct2,
+            "Product3" : flattenedProduct3,
+        ]
+        expectedResult.arrayofresources = [flattenedProduct4, flattenedProduct5, flattenedProduct6]
+        expectedResult.productresource = flattenedProduct7
+        
+        
+        cmd.executeAsync(client: self.azureClient) {
+            
+            (res: ResourceCollectionProtocol?, error: Error?) in
+            
+            XCTAssertNotNil(res)
+            XCTAssertNil(error)
+            XCTAssertNotNil(res!.dictionaryofresources)
+            guard let dict = res!.dictionaryofresources else {
+                XCTFail(); return
+            }
+            for (key, value) in expectedResult.dictionaryofresources! {
+                guard let keyExists = dict[key], let valNotNil = keyExists else {
+                    XCTFail(); return
+                }
+                XCTAssertEqual(value?.id, valNotNil.id)
+                XCTAssertEqual(value?.name, valNotNil.name)
+                XCTAssertEqual(value?.location, valNotNil.location)
+            }
+            
+            XCTAssertNotNil(res!.arrayofresources)
+            guard let array = res!.arrayofresources else {
+                XCTFail(); return
+            }
+            
+            for i in 0 ..< expectedResult.arrayofresources!.count {
+                XCTAssertEqual(array[i]?.id, expectedResult.arrayofresources![i]?.id)
+                XCTAssertEqual(array[i]?.name, expectedResult.arrayofresources![i]?.name)
+                XCTAssertEqual(array[i]?.location, expectedResult.arrayofresources![i]?.location)
+            }
+            
+            guard let resource = expectedResult.productresource else {
+                XCTFail(); return
+            }
+            
+            XCTAssertEqual(expectedResult.productresource?.id, resource.id)
+            XCTAssertEqual(expectedResult.productresource?.name, resource.name)
+            XCTAssertEqual(expectedResult.productresource?.location, resource.location)
+        }
+    }
+    
 }
 

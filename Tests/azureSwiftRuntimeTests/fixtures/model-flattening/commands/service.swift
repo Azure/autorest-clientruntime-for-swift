@@ -69,6 +69,13 @@ struct ModelFlatteningNamespace {
         public func execute(client: RuntimeClient) throws -> ResourceCollectionProtocol? {
             return try client.execute(command: self) as! ResourceCollectionProtocol?
         }
+        
+        public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ResourceCollectionProtocol?, Error?)->Void) {
+            client.executeAsync(command: self) {
+                (result: ResourceCollectionData?, error: Error?)  in
+                completionHandler(result, error)
+            }
+        }
     }
 
     // GetWrappedArray no need to have a route in Express server for this operation. Used to verify the type flattened is
@@ -194,6 +201,15 @@ struct ModelFlatteningNamespace {
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
             return try client.execute(command: self)
+        }
+        
+        // FIXME: if a command returns no result - should we have a specific method for that in the client?
+        struct NilResult : Decodable {}
+        public func executeAsync(client: RuntimeClient, completionHandler: @escaping (NilResult?, Error?)->Void) {
+            client.executeAsync(command: self) {
+                (result, error)  in
+                completionHandler(result, error)
+            }
         }
     }
 

@@ -16,8 +16,26 @@ class LROSADsDeleteAsyncRelativeRetry400Command : BaseCommand {
     override func preCall()  {
     }
 
-
     public func execute(client: RuntimeClient) throws -> Decodable? {
         return try client.execute(command: self)
+    }
+    
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self, completionHandler:  {
+            (decodable, error)  in
+            completionHandler(decodable, error)
+        })
+    }
+    
+    override func returnFunc(data: Data) throws -> Decodable? {
+        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+    }
+    
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self, completionHandler:  {
+            (decodable, error)  in
+            
+            completionHandler(decodable as? ProductType, error)
+        })
     }
 }

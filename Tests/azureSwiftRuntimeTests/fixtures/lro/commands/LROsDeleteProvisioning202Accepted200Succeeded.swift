@@ -25,12 +25,10 @@ class LROsDeleteProvisioning202Accepted200SucceededCommand : BaseCommand {
         return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
-        
-        try client.executeAsyncLRO(command: self, completionHandler:  {
-            (decodable, error)  in
-            
-            completionHandler(decodable as? ProductType, error)
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self, completionHandler:  {
+            (result, error)  in
+            completionHandler(result as! ProductType?, error)
         })
     }
 }

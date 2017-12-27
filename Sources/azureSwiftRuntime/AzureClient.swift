@@ -23,7 +23,7 @@ public class AzureClient: RuntimeClient {
                 } else {
                     return Observable<T?>.just(nil)
                 }
-            }.subscribeOn(ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+            }
     }
         
     // handles non-long-running operations (blocking)
@@ -49,17 +49,18 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?) -> Void) throws {
-        
-        let (url, method, headers, body) = try self.prepareRequest(command: command)
-        
-        self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body)
-            .asObservable()
-            .subscribe(
-                onNext:{ (httpResponse, data) in
-                    if let body = data {
-                        let decodable = try? command.returnFunc(data: body)
-                        completionHandler(decodable, nil)
+    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {        
+        return Observable.just(command)
+            .map { c -> RequestParams in
+                return try self.prepareRequest(command: c)
+            }.flatMap { (requestParams: RequestParams) -> Observable<ResponseData> in
+                let (url, method, headers, body) = requestParams
+                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
+            }.subscribe (
+                onNext: { (httpResponse, data) in
+                    if let body = data,
+                        let decodable = try? command.returnFunc(data: body) {
+                        completionHandler(decodable as! T?, nil)
                     } else {
                         completionHandler(nil, nil)
                     }
@@ -113,8 +114,6 @@ public class AzureClient: RuntimeClient {
         
         return fullUrl;
     }
-    
-    internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
     
     internal func prepareRequest (command: BaseCommand) throws -> RequestParams  {
         command.preCall()

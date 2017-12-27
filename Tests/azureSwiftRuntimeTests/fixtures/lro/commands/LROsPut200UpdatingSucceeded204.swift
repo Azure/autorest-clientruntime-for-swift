@@ -30,12 +30,10 @@ class LROsPut200UpdatingSucceeded204Command : BaseCommand {
         return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
-        
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self)  {
             (decodable, error)  in
-            
             completionHandler(decodable as? ProductType, error)
-        })
+        }
     }
 }

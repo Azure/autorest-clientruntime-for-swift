@@ -31,9 +31,9 @@ class LROsCustomHeaderPutAsyncRetrySucceededCommand : BaseCommand {
         return try client.execute(command: self) as! ProductTypeProtocol?
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
         
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+        client.executeAsyncLRO(command: self, completionHandler:  {
             (decodable, error)  in
             
             completionHandler(decodable as? ProductType, error)

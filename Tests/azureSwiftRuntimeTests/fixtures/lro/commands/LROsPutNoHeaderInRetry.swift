@@ -30,12 +30,10 @@ class LROsPutNoHeaderInRetryCommand : BaseCommand {
         return try client.execute(command: self) as! ProductTypeProtocol?
     }
    
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) throws {
-        
-        try client.executeAsyncLRO(command: self, completionHandler:  {
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+        client.executeAsyncLRO(command: self) {
             (decodable, error)  in
-            
             completionHandler(decodable as? ProductType, error)
-        })
+        }
     }
 }
