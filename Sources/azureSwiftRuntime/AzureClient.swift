@@ -10,11 +10,8 @@ import RxSwift
 import RxBlocking
 
 public class AzureClient: RuntimeClient {
-    
     internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
-    
     public func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
-        
         return Observable.just(command)
             .map { c -> RequestParams in
                 return try self.prepareRequest(command: c)
@@ -90,8 +87,6 @@ public class AzureClient: RuntimeClient {
     let atc : AzureTokenCredentials
     
     var disposeBag = DisposeBag()
-    
-    let decoder = JsonResponseDecoder()
     
     public init(atc: AzureTokenCredentials) {
         self.atc = atc

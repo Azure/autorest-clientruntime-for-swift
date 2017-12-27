@@ -18,11 +18,11 @@ class LROsPutAsyncSubResourceCommand : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable: product as! SubProductType?)
+        return try CoderFactory.encoder(for: .json).encode(product as! SubProductType?)
     }
 
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(SubProductType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(SubProductType?.self, from: data)
     }
     
     public func execute(client: RuntimeClient) throws -> SubProductTypeProtocol? {

@@ -21,7 +21,7 @@ class LROsPost200WithPayloadCommand : BaseCommand {
     }
     
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(SkuType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(SkuType?.self, from: data)
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) {

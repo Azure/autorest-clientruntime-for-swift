@@ -167,7 +167,7 @@ public extension AzureClient {
                     return false
                 }
                 
-                if let result = try? JsonResponseDecoder.decode(Status.self, from: body) {
+                if let result = try? CoderFactory.decoder(for: .json).decode(Status.self, from: body) {
                     if let status = Status.Value(rawValue: result.status) {
                         switch status {
                         case .Accepted, .InProgress:
@@ -184,7 +184,7 @@ public extension AzureClient {
                     }
                     
                 } else if try command.returnFunc(data: body) != nil {
-                    if let result = try? JsonResponseDecoder.decode(ProvisionStateProp.self, from: body) {
+                    if let result = try? CoderFactory.decoder(for: .json).decode(ProvisionStateProp.self, from: body) {
                         //print("Result:", result)
                         if let provisioningState: ProvisionState.Value = ProvisionState.Value(rawValue: result.properties.provisioningState) {
                             switch provisioningState {

@@ -1,4 +1,0 @@
-module RxCocoaRuntime {
-    umbrella header "/Users/vlashch/git/swift/autorest-clientruntime-for-swift/.build/checkouts/RxSwift.git--5214619868639177420/Sources/RxCocoaRuntime/include/RxCocoaRuntime.h"
-    export *
-}

@@ -19,7 +19,7 @@ struct BoolNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Bool?.self, from: data) as Decodable
+            return try CoderFactory.decoder(for: .json).decode(Bool?.self, from: data) as Decodable
         }
         
         public func execute(client: RuntimeClient) throws -> Bool? {
@@ -41,7 +41,7 @@ struct BoolNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Bool?.self, from: data) as Decodable
+            return try CoderFactory.decoder(for: .json).decode(Bool?.self, from: data) as Decodable
         }
         
         public func execute(client: RuntimeClient) throws -> Bool? {
@@ -63,7 +63,7 @@ struct BoolNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Bool?.self, from: data) as Decodable
+            return try CoderFactory.decoder(for: .json).decode(Bool?.self, from: data) as Decodable
         }
         
         public func execute(client: RuntimeClient) throws -> Bool? {
@@ -85,7 +85,7 @@ struct BoolNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Bool?.self, from: data) as Decodable
+            return try CoderFactory.decoder(for: .json).decode(Bool?.self, from: data) as Decodable
         }
         
         public func execute(client: RuntimeClient) throws -> Bool? {
@@ -110,7 +110,7 @@ struct BoolNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: boolBody)
+            return try CoderFactory.encoder(for: .json).encode(boolBody)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -135,7 +135,7 @@ struct BoolNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: boolBody)
+            return try CoderFactory.encoder(for: .json).encode(boolBody);
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {

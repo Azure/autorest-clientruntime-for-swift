@@ -20,11 +20,11 @@ class LROsPutAsyncNonResourceCommand : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable: sku as! SkuType?)
+        return try CoderFactory.encoder(for: .json).encode(sku as! SkuType?)
     }
 
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(SkuType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(SkuType?.self, from: data)
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (SkuTypeProtocol?, Error?) -> Void) {

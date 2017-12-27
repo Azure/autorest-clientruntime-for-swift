@@ -19,11 +19,11 @@ class LROsPut200Acceptedcanceled200Command : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable: product as! ProductType?)
+        return try CoderFactory.encoder(for: .json).encode(product as! ProductType?)
     }
 
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+        return try CoderFactory.decoder(for: .json).decode(ProductType?.self, from: data)
     }
     
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {

@@ -15,8 +15,9 @@ internal extension AzureClient {
                     throw RuntimeError.errorStatusCode(code: statusCode, details: "no details")
                 }
                 
-                if let azureError = try? JsonResponseDecoder.decode(AzureError.self, from: jsonData) {
-                    throw RuntimeError.azure(error: azureError)
+                if let cloudError = try? CoderFactory.decoder(for: .json)
+                        .decode(CloudError.self, from: jsonData) {
+                    throw RuntimeError.cloud(error: cloudError)
                 } else {
                     if let cloudError = try? JsonResponseDecoder.decode(CloudError.self, from: jsonData) {
                         throw RuntimeError.cloud(error: cloudError)

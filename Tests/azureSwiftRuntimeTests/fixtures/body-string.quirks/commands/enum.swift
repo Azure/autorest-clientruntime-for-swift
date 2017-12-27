@@ -20,7 +20,7 @@ struct EnumNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            let val = try JsonResponseDecoder.decode(String.self, from: data)
+            let val = try CoderFactory.decoder(for: .json).decode(String.self, from: data)
             return Colors(rawValue: val)
         }
         
@@ -44,7 +44,7 @@ struct EnumNamespace {
 
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            let val = try JsonResponseDecoder.decode(String.self, from: data)
+            let val = try CoderFactory.decoder(for: .json).decode(String.self, from: data)
             return  Colors(rawValue: val)
         }
         
@@ -67,7 +67,7 @@ struct EnumNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(RefColorConstantData.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(RefColorConstantData.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> RefColorConstantProtocol? {
@@ -92,7 +92,7 @@ struct EnumNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: stringBody?.rawValue)
+            return try CoderFactory.encoder(for: .json).encode(stringBody?.rawValue)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -117,7 +117,7 @@ struct EnumNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: enumStringBody?.rawValue)
+            return try CoderFactory.encoder(for: .json).encode(enumStringBody?.rawValue)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
@@ -142,7 +142,7 @@ struct EnumNamespace {
         }
 
         public override func encodeBody() throws -> Data? {
-            return try JsonRequestEncoder.encode(encodable: enumStringBody as? RefColorConstantData)
+            return try CoderFactory.encoder(for: .json).encode(enumStringBody as? RefColorConstantData)
         }
 
         public func execute(client: RuntimeClient) throws -> Decodable? {
