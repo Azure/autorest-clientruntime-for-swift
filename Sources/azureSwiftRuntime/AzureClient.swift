@@ -10,7 +10,63 @@ import RxSwift
 import RxBlocking
 
 public class AzureClient: RuntimeClient {
+    
+    // handles non-long-running operations that doesn't return value
+    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
+        self.createExecuteObservable (command: command)
+            .subscribe (
+                onNext: { (httpResponse, data) in
+                    completionHandler(nil)
+                },
+                onError: { error in
+                    completionHandler(error)
+                }
+            ).disposed(by: disposeBag)
+    }
+    
+    // handles non-long-running operations
+    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {
+        self.createExecuteObservable(command: command)
+            .subscribe (
+                onNext: { (httpResponse, data) in
+                    if let body = data,
+                        let decodable = try? command.returnFunc(data: body) {
+                        completionHandler(decodable as! T?, nil)
+                    } else {
+                        completionHandler(nil, nil)
+                    }
+                },
+                onError: { error in
+                    completionHandler(nil,error)
+                }
+            ).disposed(by: disposeBag)
+    }
+    
+    // handles non-long-running operations (blocking)
+    public func execute (command: BaseCommand) throws -> Decodable? {
+        
+        let (url, method, headers, body) = try self.prepareRequest(command: command)
+        
+        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
+            .toBlocking()
+            .single() else {
+                
+                throw RuntimeError.general(message: "Request returned nil")
+        }
+        
+        try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+        
+        do {
+            let decodable = try command.returnFunc(data: data!)
+            return decodable
+        } catch DecodeError.nilData { // to return nil not empty string or data
+            return nil
+        }
+    }
+    
     internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
+    
+    // returns
     public func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
         return Observable.just(command)
             .map { c -> RequestParams in
@@ -28,51 +84,6 @@ public class AzureClient: RuntimeClient {
                         }
                 }
             }
-    }
-        
-    // handles non-long-running operations (blocking)
-    public func execute (command: BaseCommand) throws -> Decodable? {
-        
-        let (url, method, headers, body) = try self.prepareRequest(command: command)
-        
-        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
-            .toBlocking()
-            .single() else {
-                
-            throw RuntimeError.general(message: "Request returned nil")
-        }
-        
-        try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-        
-        do {
-            let decodable = try command.returnFunc(data: data!)
-            return decodable
-        } catch DecodeError.nilData { // to return nil not empty string or data
-            return nil
-        }
-    }
-    
-    // handles non-long-running operations
-    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {        
-        return Observable.just(command)
-            .map { c -> RequestParams in
-                return try self.prepareRequest(command: c)
-            }.flatMap { (requestParams: RequestParams) -> Observable<ResponseData> in
-                let (url, method, headers, body) = requestParams
-                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
-            }.subscribe (
-                onNext: { (httpResponse, data) in
-                    if let body = data,
-                        let decodable = try? command.returnFunc(data: body) {
-                        completionHandler(decodable as! T?, nil)
-                    } else {
-                        completionHandler(nil, nil)
-                    }
-                },
-                onError: { error in
-                    completionHandler(nil,error)
-                }
-            ).disposed(by: disposeBag)
     }
     
     internal var retryDelay = 0.01
@@ -93,6 +104,16 @@ public class AzureClient: RuntimeClient {
         if let _ = atc.environment.url(forEndpoint: .activeDirectory) {
             _ = self.withRequestInterceptor(AuthHeaderInterseptor(atc: atc))
         }
+    }
+    
+    private func createExecuteObservable(command: BaseCommand) -> Observable<ResponseData> {
+        return Observable.just(command)
+            .map { c -> RequestParams in
+                return try self.prepareRequest(command: c)
+            }.flatMap { (requestParams: RequestParams) -> Observable<ResponseData> in
+                let (url, method, headers, body) = requestParams
+                return self.executeRequestWithInterception (url: url, method: method, headers: headers, body: body).asObservable()
+            }
     }
     
     internal func buildUrl (command: BaseCommand, baseUrl: String) -> String {

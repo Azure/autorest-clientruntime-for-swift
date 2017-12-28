@@ -27,9 +27,9 @@ class LROSADsPostAsyncRelativeRetryInvalidJsonPollingCommand : BaseCommand {
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) {
-        client.executeAsyncLRO(command: self, completionHandler:  {
-            (decodable, error)  in
-            completionHandler(decodable, error)
-        })
+        client.executeAsyncLRO (command: self) {
+            (result: ProductType?, error: Error?)  in
+            completionHandler(result, error)
+        }
     }
 }

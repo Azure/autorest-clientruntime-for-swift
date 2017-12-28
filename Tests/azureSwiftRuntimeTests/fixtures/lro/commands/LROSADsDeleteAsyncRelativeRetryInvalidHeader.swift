@@ -20,10 +20,10 @@ class LROSADsDeleteAsyncRelativeRetryInvalidHeaderCommand : BaseCommand {
         return try client.execute(command: self)
     }
     
-    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Decodable?, Error?) -> Void) {
-        client.executeAsyncLRO(command: self, completionHandler:  {
-            (decodable, error)  in
-            completionHandler(decodable, error)
-        })
+    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (Error?) -> Void) {
+        client.executeAsyncLRO (command: self) {
+            error in
+            completionHandler(error)
+        }
     }
 }
