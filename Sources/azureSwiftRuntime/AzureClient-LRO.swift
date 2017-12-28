@@ -10,8 +10,38 @@ import RxSwift
 
 public extension AzureClient {
     
+    public func executeAsyncLRO<T>(command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) where T : Decodable {
+        self.createExecuteObservableLRO(command: command)
+            .subscribe(
+                onNext: { (httpResponse, data) in
+                    if let body = data,
+                        let decodable = try? command.returnFunc(data: body) {
+                        completionHandler(decodable as! T?, nil)
+                    } else {
+                        completionHandler(nil,nil)
+                    }
+                },
+                onError: { e in
+                    completionHandler(nil,e)
+                }
+            ).disposed(by: disposeBag)
+    }
+    
+    public func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
+        self.createExecuteObservableLRO(command: command)
+            .subscribe(
+                onNext: { (httpResponse, data) in
+                    completionHandler(nil)
+                },
+                onError: { e in
+                    completionHandler(e)
+                }
+            ).disposed(by: disposeBag)
+    }
+    
     // handles long-running operations with retry loginc
-    public func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void){
+    //public func executeAsyncLRO (command: BaseCommand, completionHandler: @escaping (Decodable?, Error?)->Void) {
+    private func createExecuteObservableLRO(command: BaseCommand) -> Observable<ResponseData> {
         
         let firstRequestObservable = Observable.just(command)
             .map { c -> RequestParams in
@@ -102,21 +132,7 @@ public extension AzureClient {
                     }
         }
         
-        responseParserObservable
-            //.subscribeOn(ConcurrentDispatchQueueScheduler(queue: queueWorker))
-            .subscribe(
-                onNext: { (httpResponse, data) in
-                    if let body = data {
-                        let decodable = try? command.returnFunc(data: body)
-                        completionHandler(decodable, nil)
-                    } else {
-                        completionHandler(nil,nil)
-                    }
-                },
-                onError: { e in
-                    completionHandler(nil,e)
-                }
-            ).disposed(by: disposeBag)
+        return responseParserObservable
     }
     
     internal enum RetryConditionError: Error {

@@ -26,9 +26,9 @@ class LROsDeleteProvisioning202Accepted200SucceededCommand : BaseCommand {
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
-        client.executeAsyncLRO(command: self, completionHandler:  {
-            (result, error)  in
-            completionHandler(result as! ProductType?, error)
-        })
+        client.executeAsyncLRO (command: self) {
+            (result: ProductType?, error: Error?)  in
+            completionHandler(result, error)
+        }
     }
 }

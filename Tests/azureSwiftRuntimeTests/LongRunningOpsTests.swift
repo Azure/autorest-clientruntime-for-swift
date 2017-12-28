@@ -473,7 +473,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDelete204SucceededCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -487,7 +487,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDelete202Retry200Command()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -501,7 +501,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDelete202NoRetry204Command()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -515,7 +515,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteNoHeaderInRetryCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -529,7 +529,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteAsyncNoHeaderInRetryCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -543,7 +543,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteAsyncRetrySucceededCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -557,7 +557,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteAsyncNoRetrySucceededCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
@@ -571,7 +571,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteAsyncRetryFailedCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             if let curError = error {
@@ -594,7 +594,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROsDeleteAsyncRetrycanceledCommand()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             if let curError = error {
@@ -847,11 +847,10 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LRORetrysDeleteAsyncRelativeRetrySucceededCommand()
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNil(error)
-            XCTAssertNotNil(result)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -1013,7 +1012,7 @@ class LongRunningOpsTest: XCTestCase {
         
         let cmd = LROSADsDeleteNonRetry400Command()
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNotNil(error)
@@ -1038,7 +1037,7 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LROSADsDelete202NonRetry400Command()
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNotNil(error)
@@ -1113,7 +1112,7 @@ class LongRunningOpsTest: XCTestCase {
         cmd.product = self.product
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNotNil(error)
@@ -1137,7 +1136,7 @@ class LongRunningOpsTest: XCTestCase {
         cmd.product = self.product
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNotNil(error)
@@ -1252,7 +1251,7 @@ class LongRunningOpsTest: XCTestCase {
 //      <--  DELETE http://localhost:3000/lro/error/delete/204/nolocation
 //      --> 204 http://localhost:3000/lro/error/delete/204/nolocation
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             
@@ -1296,7 +1295,7 @@ class LongRunningOpsTest: XCTestCase {
         cmd.product = self.product
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             XCTAssertNotNil(error)
@@ -1454,7 +1453,7 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LROSADsDeleteAsyncRelativeRetryInvalidHeaderCommand()
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             if let curError = error {
@@ -1480,7 +1479,7 @@ class LongRunningOpsTest: XCTestCase {
         let cmd = LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingCommand()
         
         cmd.executeAsync(client: self.azureClient) {
-            result, error in
+            error in
             defer { e.fulfill() }
             
             if let curError = error {

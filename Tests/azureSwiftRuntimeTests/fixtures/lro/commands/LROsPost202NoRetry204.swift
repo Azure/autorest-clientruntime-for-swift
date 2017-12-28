@@ -29,12 +29,17 @@ class LROsPost202NoRetry204Command : BaseCommand {
         return try client.execute(command: self) as! ProductTypeProtocol?
     }
     
+//    public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
+//        client.executeAsyncLRO (command: self) {
+//            (result: ProductType?, error: Error?)  in
+//            completionHandler(result, error)
+//        }
+//    }
+    
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
-        
-        client.executeAsyncLRO(command: self, completionHandler:  {
-            (decodable, error)  in
-            
-            completionHandler(decodable as? ProductType, error)
-        })
+        client.executeAsyncLRO (command: self) {
+            (result: ProductType?, error: Error?)  in
+            completionHandler(result, error)
+        }
     }
 }
