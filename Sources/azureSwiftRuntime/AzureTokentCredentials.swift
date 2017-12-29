@@ -1,9 +1,8 @@
-//
-//  AzureTokentCredentials.swift
-//  azureSwiftRuntimePackageDescription
-//
-//  Created by Vladimir Shcherbakov on 10/31/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
 import RxSwift

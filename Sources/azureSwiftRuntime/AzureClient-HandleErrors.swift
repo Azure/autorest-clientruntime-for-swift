@@ -1,9 +1,8 @@
-//
-//  AzureClient-HandleErrors.swift
-//  azureSwiftRuntime
-//
-//  Created by Vladimir Shcherbakov on 12/13/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
 
@@ -19,7 +18,7 @@ internal extension AzureClient {
                         .decode(CloudError.self, from: jsonData) {
                     throw RuntimeError.cloud(error: cloudError)
                 } else {
-                    if let cloudError = try? JsonResponseDecoder.decode(CloudError.self, from: jsonData) {
+                    if let cloudError = try? AzureJSONDecoder().decode(CloudError.self, from: jsonData) {
                         throw RuntimeError.cloud(error: cloudError)
                     } else {
                         let str = String(data: jsonData, encoding: .utf8)

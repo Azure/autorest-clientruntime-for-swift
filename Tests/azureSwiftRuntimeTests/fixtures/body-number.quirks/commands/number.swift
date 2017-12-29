@@ -63,7 +63,7 @@ struct NumberNamespace {
         }
 
         override func returnFunc(data: Data) throws -> Decodable? {
-            return try JsonResponseDecoder.decode(Decimal?.self, from: data)
+            return try AzureJSONDecoder().decode(Decimal?.self, from: data)
         }
         
         public func execute(client: RuntimeClient) throws -> Decimal? {

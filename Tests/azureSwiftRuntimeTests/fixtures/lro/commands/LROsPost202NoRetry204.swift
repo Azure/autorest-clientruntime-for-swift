@@ -18,7 +18,7 @@ class LROsPost202NoRetry204Command : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable:product as! ProductType?)
+        return try  AzureJSONEncoder().encode(product as! ProductType?)
     }
 
     override func returnFunc(data: Data) throws -> Decodable? {
