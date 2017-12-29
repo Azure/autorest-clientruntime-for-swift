@@ -27,7 +27,7 @@ class LRORetrysPost202Retry200Command : BaseCommand {
     }
     
     override func returnFunc(data: Data) throws -> Decodable? {
-        return try JsonResponseDecoder.decode(ProductType?.self, from: data)
+        return try AzureJSONDecoder().decode(ProductType?.self, from: data)
     }
     
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {

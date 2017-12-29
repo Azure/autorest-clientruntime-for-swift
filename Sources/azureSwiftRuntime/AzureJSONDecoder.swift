@@ -1,11 +1,41 @@
-//
-//  PlainDecoder.swift
-//  azureSwiftRuntimePackageDescription
-//
-//  Created by Alva D Bandy on 12/20/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
+
+public enum DecodeError: Error {
+    case dataToString
+    case base64
+    case base64Url
+    case wrongInputType
+    case invalidString
+    case nilData
+    case unknownMimeType
+}
+
+public extension String {
+    //: ### Base64 decoding a string
+    func base64Decoded() -> String? {
+        if let data = Data(base64Encoded: self) {
+            return String(data: data, encoding: .utf8)
+        }
+        
+        return nil
+    }
+    func base64uriDecoded() -> String? {
+        var base64 = self
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        if base64.count % 4 != 0 {
+            base64.append(String(repeating: "=", count: 4 - base64.count % 4))
+        }
+        
+        return base64.base64Decoded()
+    }
+}
 
 public class AzureJSONDecoder : JSONDecoder {
     public override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable{// to return nil instead of emply data down stream

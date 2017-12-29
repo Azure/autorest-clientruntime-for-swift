@@ -1,11 +1,39 @@
-//
-//  PlainEncoder.swift
-//  azureSwiftRuntimePackageDescription
-//
-//  Created by Alva D Bandy on 12/17/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
+
+public enum EncodeError: Error {
+    case nilInput
+    case DataToBase64Failed
+    case notString
+    case stringToDataFailed
+    case unknownMimeType
+}
+
+public extension String {
+    //: ### Base64 encoding a string
+    func base64Encoded() -> String? {
+        if let data = self.data(using: .utf8) {
+            return data.base64EncodedString()
+        }
+        return nil
+    }
+    
+    func base64uriEncoded() -> String? {
+        guard let base64url = self.base64Encoded() else {
+            return nil
+        }
+        
+        return base64url
+            .replacingOccurrences(of: "+", with: "-")
+            .replacingOccurrences(of: "/", with: "_")
+            .replacingOccurrences(of: "=", with: "")
+    }
+}
 
 public class AzureJSONEncoder : JSONEncoder {
     public override func encode<T>(_ value: T?) throws -> Data where T : Encodable {
