@@ -13,7 +13,7 @@ open class BaseCommand {
     public var pathParameters = [String: String]()
     public var queryParameters = [String: String]()
     public var headerParameters = [String: String]()
-    public var body: Codable?
+    public var body: Any?
     
     open func preCall() {}
     
