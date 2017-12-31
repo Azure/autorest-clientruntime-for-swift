@@ -6,14 +6,14 @@
 
 import Foundation
 
-public struct NSDataWrapper : Decodable {
-    public let data: NSData;
+public struct DataWrapper : Decodable {
+    public let data: Data;
     
     public init(data: Data) {
-        self.data = data as NSData;
+        self.data = data as Data;
     }
     
     public init(from decoder: Decoder) throws {
-        self.data = NSData()
+        self.data = Data()
     }
 }
