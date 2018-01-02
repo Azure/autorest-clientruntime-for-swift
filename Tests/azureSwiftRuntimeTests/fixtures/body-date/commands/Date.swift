@@ -19,19 +19,20 @@ struct DateNamespace {
         public override func preCall()  {
         }
 
-
         public override func returnFunc(data: Data) throws -> Decodable? {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
         
         public func execute(client: RuntimeClient,
-            completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            completionHandler: @escaping (Date?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -52,18 +53,20 @@ struct DateNamespace {
         public override func preCall()  {
         }
 
-
         public override func returnFunc(data: Data) throws -> Decodable? {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
+        
         public func execute(client: RuntimeClient,
-            completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            completionHandler: @escaping (Date?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -84,18 +87,20 @@ struct DateNamespace {
         public override func preCall()  {
         }
 
-
         public override func returnFunc(data: Data) throws -> Decodable? {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
+        
         public func execute(client: RuntimeClient,
-            completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            completionHandler: @escaping (Date?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -121,13 +126,16 @@ struct DateNamespace {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
+        
         public func execute(client: RuntimeClient,
-            completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            completionHandler: @escaping (Date?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -152,13 +160,15 @@ struct DateNamespace {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
         
-        public func execute(client: RuntimeClient, completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+        public func execute(client: RuntimeClient, completionHandler: @escaping (Date?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -179,18 +189,20 @@ struct DateNamespace {
         public override func preCall()  {
         }
 
-
         public override func returnFunc(data: Data) throws -> Decodable? {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let decoder = try CoderFactory.decoder(for: mimeType)
-                return try decoder.decode(String?.self, from: data)
+                let dataString = try decoder.decode(String?.self, from: data)
+                return DateConverter.fromString(dateStr: dataString, format: .date)
             }
+            
             throw DecodeError.unknownMimeType
         }
+        
         public func execute(client: RuntimeClient,
-            completionHandler: @escaping (String?, Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            completionHandler: @escaping (Data?, Error?) -> Void) -> Void {
+            client.executeAsync(command: self) {
                 (result, error) in
                 completionHandler(result, error)
             }
@@ -199,7 +211,7 @@ struct DateNamespace {
 
     // PutMaxDate put max date value 9999-12-31
     public class PutMaxDateCommand : BaseCommand {
-        public var dateBody :  String??
+        public var dateBody : Date?
 
         public override init() {
             super.init()
@@ -217,15 +229,17 @@ struct DateNamespace {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let encoder = try CoderFactory.encoder(for: mimeType)
-                let encodedValue = try encoder.encode(dateBody)
+                let dateBodyString = DateConverter.toString(date: dateBody, format: .date)
+                let encodedValue = try encoder.encode(dateBodyString)
                 return encodedValue
             }
+            
             throw DecodeError.unknownMimeType
         }
 
         public func execute(client: RuntimeClient,
             completionHandler: @escaping (Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
+            client.executeAsync(command: self) {
                 error in
                 completionHandler(error)
             }
@@ -234,7 +248,7 @@ struct DateNamespace {
 
     // PutMinDate put min date value 0000-01-01
     public class PutMinDateCommand : BaseCommand {
-        public var dateBody :  String?
+        public var dateBody :  Date?
 
         public override init() {
             super.init()
@@ -252,7 +266,8 @@ struct DateNamespace {
             let contentType = "application/json"
             if let mimeType = MimeType.getType(forStr: contentType) {
                 let encoder = try CoderFactory.encoder(for: mimeType)
-                let encodedValue = try encoder.encode(dateBody)
+                let dateBodyString = DateConverter.toString(date: dateBody, format: .date)
+                let encodedValue = try encoder.encode(dateBodyString)
                 return encodedValue
             }
             throw DecodeError.unknownMimeType
@@ -260,8 +275,8 @@ struct DateNamespace {
 
         public func execute(client: RuntimeClient,
             completionHandler: @escaping (Error?) -> Void) -> Void {
-            return client.executeAsync(command: self) {
-                (error: Error?) -> Void in
+            client.executeAsync(command: self) {
+                error in
                 completionHandler(error)
             }
         }

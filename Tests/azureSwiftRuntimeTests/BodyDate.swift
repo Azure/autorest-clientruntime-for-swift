@@ -19,7 +19,7 @@ class BodyDateTests: XCTestCase {
         
         let env = AuzureEnvironment(endpoints:[
             .resourceManager : "http://localhost:3000"
-            ])
+        ])
         
         let atc = AzureTokenCredentials(environment: env, tenantId: "", subscriptionId: "")
         
@@ -61,10 +61,8 @@ class BodyDateTests: XCTestCase {
         cmd.execute(client: self.azureClient) { (result, error) in
             defer { e.fulfill() }
             XCTAssertNil(error)
-            XCTAssertNotNil(result)
-            
-            // TODO: check date is valid
-            print("=== Result", result!)
+            //"201O-18-90"
+            XCTAssertNil(result)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -80,10 +78,8 @@ class BodyDateTests: XCTestCase {
         cmd.execute(client: self.azureClient) { (result, error) in
             defer { e.fulfill() }
             XCTAssertNil(error)
-            XCTAssertNotNil(result)
-            
-            // TODO: check date is valid
-            print("=== Result", result!)
+            //"10000000000-12-31"
+            XCTAssertNil(result)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -99,10 +95,8 @@ class BodyDateTests: XCTestCase {
         cmd.execute(client: self.azureClient) { (result, error) in
             defer { e.fulfill() }
             XCTAssertNil(error)
-            XCTAssertNotNil(result)
-            
-            // TODO: check date is valid
-            print("=== Result", result!)
+            //"0000-00-00"
+            XCTAssertNil(result)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -114,12 +108,11 @@ class BodyDateTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = DateNamespace.PutMaxDateCommand()
-        cmd.dateBody = "9999-12-31"
+        cmd.dateBody = Date(fromString: "9999-12-31")
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
-            //XCTAssertNil(error)
-            //print("=== Error",error!)
+            XCTAssertNil(error)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -135,10 +128,15 @@ class BodyDateTests: XCTestCase {
         cmd.execute(client: self.azureClient) { (result, error) in
             defer { e.fulfill() }
             XCTAssertNil(error)
+            //"9999-12-31"
             XCTAssertNotNil(result)
-            
-            // TODO: check date is valid
-            print("=== Result", result!)
+            let date = result!
+            XCTAssertNotNil(date)
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            XCTAssertEqual(9999, components.year)
+            XCTAssertEqual(12, components.month)
+            XCTAssertEqual(31, components.day)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -150,12 +148,12 @@ class BodyDateTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = DateNamespace.PutMinDateCommand()
-        cmd.dateBody = "0000-01-01"
+        cmd.dateBody = Date(fromString: "0001-01-01")
+        XCTAssertNotNil(cmd.dateBody)
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
-            //XCTAssertNil(error)
-            //print("=== Error",error!)
+            XCTAssertNil(error)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -173,7 +171,14 @@ class BodyDateTests: XCTestCase {
             XCTAssertNil(error)
             XCTAssertNotNil(result)
             
-            // TODO: check date is valid
+            let date = result!
+            XCTAssertNotNil(date)
+            
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            XCTAssertEqual(0001, components.year)
+            XCTAssertEqual(1, components.month)
+            XCTAssertEqual(1, components.day)
             print("=== Result", result!)
         }
         

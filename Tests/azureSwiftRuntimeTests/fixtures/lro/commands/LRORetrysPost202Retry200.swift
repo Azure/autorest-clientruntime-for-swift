@@ -33,7 +33,6 @@ class LRORetrysPost202Retry200Command : BaseCommand {
     public func executeAsync(client: RuntimeClient, completionHandler: @escaping (ProductTypeProtocol?, Error?) -> Void) {
         client.executeAsyncLRO(command: self, completionHandler:  {
             (result: ProductType?, error: Error?)  in
-            
             completionHandler(result, error)
         })
     }
