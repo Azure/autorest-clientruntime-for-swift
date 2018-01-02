@@ -62,11 +62,11 @@ public class AzureXMLDecocder : PropertyListDecoder, AzureDecoder, PageDecoder {
 }
 
 public struct UnknownCodingKey: CodingKey {
-    init?(stringValue: String) { self.stringValue = stringValue }
-    let stringValue: String
+    public init?(stringValue: String) { self.stringValue = stringValue }
+    public let stringValue: String
     
-    init?(intValue: Int) { return nil }
-    var intValue: Int? { return nil }
+    public init?(intValue: Int) { return nil }
+    public var intValue: Int? { return nil }
     
     public static func decodeStringForKey(decoder: Decoder, keyForDecode: String?) throws -> String? {
         if keyForDecode == nil {
