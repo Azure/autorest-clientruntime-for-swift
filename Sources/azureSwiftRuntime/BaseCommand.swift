@@ -7,6 +7,7 @@
 import Foundation
 
 open class BaseCommand {
+    public var baseUrl: String?
     public var method: String
     public var isLongRunningOperation: Bool
     public var path: String
