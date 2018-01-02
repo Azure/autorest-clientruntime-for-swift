@@ -61,7 +61,7 @@ public class AzureXMLDecocder : PropertyListDecoder, AzureDecoder, PageDecoder {
     public var nextLink: String?
 }
 
-struct UnknownCodingKey: CodingKey {
+public struct UnknownCodingKey: CodingKey {
     init?(stringValue: String) { self.stringValue = stringValue }
     let stringValue: String
     
