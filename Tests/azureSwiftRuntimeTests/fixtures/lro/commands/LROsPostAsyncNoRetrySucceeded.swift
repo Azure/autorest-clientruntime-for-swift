@@ -19,7 +19,7 @@ class LROsPostAsyncNoRetrySucceededCommand : BaseCommand {
     }
 
     override func encodeBody() throws -> Data? {
-        return try JsonRequestEncoder.encode(encodable:product as! ProductType?)
+        return try  AzureJSONEncoder().encode(product as! ProductType?)
     }
 
     public func execute(client: RuntimeClient) throws -> ProductTypeProtocol? {

@@ -1,9 +1,8 @@
-//
-//  AzureClient.swift
-//  azureSwiftRuntimeTests
-//
-//  Created by Vladimir Shcherbakov on 12/13/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
 import RxSwift
@@ -143,11 +142,17 @@ public class AzureClient: RuntimeClient {
     internal func prepareRequest (command: BaseCommand) throws -> RequestParams  {
         command.preCall()
         
-        guard let baseUrl = self.atc.environment.url(forEndpoint: .resourceManager) else {
-            throw RuntimeError.general(message: "Base URL is not set")
+        var baseUrl = command.baseUrl
+        
+        if(baseUrl == nil) {
+            guard let envBaseUrl = self.atc.environment.url(forEndpoint: .resourceManager) else {
+                throw RuntimeError.general(message: "Base URL is not set")
+            }
+            
+            baseUrl = envBaseUrl
         }
         
-        let url = self.buildUrl(command: command, baseUrl: baseUrl)
+        let url = self.buildUrl(command: command, baseUrl: baseUrl!)
         
         var bodyData: Data? = nil
         if command.body != nil {

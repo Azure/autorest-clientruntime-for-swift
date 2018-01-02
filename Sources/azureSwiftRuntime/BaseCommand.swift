@@ -1,20 +1,20 @@
-//
-//  BaseCommand.swift
-//  azureSwiftRuntimePackageDescription
-//
-//  Created by Vladimir Shcherbakov on 11/7/17.
-//
+/**
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT License. See License.txt in the project root for
+ * license information.
+ */
 
 import Foundation
 
 open class BaseCommand {
+    public var baseUrl: String?
     public var method: String
     public var isLongRunningOperation: Bool
     public var path: String
     public var pathParameters = [String: String]()
     public var queryParameters = [String: String]()
     public var headerParameters = [String: String]()
-    public var body: Codable?
+    public var body: Any?
     
     open func preCall() {}
     
