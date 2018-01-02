@@ -61,3 +61,38 @@ public class AzureXMLDecocder : PropertyListDecoder, AzureDecoder, PageDecoder {
     public var nextLink: String?
 }
 
+struct UnknownCodingKey: CodingKey {
+    init?(stringValue: String) { self.stringValue = stringValue }
+    let stringValue: String
+    
+    init?(intValue: Int) { return nil }
+    var intValue: Int? { return nil }
+    
+    public static func decodeStringForKey(decoder: Decoder, keyForDecode: String?) throws -> String? {
+        if keyForDecode == nil {
+            return nil;
+        }
+        
+        let container = try decoder.container(keyedBy: UnknownCodingKey.self)
+        var retVal: String? = nil;
+        for key in container.allKeys {
+            if key.stringValue != keyForDecode {
+                continue;
+            }
+            
+            func decodeUnknownValue<T: Decodable>(_ type: T.Type) -> T? {
+                guard let value = try? container.decode(type, forKey: key) else {
+                    return nil
+                }
+                
+                return value
+            }
+
+            retVal = decodeUnknownValue(String.self)
+            break;
+
+        }
+        
+        return retVal;
+    }
+}
