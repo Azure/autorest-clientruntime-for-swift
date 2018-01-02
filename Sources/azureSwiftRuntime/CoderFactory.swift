@@ -25,11 +25,17 @@ public class CoderFactory {
             case .json:
                 return AzureJSONDecoder();
             case .xml:
-                return PropertyListDecoder()
+                return AzureXMLDecocder()
             default:
                 throw RuntimeError.general(message: "Decoder for \(mimeType) not found.")
         }
     }
+}
+
+public protocol PageDecoder {
+    var isPagedData: Bool { get set }
+    var nextLinkName: String? {get set }
+    var nextLink: String? { get set }
 }
 
 public protocol AzureEncoder {
@@ -47,10 +53,11 @@ extension PropertyListEncoder : AzureEncoder {
 }
 
 extension AzureJSONDecoder : AzureDecoder {
-    
 }
 
-extension PropertyListDecoder : AzureDecoder {
-    
+public class AzureXMLDecocder : PropertyListDecoder, AzureDecoder, PageDecoder {
+    public var isPagedData = false
+    public var nextLinkName: String?
+    public var nextLink: String?
 }
 
