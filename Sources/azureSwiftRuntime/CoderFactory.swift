@@ -25,11 +25,17 @@ public class CoderFactory {
             case .json:
                 return AzureJSONDecoder();
             case .xml:
-                return PropertyListDecoder()
+                return AzureXMLDecocder()
             default:
                 throw RuntimeError.general(message: "Decoder for \(mimeType) not found.")
         }
     }
+}
+
+public protocol PageDecoder {
+    var isPagedData: Bool { get set }
+    var nextLinkName: String? {get set }
+    var nextLink: String? { get set }
 }
 
 public protocol AzureEncoder {
@@ -47,10 +53,46 @@ extension PropertyListEncoder : AzureEncoder {
 }
 
 extension AzureJSONDecoder : AzureDecoder {
-    
 }
 
-extension PropertyListDecoder : AzureDecoder {
-    
+public class AzureXMLDecocder : PropertyListDecoder, AzureDecoder, PageDecoder {
+    public var isPagedData = false
+    public var nextLinkName: String?
+    public var nextLink: String?
 }
 
+public struct UnknownCodingKey: CodingKey {
+    public init?(stringValue: String) { self.stringValue = stringValue }
+    public let stringValue: String
+    
+    public init?(intValue: Int) { return nil }
+    public var intValue: Int? { return nil }
+    
+    public static func decodeStringForKey(decoder: Decoder, keyForDecode: String?) throws -> String? {
+        if keyForDecode == nil {
+            return nil;
+        }
+        
+        let container = try decoder.container(keyedBy: UnknownCodingKey.self)
+        var retVal: String? = nil;
+        for key in container.allKeys {
+            if key.stringValue != keyForDecode {
+                continue;
+            }
+            
+            func decodeUnknownValue<T: Decodable>(_ type: T.Type) -> T? {
+                guard let value = try? container.decode(type, forKey: key) else {
+                    return nil
+                }
+                
+                return value
+            }
+
+            retVal = decodeUnknownValue(String.self)
+            break;
+
+        }
+        
+        return retVal;
+    }
+}
