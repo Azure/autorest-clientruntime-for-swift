@@ -108,7 +108,8 @@ class BodyDateTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = DateNamespace.PutMaxDateCommand()
-        cmd.dateBody = Date(fromString: "9999-12-31")
+        cmd.dateBody = Date(fromString: "9999-12-31", format: .date)
+        XCTAssertNotNil(cmd.dateBody)
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
@@ -133,7 +134,7 @@ class BodyDateTests: XCTestCase {
             let date = result!
             XCTAssertNotNil(date)
             let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: date)
+            let components = calendar.dateComponents(in: TimeZone(identifier: "GMT")!, from: date)
             XCTAssertEqual(9999, components.year)
             XCTAssertEqual(12, components.month)
             XCTAssertEqual(31, components.day)
@@ -148,7 +149,7 @@ class BodyDateTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = DateNamespace.PutMinDateCommand()
-        cmd.dateBody = Date(fromString: "0001-01-01")
+        cmd.dateBody = Date(fromString: "0001-01-01", format: .date)
         XCTAssertNotNil(cmd.dateBody)
         
         cmd.execute(client: self.azureClient) { (error) in
@@ -175,11 +176,10 @@ class BodyDateTests: XCTestCase {
             XCTAssertNotNil(date)
             
             let calendar = Calendar.current
-            let components = calendar.dateComponents([.year, .month, .day], from: date)
-            XCTAssertEqual(0001, components.year)
+            let components = calendar.dateComponents(in: TimeZone(identifier: "GMT")!, from: date)
+            XCTAssertEqual(1, components.year)
             XCTAssertEqual(1, components.month)
             XCTAssertEqual(1, components.day)
-            print("=== Result", result!)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)

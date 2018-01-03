@@ -79,7 +79,8 @@ class BodyDateTimeTests: XCTestCase {
             defer { e.fulfill() }
             XCTAssertNil(error)
             // "9999-12-31T23:59:59.9999999-14:00"
-            XCTAssertNil(result)
+            // Swift dosn't consider it as overflow
+            XCTAssertNotNil(result)
         }
         
         waitForExpectations(timeout: timeout, handler: nil)
@@ -108,7 +109,8 @@ class BodyDateTimeTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = Datetime.PutUtcMaxDateTimeCommand()
-        cmd.datetimeBody = Date(fromString: "9999-12-31T23:59:59.9999999Z", format: AzureDate.dateTime.toFormatString())
+        cmd.datetimeBody = Date(fromString: "9999-12-31T23:59:59.9999999Z", format: .dateTime)
+        XCTAssertNotNil(cmd.datetimeBody)
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
@@ -178,7 +180,7 @@ class BodyDateTimeTests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = Datetime.PutUtcMinDateTimeCommand()
-        cmd.datetimeBody = Date(fromString: "0001-01-01T00:00:00.0Z", format: AzureDate.dateTime.toFormatString())
+        cmd.datetimeBody = Date(fromString: "0001-01-01T00:00:00Z", format: .dateTime)
         XCTAssertNotNil(cmd.datetimeBody)
         
         cmd.execute(client: self.azureClient) { (error) in
@@ -199,7 +201,7 @@ class BodyDateTimeTests: XCTestCase {
         cmd.execute(client: self.azureClient) { (result, error) in
             defer { e.fulfill() }
             XCTAssertNil(error)
-            // 0001-01-01T00:00:00Z"
+            // "0001-01-01T00:00:00Z"
             XCTAssertNotNil(result)
             
             let date = result!

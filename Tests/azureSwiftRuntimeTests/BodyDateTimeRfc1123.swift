@@ -108,7 +108,8 @@ class BodyDateTimeRfc1123Tests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = Datetimerfc1123.PutUtcMaxDateTimeCommand()
-        cmd.datetimeBody = Date(fromString: "Fri, 31 Dec 9999 23:59:59 GMT", format: AzureDate.dateTimeRfc1123.toFormatString())
+        cmd.datetimeBody = Date(fromString: "Fri, 31 Dec 9999 23:59:59 GMT", format: .dateTimeRfc1123)
+        XCTAssertNotNil(cmd.datetimeBody)
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
@@ -180,7 +181,8 @@ class BodyDateTimeRfc1123Tests: XCTestCase {
         let e = expectation(description: "Wait for HTTP request to complete")
         
         let cmd = Datetimerfc1123.PutUtcMinDateTimeCommand()
-        cmd.datetimeBody = Date(fromString: "Mon, 1 Jan 0001 00:00:00 GMT", format: AzureDate.dateTimeRfc1123.toFormatString())
+        cmd.datetimeBody = Date(fromString: "Mon, 1 Jan 0001 00:00:00 GMT", format: .dateTimeRfc1123)
+        XCTAssertNotNil(cmd.datetimeBody)
         
         cmd.execute(client: self.azureClient) { (error) in
             defer { e.fulfill() }
