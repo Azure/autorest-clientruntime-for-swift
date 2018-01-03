@@ -10,25 +10,31 @@ public enum AzureDate : String {
     case dateTimeRfc1123 = "date-time-rfc1123"
     case dateTime = "date-time"
     case date = "date"
+    
+    public func toFormatString() -> String {
+        switch self {
+        case .dateTimeRfc1123:
+            return "EEE, dd MMM yyyy HH:mm:ssZ"
+        case .dateTime:
+            //return "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ"
+            return "yyyy-MM-dd'T'HH:mm:ss.SZ"
+        case .date:
+            return "yyyy-MM-dd"
+        }
+    }
 }
 
 public class DateConverter {
     
-    static let azureToSwiftFormat: [AzureDate:String] = [
-        .dateTimeRfc1123 : "EEE, dd MMM yyyy HH:mm:ss z",   // Fri, 31 Dec 9999 23:59:59 GMT
-        .dateTime : "yyyy-MM-ddTHH:mm:ssZ",                 // 9999-12-31T23:59:59.9999999Z
-        .date : "yyyy-MM-dd",                               // 9999-12-31
-    ]
-    
     static public func toString(date: Date?, format: AzureDate) -> String? {
-        return date?.toString(format: azureToSwiftFormat[format]!)
+        return date?.toString(format: format.toFormatString())
     }
     
     static public func fromString(dateStr: String?, format: AzureDate) -> Date? {
         guard let _ = dateStr else {
             return nil
         }
-        return Date(fromString: dateStr!, format: azureToSwiftFormat[format]!)
+        return Date(fromString: dateStr!, format: format.toFormatString())
     }
 }
 
@@ -37,16 +43,18 @@ public extension Date {
         let dateFormatter = DateFormatter()
         //let dateFormatter = ISO8601DateFormatter()
         dateFormatter.dateFormat = format
-        if let date = dateFormatter.date(from: fromString) {
+        //dateFormatter.timeZone = TimeZone(identifier: "GMT")
+        if let date = dateFormatter.date(from: fromString.uppercased()) {
             self = date
         } else {
             return nil
         }
     }
     
-    public func toString(format: String = "yyyy-MM-dd") -> String {
+    public func toString(format: String = "yyyy-MM-dd", timezone: TimeZone? = TimeZone(identifier: "GMT")) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
+        dateFormatter.timeZone = timezone
         return dateFormatter.string(from: self)
     }
 }
