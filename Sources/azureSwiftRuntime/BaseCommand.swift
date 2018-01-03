@@ -7,6 +7,7 @@
 import Foundation
 
 open class BaseCommand {
+    public var pathType = PathType.relative
     public var baseUrl: String?
     public var method: String
     public var isLongRunningOperation: Bool
@@ -35,4 +36,9 @@ open class BaseCommand {
     	self.path = ""
     	self.isLongRunningOperation = false
     }
+}
+
+public enum PathType {
+    case relative
+    case absolute
 }
