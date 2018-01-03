@@ -116,7 +116,13 @@ public class AzureClient: RuntimeClient {
     }
     
     internal func buildUrl (command: BaseCommand, baseUrl: String) -> String {
-        var fullUrl = baseUrl + command.path
+        var fullUrl : String
+        if command.pathType == .relative {
+            fullUrl = baseUrl + command.path;
+        }else {
+            fullUrl = command.path;
+        }
+        
         for (key, value) in command.pathParameters {
             //replace parameter in full url with path parameter value
             fullUrl = fullUrl.replacingOccurrences(of: key, with: value)
