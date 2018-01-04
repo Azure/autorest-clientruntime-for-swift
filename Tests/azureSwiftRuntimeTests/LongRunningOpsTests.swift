@@ -28,7 +28,7 @@ class LongRunningOpsTest: XCTestCase {
         let responseHeadersToShow = ["Azure-AsyncOperation", "Location"]
         
         self.azureClient = AzureClient(atc: atc)
-            .withRequestInterceptor(CustomHeadersInterseptor(customHeaders: customHeaders))
+            .withRequestInterceptor(CustomHeadersInterceptor(customHeaders: customHeaders))
             .withRequestInterceptor(LogRequestInterceptor(showOptions: .all))
             .withResponseInterceptor(LogResponseInterceptor(showOptions: .all).withHeadersToShow(responseHeadersToShow))
         

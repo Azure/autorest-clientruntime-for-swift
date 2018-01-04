@@ -94,15 +94,19 @@ public class AzureClient: RuntimeClient {
     internal var requestInterceptors: [RequestInterceptor] = []
     internal var responseInterceptors: [ResponseInterceptor] = []
     
-    let atc : AzureTokenCredentials
+    let atc : AzureTokenCredentials?
     
     var disposeBag = DisposeBag()
     
     public init(atc: AzureTokenCredentials) {
         self.atc = atc
         if let _ = atc.environment.url(forEndpoint: .activeDirectory) {
-            _ = self.withRequestInterceptor(AuthHeaderInterseptor(atc: atc))
+            _ = self.withRequestInterceptor(AuthHeaderInterceptor(atc: atc))
         }
+    }
+    
+    public init() {
+        self.atc = nil // storage case
     }
     
     private func createExecuteObservable(command: BaseCommand) -> Observable<ResponseData> {
@@ -151,7 +155,7 @@ public class AzureClient: RuntimeClient {
         var baseUrl = command.baseUrl
         
         if(baseUrl == nil) {
-            guard let envBaseUrl = self.atc.environment.url(forEndpoint: .resourceManager) else {
+            guard let envBaseUrl = self.atc?.environment.url(forEndpoint: .resourceManager) else {
                 throw RuntimeError.general(message: "Base URL is not set")
             }
             

@@ -10,7 +10,7 @@ public protocol RequestInterceptor {
     func intercept(url: inout String, method: inout String, headers: inout [String:String]?, body: inout Data?) -> Void
 }
 
-public class CustomHeadersInterseptor : RequestInterceptor {
+public class CustomHeadersInterceptor : RequestInterceptor {
     
     let customHeaders:[String:String]
     
@@ -29,7 +29,7 @@ public class CustomHeadersInterseptor : RequestInterceptor {
     }
 }
 
-public class AuthHeaderInterseptor : RequestInterceptor {
+public class AuthHeaderInterceptor : RequestInterceptor {
     
     let atc: AzureTokenCredentials
     
