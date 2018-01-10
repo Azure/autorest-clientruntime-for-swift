@@ -10,19 +10,8 @@ public enum RuntimeError: Error {
     case general(message: String)
     case operationFailed
     case operationCanceled
-    case azure(error: AzureError)
-    case cloud(error: CloudError)
-    case errorStatusCode(code: Int, details: String)
+    case errorStatusCode(code: Int, data: Data)
     case invalidData
-}
-
-public struct AzureError: Codable {
-    public let error: AzureErrorDetails
-    
-    public struct AzureErrorDetails: Codable {
-        let code: String
-        let message: String
-    }
 }
 
 public struct CloudError: Codable {

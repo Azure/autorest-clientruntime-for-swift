@@ -198,11 +198,15 @@ class PagingTests: XCTestCase {
                 res = next
             }
             
-        } catch RuntimeError.cloud(let error){
-            let status = error.status
-            let message = error.message
-            XCTAssertEqual(status, 400)
-            XCTAssertEqual(message, "Expected single failure test.")
+        } catch RuntimeError.errorStatusCode(_, let data) {
+            if let error = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                let status = error.status
+                let message = error.message
+                XCTAssertEqual(status, 400)
+                XCTAssertEqual(message, "Expected single failure test.")
+            } else {
+                XCTFail("Can't parse error data")
+            }
         } catch {
             print("=== Error:", error)
             XCTFail(error.localizedDescription)
@@ -223,12 +227,15 @@ class PagingTests: XCTestCase {
                 res = next
             }
             
-        } catch RuntimeError.cloud(let error){
-            print("=== Error:", error)
-            let status = error.status
-            let message = error.message
-            XCTAssertEqual(status, 400)
-            XCTAssertEqual(message, "Expected single failure test.")
+        } catch RuntimeError.errorStatusCode(_, let data) {
+            if let error = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                let status = error.status
+                let message = error.message
+                XCTAssertEqual(status, 400)
+                XCTAssertEqual(message, "Expected single failure test.")
+            } else {
+                XCTFail("Can't parse error data")
+            }
         } catch {
             print("=== Error:", error)
             XCTFail(error.localizedDescription)

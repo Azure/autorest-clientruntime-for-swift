@@ -118,8 +118,6 @@ class AuthTests: XCTestCase {
                         }
                     }
                 }
-            } catch RuntimeError.azure(let azureError) {
-                print("=== AzureError:", "code: \(azureError.error.code)", "message: \(azureError.error.message)")
             } catch {
                 print("=== Error:", error)
                 XCTFail(error.localizedDescription)
@@ -152,13 +150,7 @@ class AuthTests: XCTestCase {
             },
             onError: { error in
                 defer { e.fulfill() }
-                switch error {
-                case RuntimeError.azure(let azureError) :
-                    print("=== AzureError:", "code: \(azureError.error.code)", "message: \(azureError.error.message)")
-                default:
-                    print("=== Error:", error)
-                    XCTFail(error.localizedDescription)
-                }
+                XCTFail(error.localizedDescription)
             }
         ).disposed(by: disposeBag)
         

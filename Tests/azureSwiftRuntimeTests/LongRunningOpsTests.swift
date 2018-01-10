@@ -907,8 +907,13 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
+                } catch RuntimeError.errorStatusCode(_, let data) {
+                    if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                        XCTAssertEqual(cloudError.status, 400)
+                        XCTAssertEqual(cloudError.message, "Expected bad request message")
+                    } else {
+                        XCTFail("Can't parse error data")
+                    }
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -944,8 +949,12 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
+                } catch RuntimeError.errorStatusCode(_, let data) {
+                    if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                        XCTAssertEqual(cloudError.message, "Error from the server")
+                    } else {
+                        XCTFail("Can't parse error data")
+                    }
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -968,9 +977,8 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.errorStatusCode(let code, let details) {
-                    XCTAssertEqual(400, code)
-                    XCTAssertEqual("<{ \"message\" : \"Error from the server\" }", details)
+                } catch RuntimeError.errorStatusCode(_, let data) {
+                    XCTAssertEqual("<{ \"message\" : \"Error from the server\" }", String(data: data, encoding: .utf8))
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -993,9 +1001,8 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.errorStatusCode(let code, let details) {
+                } catch RuntimeError.errorStatusCode(let code, _) {
                     XCTAssertEqual(400, code)
-                    XCTAssertEqual("no details", details)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1018,8 +1025,13 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
+                } catch RuntimeError.errorStatusCode(_, let data) {
+                    if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                        XCTAssertEqual(cloudError.status, 400)
+                        XCTAssertEqual(cloudError.message, "Expected bad request message")
+                    } else {
+                        XCTFail("Can't parse error data")
+                    }
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1042,10 +1054,13 @@ class LongRunningOpsTest: XCTestCase {
             XCTAssertNotNil(error)
             
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual(400, cloudError.status)
-                XCTAssertEqual("Expected bad request message", cloudError.message)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, 400)
+                    XCTAssertEqual(cloudError.message, "Expected bad request message")
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1067,10 +1082,13 @@ class LongRunningOpsTest: XCTestCase {
             XCTAssertNotNil(error)
             
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual(400, cloudError.status)
-                XCTAssertEqual("Expected bad request message", cloudError.message)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, 400)
+                    XCTAssertEqual(cloudError.message, "Expected bad request message")
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1092,9 +1110,13 @@ class LongRunningOpsTest: XCTestCase {
             
             XCTAssertNotNil(error)
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual("Expected bad request message", cloudError.message)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, nil)
+                    XCTAssertEqual(cloudError.message, "Expected bad request message")
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1116,9 +1138,13 @@ class LongRunningOpsTest: XCTestCase {
             
             XCTAssertNotNil(error)
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual("Expected bad request message", cloudError.message)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, 400)
+                    XCTAssertEqual(cloudError.message, "Expected bad request message")
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1140,9 +1166,13 @@ class LongRunningOpsTest: XCTestCase {
             
             XCTAssertNotNil(error)
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual("Expected bad request message", cloudError.message)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, 400)
+                    XCTAssertEqual(cloudError.message, "Expected bad request message")
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1165,8 +1195,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1204,8 +1232,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1230,8 +1256,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1258,8 +1282,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1299,9 +1321,13 @@ class LongRunningOpsTest: XCTestCase {
             
             XCTAssertNotNil(error)
             switch error! {
-            case RuntimeError.cloud(let cloudError):
-                print(cloudError)
-                XCTAssertEqual(404, cloudError.status)
+            case RuntimeError.errorStatusCode(_, let data):
+                if let cloudError = AzureErrorDecoder<CloudError>(mimeType: .json).decode(data: data) {
+                    XCTAssertEqual(cloudError.status, 404)
+                    XCTAssertEqual(cloudError.message, nil)
+                } else {
+                    XCTFail("Can't parse error data")
+                }
             default:
                 XCTFail(error!.localizedDescription)
             }
@@ -1331,8 +1357,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1589,8 +1613,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1613,8 +1635,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
@@ -1638,8 +1658,6 @@ class LongRunningOpsTest: XCTestCase {
             if let curError = error {
                 do {
                     throw curError
-                } catch RuntimeError.cloud(let cloudError) {
-                    self.printCloudError(cloudError)
                 } catch {
                     print("=== Error:", error)
                     XCTFail("Unexpected error")
