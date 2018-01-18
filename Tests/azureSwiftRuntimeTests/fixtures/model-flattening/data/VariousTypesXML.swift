@@ -20,6 +20,16 @@ struct VariousTypesXML {
     let arrayOfFloat: [Float]?
     let arrayOfDouble: [Double]?
     let arrayOfString: [String?]?
+    
+    let dictionaryOfInt8: [String:Int8]?
+    let dictionaryOfInt16: [String:Int16]?
+    let dictionaryOfInt32: [String:Int32]?
+    let dictionaryOfInt64: [String:Int64]?
+    
+    let dictionaryOfUInt8: [String:UInt8]?
+    let dictionaryOfUInt16: [String:UInt16]?
+    let dictionaryOfUInt32: [String:UInt32]?
+    let dictionaryOfUInt64: [String:UInt64]?
 }
 
 extension VariousTypesXML : Decodable {
@@ -36,6 +46,16 @@ extension VariousTypesXML : Decodable {
         case arrayOfFloat = "ArrayOfFloat"
         case arrayOfDouble = "ArrayOfDouble"
         case arrayOfString = "ArrayOfString"
+        
+        case dictionaryOfInt8 = "DictionaryOfInt8"
+        case dictionaryOfInt16 = "DictionaryOfInt16"
+        case dictionaryOfInt32 = "DictionaryOfInt32"
+        case dictionaryOfInt64 = "DictionaryOfInt64"
+        
+        case dictionaryOfUInt8 = "DictionaryOfUInt8"
+        case dictionaryOfUInt16 = "DictionaryOfUInt16"
+        case dictionaryOfUInt32 = "DictionaryOfUInt32"
+        case dictionaryOfUInt64 = "DictionaryOfUInt64"
     }
     
     public init(from decoder: Decoder) throws {
@@ -52,6 +72,16 @@ extension VariousTypesXML : Decodable {
         arrayOfFloat = try container.decode([Float]?.self, forKey: .arrayOfFloat)
         arrayOfDouble = try container.decode([Double]?.self, forKey: .arrayOfDouble)
         arrayOfString = try container.decode([String?]?.self, forKey: .arrayOfString)
+        
+        dictionaryOfInt8 = try container.decode([String:Int8]?.self, forKey: .dictionaryOfInt8)
+        dictionaryOfInt16 = try container.decode([String:Int16]?.self, forKey: .dictionaryOfInt16)
+        dictionaryOfInt32 = try container.decode([String:Int32]?.self, forKey: .dictionaryOfInt32)
+        dictionaryOfInt64 = try container.decode([String:Int64]?.self, forKey: .dictionaryOfInt64)
+        
+        dictionaryOfUInt8 = try container.decode([String:UInt8]?.self, forKey: .dictionaryOfUInt8)
+        dictionaryOfUInt16 = try container.decode([String:UInt16]?.self, forKey: .dictionaryOfUInt16)
+        dictionaryOfUInt32 = try container.decode([String:UInt32]?.self, forKey: .dictionaryOfUInt32)
+        dictionaryOfUInt64 = try container.decode([String:UInt64]?.self, forKey: .dictionaryOfUInt64)
     }
 }
 
@@ -59,49 +89,83 @@ let xmlVariousTypes =
 """
 <VariousTypes>
 <DictionaryOfInt>
-<smallest>-9223372036854775808</smallest>
-<small>-9223372036854775807</small>
-<big>9223372036854775806</big>
-<biggest>9223372036854775807</biggest>
-<random>1234567890</random>
-<zero>0</zero>
+    <smallest>-9223372036854775808</smallest>
+    <small>-9223372036854775807</small>
+    <big>9223372036854775806</big>
+    <biggest>9223372036854775807</biggest>
+    <random>1234567890</random>
+    <zero>0</zero>
 </DictionaryOfInt>
 <DictionaryOfUInt>
-<smallest>0</smallest>
-<small>1</small>
-<big>18446744073709551614</big>
-<biggest>18446744073709551615</biggest>
-<random>1234567890</random>
-<zero>0</zero>
+    <smallest>0</smallest>
+    <small>1</small>
+    <big>18446744073709551614</big>
+    <biggest>18446744073709551615</biggest>
+    <random>1234567890</random>
+    <zero>0</zero>
 </DictionaryOfUInt>
 <DictionaryOfFloat>
-<smallest>1.175494e-38</smallest>
-<small>1.175494e-37</small>
-<big>3.402823e+37</big>
-<biggest>3.402823e+38</biggest>
-<random>2.123457</random>
-<zero>0.000000</zero>
+    <smallest>1.175494e-38</smallest>
+    <small>1.175494e-37</small>
+    <big>3.402823e+37</big>
+    <biggest>3.402823e+38</biggest>
+    <random>2.123457</random>
+    <zero>0.000000</zero>
 </DictionaryOfFloat>
 <DictionaryOfDouble>
-<smallest>2.225073858507201e-308</smallest>
-<small>2.225073858507201e-307</small>
-<big>2.225073858507201e-307</big>
-<biggest>2.225073858507201e-308</biggest>
-<random>2.123456789012346</random>
-<zero>0.000000000000000</zero>
+    <smallest>2.225073858507201e-308</smallest>
+    <small>2.225073858507201e-307</small>
+    <big>2.225073858507201e-307</big>
+    <biggest>2.225073858507201e-308</biggest>
+    <random>2.123456789012346</random>
+    <zero>0.000000000000000</zero>
 </DictionaryOfDouble>
 <DictionaryOfString>
-<upper>UPPER CASED STRING</upper>
-<lower>lower cased string</lower>
-<numbers>2.225073858507201e-308</numbers>
-<symbols>@#$%^*()_+</symbols>
-<random>Aa23$$</random>
-<empty></empty>
+    <upper>UPPER CASED STRING</upper>
+    <lower>lower cased string</lower>
+    <numbers>2.225073858507201e-308</numbers>
+    <symbols>@#$%^*()_+</symbols>
+    <random>Aa23$$</random>
+    <empty></empty>
 </DictionaryOfString>
 <DictionaryOfBool>
-<hi>true</hi>
-<lo>false</lo>
+    <hi>true</hi>
+    <lo>false</lo>
 </DictionaryOfBool>
+
+<DictionaryOfInt8>
+    <smallest>-128</smallest>
+    <biggest>127</biggest>
+</DictionaryOfInt8>
+<DictionaryOfInt16>
+    <smallest>-32768</smallest>
+    <biggest>32767</biggest>
+</DictionaryOfInt16>
+<DictionaryOfInt32>
+    <smallest>-2147483648</smallest>
+    <biggest>2147483647</biggest>
+</DictionaryOfInt32>
+<DictionaryOfInt64>
+    <smallest>-9223372036854775808</smallest>
+    <biggest>9223372036854775807</biggest>
+</DictionaryOfInt64>
+
+<DictionaryOfUInt8>
+    <smallest>0</smallest>
+    <biggest>255</biggest>
+</DictionaryOfUInt8>
+<DictionaryOfUInt16>
+    <smallest>0</smallest>
+    <biggest>65535</biggest>
+</DictionaryOfUInt16>
+<DictionaryOfUInt32>
+    <smallest>0</smallest>
+    <biggest>4294967295</biggest>
+</DictionaryOfUInt32>
+<DictionaryOfUInt64>
+    <smallest>0</smallest>
+    <biggest>18446744073709551615</biggest>
+</DictionaryOfUInt64>
 
 <ArrayOfInt>
 <value>-9223372036854775807</value>

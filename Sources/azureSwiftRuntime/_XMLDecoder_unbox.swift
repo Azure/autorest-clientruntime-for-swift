@@ -44,61 +44,41 @@ extension _XMLDecoder {
     internal func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = Int8(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let int8 = number.int8Value
-        guard NSNumber(value: int8) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return int8
+        return number
     }
     
     internal func unbox(_ value: Any, as type: Int16.Type) throws -> Int16? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = Int16(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let int16 = number.int16Value
-        guard NSNumber(value: int16) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return int16
+        return number
     }
     
     internal func unbox(_ value: Any, as type: Int32.Type) throws -> Int32? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = Int32(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let int32 = number.int32Value
-        guard NSNumber(value: int32) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return int32
+        return number
     }
     
     internal func unbox(_ value: Any, as type: Int64.Type) throws -> Int64? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = Int64(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let int64 = number.int64Value
-        guard NSNumber(value: int64) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return int64
+        return number
     }
     
     internal func unbox(_ value: Any, as type: UInt.Type) throws -> UInt? {
@@ -121,61 +101,41 @@ extension _XMLDecoder {
     internal func unbox(_ value: Any, as type: UInt8.Type) throws -> UInt8? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = UInt8(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let uint8 = number.uint8Value
-        guard NSNumber(value: uint8) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return uint8
+        return number
     }
     
     internal func unbox(_ value: Any, as type: UInt16.Type) throws -> UInt16? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = UInt16(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let uint16 = number.uint16Value
-        guard NSNumber(value: uint16) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return uint16
+        return number
     }
     
     internal func unbox(_ value: Any, as type: UInt32.Type) throws -> UInt32? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = UInt32(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let uint32 = number.uint32Value
-        guard NSNumber(value: uint32) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return uint32
+        return number
     }
     
     internal func unbox(_ value: Any, as type: UInt64.Type) throws -> UInt64? {
         guard !(value is NSNull) else { return nil }
         
-        guard let number = value as? NSNumber else {
+        guard let number = UInt64(value as! String) else {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        let uint64 = number.uint64Value
-        guard NSNumber(value: uint64) == number else {
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        }
-        
-        return uint64
+        return number
     }
     
     internal func unbox(_ value: Any, as type: Float.Type) throws -> Float? {

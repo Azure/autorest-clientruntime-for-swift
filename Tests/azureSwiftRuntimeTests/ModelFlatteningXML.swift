@@ -104,6 +104,16 @@ class ModelFlatteningTestsXML: XCTestCase {
             XCTAssertEqual(true, res!.dictionaryOfBool?["hi"])
             XCTAssertEqual(18446744073709551615, res!.arrayOfUInt?.first)
             
+            XCTAssertEqual(127, res!.dictionaryOfInt8?["biggest"])
+            XCTAssertEqual(32767, res!.dictionaryOfInt16?["biggest"])
+            XCTAssertEqual(-2147483648, res!.dictionaryOfInt32?["smallest"])
+            XCTAssertEqual(-9223372036854775808, res!.dictionaryOfInt64?["smallest"])
+            
+            XCTAssertEqual(255, res!.dictionaryOfUInt8?["biggest"])
+            XCTAssertEqual(65535, res!.dictionaryOfUInt16?["biggest"])
+            XCTAssertEqual(4294967295, res!.dictionaryOfUInt32?["biggest"])
+            XCTAssertEqual(18446744073709551615, res!.dictionaryOfUInt64?["biggest"])
+            
         } catch {
             print("=== Error:", error)
             XCTFail(error.localizedDescription)
