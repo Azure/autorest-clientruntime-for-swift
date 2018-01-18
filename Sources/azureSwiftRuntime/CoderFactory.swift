@@ -25,11 +25,14 @@ public class CoderFactory {
             case .json:
                 return AzureJSONDecoder();
             case .xml:
-                return AzureXMLDecocder()
+                return XMLDecoder()
             default:
                 throw RuntimeError.general(message: "Decoder for \(mimeType) not found.")
         }
     }
+}
+
+extension XMLDecoder : AzureDecoder {
 }
 
 public protocol PageDecoder {

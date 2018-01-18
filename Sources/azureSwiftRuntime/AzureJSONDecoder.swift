@@ -42,7 +42,8 @@ public class AzureJSONDecoder : JSONDecoder, PageDecoder {
     public var nextLinkName: String?
     public var nextLink: String?
     
-    public override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable{// to return nil instead of emply data down stream
+    public override func decode<T>(_ type: T.Type, from data: Data) throws -> T where T : Decodable{
+        // to return nil instead of emply data down stream
         if data.isEmpty {
             throw DecodeError.nilData
         }
