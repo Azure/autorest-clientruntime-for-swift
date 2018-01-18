@@ -114,19 +114,37 @@ class ModelFlatteningTestsXML: XCTestCase {
         print("\n=================== #0 NullValuesXML\n")
         
         do {
-            let res = try XMLDecoder().decode(NullValuesXML?.self, from: xmlNullValuesXML.data(using: .utf8)!)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ssZ"
+            let xmlDecoder = XMLDecoder()
+            xmlDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+            
+            let res = try xmlDecoder.decode(NullValuesXML?.self, from: xmlNullValuesXML.data(using: .utf8)!)
             XCTAssertNotNil(res)
             XCTAssertNil(res!.int)
             XCTAssertNil(res!.string)
             XCTAssertNil(res!.float)
             XCTAssertNil(res!.double)
             XCTAssertNil(res!.bool)
+            XCTAssertNil(res!.date)
             
             XCTAssertEqual(45689, res!.int1)
             XCTAssertEqual("AS23@#", res!.string1)
             XCTAssertEqual(1.12345, res!.float1)
             XCTAssertEqual(1.123456789012345, res!.double1)
             XCTAssertEqual(true, res!.bool1)
+            
+            if let date = res!.date {
+                let calendar = Calendar.current
+                let components = calendar.dateComponents(in: TimeZone(identifier: "GMT")!, from: date)
+                XCTAssertEqual(2018, components.year)
+                XCTAssertEqual(1, components.month)
+                XCTAssertEqual(18, components.day)
+                XCTAssertEqual(2, components.hour)
+                XCTAssertEqual(1, components.minute)
+                XCTAssertEqual(17, components.second)
+                XCTAssertEqual(5, components.weekday)
+            }
             
         } catch {
             print("=== Error:", error)

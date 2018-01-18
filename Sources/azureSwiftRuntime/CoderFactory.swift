@@ -25,7 +25,11 @@ public class CoderFactory {
             case .json:
                 return AzureJSONDecoder();
             case .xml:
-                return XMLDecoder()
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ssZ"
+                let xmlDecoder = XMLDecoder()
+                xmlDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+                return xmlDecoder
             default:
                 throw RuntimeError.general(message: "Decoder for \(mimeType) not found.")
         }
