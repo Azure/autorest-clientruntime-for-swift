@@ -89,6 +89,23 @@ class ModelFlatteningTestsXML: XCTestCase {
         super.tearDown()
     }
     
+    func testSingleItemArrayOrMap() {
+        do {
+            let res = try XMLDecoder().decode(SingleItemCollection?.self, from: xmlSingleItemCollection.data(using: .utf8)!)
+            XCTAssertNotNil(res)
+            XCTAssertEqual("Hello", res!.array[0])
+            XCTAssertEqual("Hello", res!.map["string"])
+            XCTAssertEqual("Hello", res!.arrayOp[0])
+            XCTAssertEqual("Hello", res!.mapOp["string"]!)
+            XCTAssertEqual(nil, res!.arrayOpEmpty[0])
+            XCTAssertNil(res!.mapOpEmpty["string"]!)
+            XCTAssertEqual(nil, res!.mapOpEmpty["string"]!)
+        } catch {
+            print("=== Error:", error)
+            XCTFail(error.localizedDescription)
+        }
+    }
+    
     func testVariousTypesXML() {
         print("\n=================== #0 VariousTypesXML\n")
         

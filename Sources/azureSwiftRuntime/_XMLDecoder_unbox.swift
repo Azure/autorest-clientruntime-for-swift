@@ -16,11 +16,6 @@ extension _XMLDecoder {
             throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
         }
         
-        //        // TODO: Add a flag to coerce non-boolean numbers into Bools?
-        //        guard number._cfTypeID == CFBooleanGetTypeID() else {
-        //            throw DecodingError._typeMismatch(at: self.codingPath, expectation: type, reality: value)
-        //        }
-        
         return number
     }
     
@@ -32,13 +27,6 @@ extension _XMLDecoder {
         }
         
         return number
-        
-        //        let int = number.intValue
-        //        guard NSNumber(value: int) == number else {
-        //            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        //        }
-        //
-        //        return int
     }
     
     internal func unbox(_ value: Any, as type: Int8.Type) throws -> Int8? {
@@ -89,13 +77,6 @@ extension _XMLDecoder {
         }
         
         return number
-        
-        //        let uint = number.uintValue
-        //        guard NSNumber(value: uint) == number else {
-        //            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: self.codingPath, debugDescription: "Parsed XML number <\(number)> does not fit in \(type)."))
-        //        }
-        //
-        //        return uint
     }
     
     internal func unbox(_ value: Any, as type: UInt8.Type) throws -> UInt8? {
@@ -223,6 +204,7 @@ extension _XMLDecoder {
     }
     
     internal func unbox(_ value: Any, as type: String.Type) throws -> String? {
+        //print("---> unbox value:", value, "as:", type)
         guard !(value is NSNull) else { return nil }
         
         guard let string = value as? String else {
@@ -317,6 +299,7 @@ extension _XMLDecoder {
     }
     
     internal func unbox<T : Decodable>(_ value: Any, as type: T.Type) throws -> T? {
+        //print("---> unbox <T> value:", value, "as:", type)
         let decoded: T
         if T.self == Date.self {
             guard let date = try self.unbox(value, as: Date.self) else { return nil }

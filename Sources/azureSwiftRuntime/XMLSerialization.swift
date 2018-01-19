@@ -101,8 +101,6 @@ fileprivate class _XMLParser: NSObject, XMLParserDelegate {
     
     var stack = Stack<Node>()
     
-    //var dict: [String:Any]
-    
     var errors = [Error]()
     
     var root = Node(name: "Root")
@@ -115,7 +113,7 @@ fileprivate class _XMLParser: NSObject, XMLParserDelegate {
     
     func parseXML() throws -> Any {
         parser.parse()
-        root.printTree()
+        //root.printTree()
         if !errors.isEmpty {
             throw errors.first!
         }

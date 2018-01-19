@@ -198,11 +198,13 @@ extension _XMLDecoder : SingleValueDecodingContainer {
     }
     
     public func decode(_ type: String.Type) throws -> String {
+        //print("---> SingleValueDecodingContainer.decode<String> type:", type)
         try expectNonNull(String.self)
         return try self.unbox(self.storage.topContainer, as: String.self)!
     }
     
     public func decode<T : Decodable>(_ type: T.Type) throws -> T {
+        //print("---> SingleValueDecodingContainer.decode<T> type:", type)
         try expectNonNull(T.self)
         return try self.unbox(self.storage.topContainer, as: T.self)!
     }
