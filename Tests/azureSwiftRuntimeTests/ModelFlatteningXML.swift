@@ -91,15 +91,33 @@ class ModelFlatteningTestsXML: XCTestCase {
     
     func testSingleItemArrayOrMap() {
         do {
-            let res = try XMLDecoder().decode(SingleItemCollection?.self, from: xmlSingleItemCollection.data(using: .utf8)!)
+            let string = "Hello"
+            let xmlString = xmlSingleItemCollection.replacingOccurrences(of: "$", with: string)
+            let res = try XMLDecoder().decode(SingleItemCollection<String>?.self, from: xmlString.data(using: .utf8)!)
             XCTAssertNotNil(res)
-            XCTAssertEqual("Hello", res!.array[0])
-            XCTAssertEqual("Hello", res!.map["string"])
-            XCTAssertEqual("Hello", res!.arrayOp[0])
-            XCTAssertEqual("Hello", res!.mapOp["string"]!)
-            XCTAssertEqual(nil, res!.arrayOpEmpty[0])
-            XCTAssertNil(res!.mapOpEmpty["string"]!)
-            XCTAssertEqual(nil, res!.mapOpEmpty["string"]!)
+            XCTAssertEqual(string, res!.arrayType[0])
+            XCTAssertEqual(string, res!.mapType["val"])
+            XCTAssertEqual(string, res!.arrayTypeOp[0])
+            XCTAssertEqual(string, res!.mapTypeOp["val"]!)
+            XCTAssertEqual(nil, res!.arrayTypeOpEmpty[0])
+            XCTAssertNil(res!.mapTypeOpEmpty["val"]!)
+            XCTAssertEqual(nil, res!.mapTypeOpEmpty["val"]!)
+            XCTAssertEqual(string, res!.arrayOpTypeOp?[0])
+            XCTAssertEqual(string, res!.mapOpTypeOp?["val"]!)
+            
+            let val = 12345.2345
+            let xmlInt = xmlSingleItemCollection.replacingOccurrences(of: "$", with: "\(val)")
+            let resInt = try XMLDecoder().decode(SingleItemCollection<Double>?.self, from: xmlInt.data(using: .utf8)!)
+            XCTAssertNotNil(res)
+            XCTAssertEqual(val, resInt!.arrayType[0])
+            XCTAssertEqual(val, resInt!.mapType["val"])
+            XCTAssertEqual(val, resInt!.arrayTypeOp[0])
+            XCTAssertEqual(val, resInt!.mapTypeOp["val"]!)
+            XCTAssertEqual(nil, res!.arrayTypeOpEmpty[0])
+            XCTAssertNil(res!.mapTypeOpEmpty["val"]!)
+            XCTAssertEqual(nil, resInt!.mapTypeOpEmpty["val"]!)
+            XCTAssertEqual(val, resInt!.arrayOpTypeOp?[0])
+            XCTAssertEqual(val, resInt!.mapOpTypeOp?["val"]!)
         } catch {
             print("=== Error:", error)
             XCTFail(error.localizedDescription)

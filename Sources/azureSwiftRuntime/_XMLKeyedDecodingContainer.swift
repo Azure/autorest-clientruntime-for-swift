@@ -288,8 +288,8 @@ internal struct _XMLKeyedDecodingContainer<K : CodingKey> : KeyedDecodingContain
         
         if let map = entry as? [String:Any] {
             if map.count == 1
-                && (T.self == Array<String>.self
-                    || T.self == Array<String?>.self) {
+                && ("\(T.self)".starts(with: "Array")
+                    || "\(T.self)".starts(with: "Optional<Array")) {
                 let (_,val) = map.first!
                 entry = [val]
             }
