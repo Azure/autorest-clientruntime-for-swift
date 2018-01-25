@@ -54,8 +54,15 @@ open class XMLDecoder {
         case convertFromString(positiveInfinity: String, negativeInfinity: String, nan: String)
     }
     
+    private static var defaultDecodingStrategy : DateDecodingStrategy {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ssZ"
+        return .formatted(dateFormatter)
+    }
+    
     /// The strategy to use in decoding dates. Defaults to `.deferredToDate`.
-    open var dateDecodingStrategy: DateDecodingStrategy = .deferredToDate
+    //open var dateDecodingStrategy: DateDecodingStrategy = .deferredToDate
+    open var dateDecodingStrategy: DateDecodingStrategy = defaultDecodingStrategy
     
     /// The strategy to use in decoding binary data. Defaults to `.base64`.
     open var dataDecodingStrategy: DataDecodingStrategy = .base64
@@ -97,7 +104,6 @@ open class XMLDecoder {
     /// - throws: `DecodingError.dataCorrupted` if values requested from the payload are corrupted, or if the given data is not valid XML.
     /// - throws: An error if any value throws an error during decoding.
     open func decode<T : Decodable>(_ type: T.Type, from data: Data) throws -> T {
-        //let topLevel = try JSONSerialization.jsonObject(with: data, options: [/*.useReferenceNumericTypes*/])
         let topLevel = try XMLSerialization.xmlObject(data: data)
         let decoder = _XMLDecoder(referencing: topLevel, options: self.options)
         return try T(from: decoder)
