@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 import azureSwiftRuntime
 
-struct Map {
+struct BlobProperties {
     let contentLength : Int
     let xMsServerEncrypted : Bool
     let eTag : String
@@ -18,7 +18,7 @@ struct Map {
     let date : Date
 }
 
-extension Map: Decodable {
+extension BlobProperties: Decodable {
     enum CodingKeys: String, CodingKey {
         case contentLength = "Content-Length"
         case xMsServerEncrypted = "x-ms-server-encrypted"
@@ -37,7 +37,6 @@ extension Map: Decodable {
         contentType = try container.decode(String.self, forKey: .contentType)
         date = try container.decode(Date.self, forKey: .date)
     }
-    
 }
 
 class MapDecoderTests: XCTestCase {
@@ -50,9 +49,6 @@ class MapDecoderTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
-    
-    
     
     func testSipmleMap() {
         
@@ -73,15 +69,16 @@ class MapDecoderTests: XCTestCase {
             "Date" : "Thu, 25 Jan 2018 17:30:01 GMT",
         ]
         
-        let mapDecoder = HeadersDecoder()
+        let decoder = HeadersDecoder()
         
         do {
-            let map = try mapDecoder.decode(Map.self, from: headers)
-            print (map.contentLength, type(of: map.contentLength))
-            print (map.date, type(of: map.date))
+            let blobProperties = try decoder.decode(BlobProperties.self, from: headers)
+            XCTAssertEqual (blobProperties.contentLength, 268435456)
+            XCTAssertEqual (blobProperties.xMsServerEncrypted, true)
+            XCTAssertEqual (blobProperties.contentType, "application/xml; charset=utf-8")
         } catch {
             print ("=== Error:", error)
+            XCTFail(error.localizedDescription)
         }
     }
-
 }

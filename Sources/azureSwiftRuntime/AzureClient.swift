@@ -8,10 +8,10 @@ import Foundation
 import RxSwift
 import RxBlocking
 
-public class AzureClient: RuntimeClient {
+open class AzureClient: RuntimeClient {
     
     // handles non-long-running operations that doesn't return value
-    public func executeAsync (command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
+    open func executeAsync (command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
         self.createExecuteObservable (command: command)
             .subscribe (
                 onNext: { (httpResponse, data) in
@@ -24,7 +24,7 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations
-    public func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {
+    open func executeAsync<T> (command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) {
         self.createExecuteObservable(command: command)
             .subscribe (
                 onNext: { (httpResponse, data) in
@@ -42,7 +42,7 @@ public class AzureClient: RuntimeClient {
     }
     
     // handles non-long-running operations (blocking)
-    public func execute (command: BaseCommand) throws -> Decodable? {
+    open func execute (command: BaseCommand) throws -> Decodable? {
         
         let (url, method, headers, body) = try self.prepareRequest(command: command)
         
@@ -63,10 +63,10 @@ public class AzureClient: RuntimeClient {
         }
     }
     
-    internal typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
+    public typealias RequestParams = (url: String, method: String, headers: [String:String]?, body: Data?)
     
     // returns
-    public func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
+    open func executeAsync<T>(command: BaseCommand) -> Observable<T?>  where T : Decodable {
         return Observable.just(command)
             .map { c -> RequestParams in
                 return try self.prepareRequest(command: c)
@@ -85,18 +85,18 @@ public class AzureClient: RuntimeClient {
             }
     }
     
-    internal var retryDelay = 0.01
+    public var retryDelay = 0.01
     
-    public func withRetryDelay(_ retryDelay: TimeInterval) {
+    open func withRetryDelay(_ retryDelay: TimeInterval) {
         self.retryDelay = retryDelay
     }
     
-    internal var requestInterceptors: [RequestInterceptor] = []
-    internal var responseInterceptors: [ResponseInterceptor] = []
+    public var requestInterceptors: [RequestInterceptor] = []
+    public var responseInterceptors: [ResponseInterceptor] = []
     
-    let atc : AzureTokenCredentials?
+    public let atc : AzureTokenCredentials?
     
-    var disposeBag = DisposeBag()
+    public var disposeBag = DisposeBag()
     
     public init(atc: AzureTokenCredentials) {
         self.atc = atc
@@ -109,7 +109,7 @@ public class AzureClient: RuntimeClient {
         self.atc = nil // storage case
     }
     
-    private func createExecuteObservable(command: BaseCommand) -> Observable<ResponseData> {
+    open func createExecuteObservable(command: BaseCommand) -> Observable<ResponseData> {
         return Observable.just(command)
             .map { c -> RequestParams in
                 return try self.prepareRequest(command: c)
@@ -119,7 +119,7 @@ public class AzureClient: RuntimeClient {
             }
     }
     
-    internal func buildUrl (command: BaseCommand, baseUrl: String) -> String {
+    open func buildUrl (command: BaseCommand, baseUrl: String) -> String {
         var fullUrl : String
         if command.pathType == .relative {
             fullUrl = baseUrl + command.path;
@@ -149,7 +149,7 @@ public class AzureClient: RuntimeClient {
         return fullUrl;
     }
     
-    internal func prepareRequest (command: BaseCommand) throws -> RequestParams  {
+    open func prepareRequest (command: BaseCommand) throws -> RequestParams  {
         command.preCall()
         
         var baseUrl = command.baseUrl
@@ -176,16 +176,16 @@ public class AzureClient: RuntimeClient {
         return (url, command.method.uppercased() , command.headerParameters, bodyData)
     }
     
-    let queueWorker = DispatchQueue(label: "com.microsoft.executeAsync", qos: .userInitiated)
+    public let queueWorker = DispatchQueue(label: "com.microsoft.executeAsync", qos: .userInitiated)
     
-    internal typealias ResponseData = (HTTPURLResponse, Data?)
-    internal let session = URLSession(configuration: .default)
+    public  typealias ResponseData = (HTTPURLResponse, Data?)
+    public let session = URLSession(configuration: .default)
     
     deinit {
         session.finishTasksAndInvalidate()
     }
     
-    internal func executeRequest (url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Single<ResponseData> {
+    open func executeRequest (url: String, method: String = "GET", headers:[String:String]? = nil, body: Data? = nil) -> Single<ResponseData> {
         return Single<ResponseData>.create { single in
             var _urlStr = url, _method = method, _headers = headers, _body = body
             
