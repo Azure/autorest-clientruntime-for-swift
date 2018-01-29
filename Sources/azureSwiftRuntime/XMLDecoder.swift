@@ -108,6 +108,13 @@ open class XMLDecoder {
         let decoder = _XMLDecoder(referencing: topLevel, options: self.options)
         return try T(from: decoder)
     }
+    
+    open func withDateFormatString(_ dateFormatString: String) -> XMLDecoder {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormatString
+        self.dateDecodingStrategy = .formatted(dateFormatter)
+        return self
+    }
 }
 
 //===----------------------------------------------------------------------===//
