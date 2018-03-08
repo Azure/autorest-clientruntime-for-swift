@@ -9,6 +9,7 @@ import RxSwift
 import RxBlocking
 
 open class AzureClient: RuntimeClient {
+    private static let DEFAULT_USER_AGENT = "AutoRest-Swift";
     
     // handles non-long-running operations that doesn't return value
     open func executeAsync (command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
@@ -173,6 +174,11 @@ open class AzureClient: RuntimeClient {
             bodyData = jsonData
         }
         
+        if let userAgent = command.headerParameters["user-agent"] {
+            command.headerParameters["user-agent"] = userAgent + AzureClient.DEFAULT_USER_AGENT;
+        }else {
+            command.headerParameters["user-agent"] = AzureClient.DEFAULT_USER_AGENT;
+        }
         return (url, command.method.uppercased() , command.headerParameters, bodyData)
     }
     
