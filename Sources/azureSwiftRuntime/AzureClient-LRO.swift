@@ -9,7 +9,7 @@ import RxSwift
 
 public extension AzureClient {
     
-    public func executeAsyncLRO<T>(command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) where T : Decodable {
+    func executeAsyncLRO<T>(command: BaseCommand, completionHandler: @escaping (T?, Error?) -> Void) where T : Decodable {
         self.createExecuteObservableLRO(command: command)
             .subscribe(
                 onNext: { (httpResponse, data) in
@@ -26,7 +26,7 @@ public extension AzureClient {
             ).disposed(by: disposeBag)
     }
     
-    public func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
+    func executeAsyncLRO(command: BaseCommand, completionHandler: @escaping (Error?) -> Void) {
         self.createExecuteObservableLRO(command: command)
             .subscribe(
                 onNext: { (httpResponse, data) in
@@ -111,12 +111,12 @@ public extension AzureClient {
                         
                         return (httpResponse, data)
                     }.retryWhen { (e: Observable<Error>) -> Observable<Int> in
-                        return e.flatMapWithIndex { (e, i) -> Observable<Int> in
+                        return e.enumerated().flatMap() { (i, e) -> Observable<Int> in
                             switch(e) {
                             case RetryConditionError.needRetry:
                                 print("===", "Delay")
                                 return Observable<Int>.just(i+1)
-                                    .delay(RxTimeInterval(self.retryDelay), scheduler: ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+                                    .delay(RxTimeInterval.milliseconds(self.retryDelay), scheduler: ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
                             default:
                                 return Observable.error(e)
                             }

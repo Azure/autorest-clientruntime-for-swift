@@ -6,7 +6,6 @@
 
 import Foundation
 import RxSwift
-import RxBlocking
 
 open class AzureClient: RuntimeClient {
     private static let DEFAULT_USER_AGENT = "AutoRest-Swift";
@@ -47,20 +46,25 @@ open class AzureClient: RuntimeClient {
         
         let (url, method, headers, body) = try self.prepareRequest(command: command)
         
-        guard let (httpResponse, data) = try self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
-            .toBlocking()
-            .single() else {
-                
-                throw RuntimeError.general(message: "Request returned nil")
-        }
+        let result = self.executeRequestWithInterception(url: url, method: method, headers: headers, body: body)
+                //throw RuntimeError.general(message: "Request returned nil")
+    
         
-        try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
-        
-        do {
-            let decodable = try command.returnFunc(data: data!)
-            return decodable
-        } catch DecodeError.nilData { // to return nil not empty string or data
-            return nil
+        if let responseData = SyncWrapper.EnsureCompletion(with: result.asObservable()) {
+            if let error = responseData.error {
+                throw error
+            }
+            
+            do {
+                let (httpResponse, data) = responseData.element!
+                try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
+                let decodable = try command.returnFunc(data: data!)
+                return decodable
+            } catch DecodeError.nilData { // to return nil not empty string or data
+                return nil
+            }
+        } else {
+            throw RuntimeError.general(message: "Request returned nil")
         }
     }
     
@@ -86,10 +90,10 @@ open class AzureClient: RuntimeClient {
             }
     }
     
-    public var retryDelay = 0.01
+    public var retryDelay = 1
     
-    open func withRetryDelay(_ retryDelay: TimeInterval) {
-        self.retryDelay = retryDelay
+    open func withRetryDelay(_ milliseconds: Int) {
+        self.retryDelay = milliseconds
     }
     
     public var requestInterceptors: [RequestInterceptor] = []
