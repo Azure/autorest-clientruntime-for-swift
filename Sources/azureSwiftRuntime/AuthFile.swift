@@ -15,7 +15,8 @@ public struct AuthFile {
             throw AuthFileError.stringData
         }
         
-        return try decoder.decode(AuthFileData.self, from: jsonData)
+        let authFileData = try decoder.decode(AuthFileData.self, from: jsonData)
+        return authFileData
     }
 }
 

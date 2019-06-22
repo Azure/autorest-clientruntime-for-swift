@@ -6,7 +6,6 @@
 
 import Foundation
 import RxSwift
-import RxBlocking
 
 public struct AuthResults: Codable {
     let ext_expires_in: String
@@ -85,8 +84,7 @@ public class ApplicationTokenCredentials: AzureTokenCredentials {
     
     private func acquireTokenSync(forResource: String) throws -> AuthResults? {
         let obs : Single<AuthResults> = self.acquireToken(forResource: forResource)
-        let obsBl = obs.toBlocking()
-        return try obsBl.single()
+        return SyncWrapper.EnsureCompletion(with: obs.asObservable())?.element;
     }
     
     private func acquireToken<T>(forResource: String) -> Single<T> where T:Decodable {
