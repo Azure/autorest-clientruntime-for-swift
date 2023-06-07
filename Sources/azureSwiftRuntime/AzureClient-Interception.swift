@@ -9,12 +9,12 @@ import RxSwift
 
 public extension AzureClient {
     
-    public func withRequestInterceptor(_ requestInterceptor: RequestInterceptor) -> AzureClient {
+    func withRequestInterceptor(_ requestInterceptor: RequestInterceptor) -> AzureClient {
         self.requestInterceptors.append(requestInterceptor)
         return self
     }
     
-    public func withResponseInterceptor(_ responseInterceptor: ResponseInterceptor) -> AzureClient {
+    func withResponseInterceptor(_ responseInterceptor: ResponseInterceptor) -> AzureClient {
         self.responseInterceptors.append(responseInterceptor)
         return self
     }
@@ -34,12 +34,12 @@ public extension AzureClient {
                 try self.handleErrorCode(statusCode: httpResponse.statusCode, data: data)
                 return (_httpResponse, _data)
             }.retryWhen { (e: Observable<Error>) -> Observable<Int> in
-                return e.flatMapWithIndex { (e, i) -> Observable<Int> in
+                return e.enumerated().flatMap() { (i, e) -> Observable<Int> in
                     switch(e) {
                     case RuntimeError.errorStatusCode(let code, _):
                         if code >= 500  && i < 2 {
                             return Observable<Int>.just(i+1)
-                                .delay(RxTimeInterval(self.retryDelay), scheduler: ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
+                                .delay(RxTimeInterval.milliseconds(self.retryDelay), scheduler: ConcurrentDispatchQueueScheduler(queue: self.queueWorker))
                         } else {
                             return Observable.error(e)
                         }

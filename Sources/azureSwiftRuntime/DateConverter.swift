@@ -71,7 +71,7 @@ public class DateConverter {
 }
 
 public extension Date {
-    public init?(fromString: String, format: AzureDateFormat) {
+    init?(fromString: String, format: AzureDateFormat) {
         let dateStr = fromString.uppercased()
         if let date = format.toDate(dateStr: dateStr) {
             self = date

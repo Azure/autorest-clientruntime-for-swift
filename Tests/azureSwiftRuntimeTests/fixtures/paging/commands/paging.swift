@@ -566,7 +566,7 @@ struct PagingNamespace {
         }
 
         public override func returnFunc(data: Data) throws -> Decodable? {
-            return try CoderFactory.decoder(for: .json).decode(ProductResultProtocol?.self, from: data)
+            return try CoderFactory.decoder(for: .json).decode(ProductResultData?.self, from: data)
         }
         
         let firstPage = "/paging/single/failure"
